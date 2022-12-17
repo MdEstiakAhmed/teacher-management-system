@@ -2,9 +2,9 @@ import { CalenderIcon, CheckboxIcon, HomeIcon, MailIcon, MessageIcon, UserIcon }
 
 export const menuList = [
     {name: "dashboard", title: "Dashboard", icon: <HomeIcon />, url: "/"},
-    {name: "email", title: "Email", icon: <MailIcon />, url: "/emails"},
-    {name: "chat", title: "Chat", icon: <MessageIcon />, url: "/chats"},
+    {name: "email", title: "Email", icon: <MailIcon />, url: "/email"},
+    {name: "chat", title: "Chat", icon: <MessageIcon />, url: "/chat"},
     {name: "todo", title: "Todo", icon: <CheckboxIcon />, url: "/todo"},
-    {name: "event", title: "Event", icon: <CalenderIcon />, url: "/events"},
-    {name: "users", title: "users", icon: <UserIcon />, url: "/users"},
+    {name: "event", title: "Event", icon: <CalenderIcon />, url: "/event"},
+    {name: "users", title: "users", icon: <UserIcon />, url: "/user"},
 ]
