@@ -4,7 +4,7 @@ export const baseUrl = '/auth';
 
 export const login = async (data) => {
     try {
-        const url = `${baseUrl}/signin`;
+        const url = `${baseUrl}/signin/`;
         const formData = new FormData();
         for (const property in data) {
             formData.append(property, data[property]);

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Navigate, redirect, useNavigate } from "react-router-dom";
-import useCheckAuth from "../hooks/useCheckAuth";
+// import useCheckAuth from "../hooks/useCheckAuth";
 import Login from "../pages/Login";
 
 const AuthRoute = ({children}) => {

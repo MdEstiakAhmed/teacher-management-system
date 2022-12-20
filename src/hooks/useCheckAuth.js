@@ -1,17 +1,24 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import { Context } from "../store/store";
 
 const useCheckAuth = () => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const {userAction, userState} = useContext(Context)
 
     useEffect(() => {
-        const token = localStorage.getItem("tms_token");
-        if (token) {
+        const data = localStorage.getItem("tms_data");
+        if (data) {
+            userAction.setUser(JSON.parse(data))
+        }
+    }, []);
+
+    useEffect(() => {
+        if (Object.keys(userState).length) {
             setIsAuthenticated(true);
         } else {
             setIsAuthenticated(false);
         }
-    }, []);
+    }, [userState]);
 
     return isAuthenticated;
 }

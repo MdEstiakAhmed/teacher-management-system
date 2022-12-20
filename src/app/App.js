@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import { BrowserRouter, Navigate, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "../components/layout/Sidebar";
 import useCheckAuth from "../hooks/useCheckAuth";
-import AuthRoute from "../middleware/AuthRoute";
 import Chat from "../pages/Chat";
 import Dashboard from "../pages/Dashboard";
 import Email from "../pages/Email";
@@ -12,29 +11,29 @@ import Login from '../pages/Login'
 import Todo from "../pages/Todo";
 import User from "../pages/User";
 const App = () => {
-	// const [isAuthenticated, setIsAuthenticated] = useState(undefined);
 	const isAuthenticated = useCheckAuth();
 	const navigate = useNavigate();
 
 	useEffect(() => {
-		if(!isAuthenticated) {
+		if (!isAuthenticated) {
+			navigate("/login");
+		}
+		else {
+			navigate("/")
 		}
 	}, [isAuthenticated])
-	console.log(isAuthenticated)
 	return (
 		<>
-			<BrowserRouter>
-				{
-					isAuthenticated === true ? (
-						<PrivateRoute />
-					) :
-						isAuthenticated === false ? (
-							<PublicRoute isAuthenticated />
-						) : (
-							<span className="sr-only">Loading...</span>
-						)
-				}
-			</BrowserRouter>
+			{
+				isAuthenticated === true ? (
+					<PrivateRoute />
+				) :
+					isAuthenticated === false ? (
+						<PublicRoute isAuthenticated />
+					) : (
+						<span className="sr-only">Loading...</span>
+					)
+			}
 		</>
 	);
 }
@@ -79,11 +78,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 }
 
 const PublicRoute = () => {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 
-	useEffect(() => {
-		navigate("/login");
-	}, []);
+	// useEffect(() => {
+	// 	navigate("/login");
+	// }, []);
 	return (
 		<Routes>
 			<Route path="/login" element={<Login />} />

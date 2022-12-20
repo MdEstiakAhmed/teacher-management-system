@@ -1,11 +1,15 @@
-import { useRef } from "react";
+import { useRef, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
 import InputBox from "../components/form/InputBox";
 import { InputSubmit } from "../components/styled/elements/form";
 import { Card, Section } from "../components/styled/pages/login";
+import {Context} from "../store/store.js"
 
 const Login = () => {
     const formRef = useRef(null);
+    const navigate = useNavigate();
+    const {userAction} = useContext(Context)
 
     const formSubmit = async(e) => {
         e.preventDefault();
@@ -17,7 +21,8 @@ const Login = () => {
         })
         const response = await login(formData);
         if(response.status){
-            console.log(response);
+            userAction.setUser(response)
+            navigate("/")
         }
         else {
             console.log(response);
