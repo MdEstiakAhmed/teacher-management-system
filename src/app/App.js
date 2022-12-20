@@ -14,6 +14,13 @@ import User from "../pages/User";
 const App = () => {
 	// const [isAuthenticated, setIsAuthenticated] = useState(undefined);
 	const isAuthenticated = useCheckAuth();
+	const navigate = useNavigate();
+
+	useEffect(() => {
+		if(!isAuthenticated) {
+		}
+	}, [isAuthenticated])
+	console.log(isAuthenticated)
 	return (
 		<>
 			<BrowserRouter>

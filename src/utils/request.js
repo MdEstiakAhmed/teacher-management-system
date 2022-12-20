@@ -19,6 +19,7 @@ export const getData = async (url, headers) => {
 
 export const postData = async (url, data, headers) => {
     try {
+        console.log(url, data, headers)
         const response = await AppInstance.post(url, data, { headers: { ...headers } });
         return response.data;
     }

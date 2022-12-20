@@ -15,9 +15,13 @@ const Login = () => {
                 formData[input.name] = input.value;
             }
         })
-        console.log(formData);
         const response = await login(formData);
-        console.log(response);
+        if(response.status){
+            console.log(response);
+        }
+        else {
+            console.log(response);
+        }
     }
     
     return (
