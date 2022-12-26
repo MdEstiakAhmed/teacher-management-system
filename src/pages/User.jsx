@@ -1,106 +1,169 @@
+import { useParams } from "react-router-dom";
+import { fetchUser } from "../api/users";
+import useFetch from "../hooks/useFetch";
+import { userPersonalInfo as data } from "../assets/test-data/userApiResponse";
+import { useState } from "react";
+import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
+
 const User = () => {
+    const { id } = useParams();
+    // const { data, isFetched, error } = useFetch(fetchUser, { id });
+
+    const [isModalShow, setIsModalShow] = useState({
+        changePassword: false,
+        editInfo: false,
+    });
+
+    const handleModalOpen = (type) => {
+        setIsModalShow(prev => ({...prev, [type]: true}));
+    }
+    const handleModalClose = (type) => {
+        setIsModalShow(prev => ({...prev, [type]: false}));
+    }
+
     return (
         <>
-        <div class="userList contentArea">
-                    <div class="userListHeader">
-                        <div class="userSearch">
-                            <input type="text" placeholder="Search"/>
+            {
+                isModalShow.changePassword && (
+                    <ChangePasswordForm onClose={handleModalClose} />
+                )
+            }
+            <div className="userDetailArea">
+                <div className="leftSide">
+                    <div className="contentArea">
+                        <div className="userIdentity">
+                            <img src="images/user.png" alt="user" />
+                            <h3 className="title">{`${data.data.first_name} ${data.data.last_name}`}</h3>
+                            <p className="designation">{data.personal_info.Designation}</p>
                         </div>
-                        <div class="userListActions">
-                            <button class="Button primaryButton">Add User</button>
+                        <div className="userHeighlight">
+                            <div className="iconCard">
+                                <div className="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </div>
+                                <div className="details">
+                                    <h4 className="count">10</h4>
+                                    <p className="title">Email</p>
+                                </div>
+                            </div>
+                            <div className="iconCard">
+                                <div className="icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                </div>
+                                <div className="details">
+                                    <h4 className="count">10</h4>
+                                    <p className="title">Email</p>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="userListBody">
-                        <table class="userListTable">
-                            <thead>
-                                <tr>
-                                    <th class="User">User</th>
-                                    <th class="Designation">Designation</th>
-                                    <th class="Status">Status</th>
-                                    <th class="Actions">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="User">
-                                        <img src="images/user.png" alt="user"/>
-                                        <div class="userDetails">
-                                            <h4 class="userName">John Doe</h4>
-                                            <p class="userEmail">example@email.com</p>
-                                        </div>
-                                    </td>
-                                    <td class="Designation">Admin</td>
-                                    <td class="Status active">
-                                        <span>Active</span>
-                                    </td>
-                                    <td class="Actions">
-                                        <button class="Button secondaryButton">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path>
-                                                    <path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path>
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <button class="Button secondaryButton">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
-                                            </svg>
-                                        </button>
-                                        <button class="Button secondaryButton">
-                                            <a href="userDetail.html">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light v-icon--size-default nav-item-icon iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                        <circle cx="12" cy="12" r="2"></circle>
-                                                        <path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7"></path>
-                                                    </g>
-                                                </svg>
-                                            </a>
-                                        </button>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="User">
-                                        <img src="images/user.png" alt="user"/>
-                                        <div class="userDetails">
-                                            <h4 class="userName">John Doe</h4>
-                                            <p class="userEmail">example@email.com</p>
-                                        </div>
-                                    </td>
-                                    <td class="Designation">Admin</td>
-                                    <td class="Status deactive">
-                                        <span>Deactive</span>
-                                    </td>
-                                    <td class="Actions">
-                                        {/* <!-- <button class="Button secondaryButton">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                    <path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path>
-                                                    <path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path>
-                                                </g>
-                                            </svg>
-                                        </button>
-                                        <button class="Button secondaryButton">
-                                            <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7h16m-10 4v6m4-6v6M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-12M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"></path>
-                                            </svg>
-                                        </button> --> */}
-                                        <button class="Button secondaryButton" >
-                                            <a href="userDetail.html">
-                                                <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" class="v-icon notranslate v-theme--light v-icon--size-default nav-item-icon iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">
-                                                    <g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
-                                                        <circle cx="12" cy="12" r="2"></circle>
-                                                        <path d="M22 12c-2.667 4.667-6 7-10 7s-7.333-2.333-10-7c2.667-4.667 6-7 10-7s7.333 2.333 10 7"></path>
-                                                    </g>
-                                                </svg>
-                                            </a>
-                                        </button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                        <ul className="userDetail">
+                            <li>Department : <span>{data.personal_info.Department}</span></li>
+                            <li>Phone : <span>{data.personal_info.Phone}</span></li>
+                            <li>Gender : <span>{data.personal_info.Gender}</span></li>
+                            <li>Blood Group : <span>{data.personal_info.BloodGroup}</span></li>
+                            <li>DOB : <span>{data.personal_info.DateOfBirth}</span></li>
+                        </ul>
+                        <div className="buttonArea">
+                            <button className="button primaryButton">Edit</button>
+                            <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
+                            {/* <button className="button primaryButton danger">Delete</button> */}
+                        </div>
                     </div>
                 </div>
+                <div className="rightSide">
+                    <div className="contentArea academicInfo">
+                        <h3 className="title">Academic Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">MSc in CSE</p>
+                            <p>Dhaka University</p>
+                            <p>3.00</p>
+                        </div>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">BSc in CSE</p>
+                            <p>Dhaka University</p>
+                            <p>3.00</p>
+                        </div>
+                    </div>
+                    <div className="contentArea trainingInfo">
+                        <h3 className="title">Training Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">Diploma in Computer</p>
+                            <p>Creative IT institute</p>
+                            <p>6 Months</p>
+                        </div>
+                    </div>
+                    <div className="contentArea teachingInfo">
+                        <h3 className="title">Teaching Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">CSE 301</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">Computer Theory</p>
+                            <p>5 Credit</p>
+                        </div>
+                    </div>
+                    <div className="contentArea publicationInfo">
+                        <h3 className="title">Publication Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">A paper on Computer</p>
+                            <p>International Journal</p>
+                        </div>
+                    </div>
+                    <div className="contentArea awardAndScolarshipInfo">
+                        <h3 className="title">Award and Scolarship Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">Best Student Award</p>
+                            <p>University</p>
+                        </div>
+                    </div>
+                    <div className="contentArea experienceInfo">
+                        <h3 className="title">Experience Information</h3>
+                        <div className="content">
+                            <div className="heading">
+                                <p className="dateTime">2022</p>
+                                <button className="edit">
+                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
+                                </button>
+                            </div>
+                            <p className="infoTitle">Web Developer</p>
+                            <p>Company</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </>
     );
 }

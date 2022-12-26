@@ -6,5 +6,5 @@ export const menuList = [
     {name: "chat", title: "Chat", icon: <MessageIcon />, url: "/chat"},
     {name: "todo", title: "Todo", icon: <CheckboxIcon />, url: "/todo"},
     {name: "event", title: "Event", icon: <CalenderIcon />, url: "/event"},
-    {name: "users", title: "users", icon: <UserIcon />, url: "/user"},
+    {name: "users", title: "users", icon: <UserIcon />, url: "/users"},
 ]

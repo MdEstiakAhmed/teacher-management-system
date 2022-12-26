@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Route, Routes } from "react-router-dom";
 import Sidebar from "../components/layout/Sidebar";
 import useCheckAuth from "../hooks/useCheckAuth";
@@ -10,18 +10,25 @@ import Event from "../pages/Event";
 import Login from '../pages/Login'
 import Todo from "../pages/Todo";
 import User from "../pages/User";
+import Users from "../pages/Users";
+import { Context } from "../store/store";
 const App = () => {
-	const isAuthenticated = useCheckAuth();
+	const [isAuthenticated, setIsAuthenticated] = useState(undefined);
 	const navigate = useNavigate();
+	const location = useLocation();
+	const {userAction, userState} = useContext(Context)
+
 
 	useEffect(() => {
-		if (!isAuthenticated) {
-			navigate("/login");
-		}
+		const data = localStorage.getItem("tms_data");
+        if (data) {
+            userAction.setUser(JSON.parse(data))
+			setIsAuthenticated(true);
+        }
 		else {
-			navigate("/")
+			setIsAuthenticated(false);
 		}
-	}, [isAuthenticated])
+	}, [])
 	return (
 		<>
 			{
@@ -61,7 +68,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 							</div>
 						</div>
 						<Routes>
-							<Route path="/user" element={<User />} />
+							<Route path="/users/:id" element={<User />} />
+							<Route path="/users" element={<Users />} />
 							<Route path="/event" element={<Event />} />
 							<Route path="/todo" element={<Todo />} />
 							<Route path="/chat" element={<Chat />} />
@@ -78,11 +86,11 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 }
 
 const PublicRoute = () => {
-	// const navigate = useNavigate();
+	const navigate = useNavigate();
 
-	// useEffect(() => {
-	// 	navigate("/login");
-	// }, []);
+	useEffect(() => {
+		navigate("/login");
+	}, []);
 	return (
 		<Routes>
 			<Route path="/login" element={<Login />} />

@@ -2,7 +2,7 @@ import { useEffect, useState, useContext } from "react";
 import { Context } from "../store/store";
 
 const useCheckAuth = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(undefined);
     const {userAction, userState} = useContext(Context)
 
     useEffect(() => {

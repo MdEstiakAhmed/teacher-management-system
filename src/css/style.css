@@ -1645,7 +1645,7 @@ input[type="submit"]:hover,
 }
 .addFormArea::after {
     content: "";
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
@@ -1663,6 +1663,7 @@ input[type="submit"]:hover,
     padding: 30px;
     z-index: 10;
     border-radius: 0;
+    overflow-y: auto;
 }
 .addFormArea .popUp .contentArea {
     padding: 30px;

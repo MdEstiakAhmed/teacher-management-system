@@ -9,7 +9,9 @@ const AppInstance = axios.create({
 
 export const getData = async (url, headers) => {
     try {
-        const response = await AppInstance.get(url, { headers: { ...headers } });
+        const localData = await localStorage.getItem("tms_data");
+        const token = JSON.parse(localData || {}).access;
+        const response = await AppInstance.get(url, { headers: { ...headers, Authorization: `Bearer ${token}` } });
         return response.data;
     }
     catch (error) {
@@ -19,8 +21,9 @@ export const getData = async (url, headers) => {
 
 export const postData = async (url, data, headers) => {
     try {
-        console.log(url, data, headers)
-        const response = await AppInstance.post(url, data, { headers: { ...headers } });
+        const localData = await localStorage.getItem("tms_data");
+        const token = JSON.parse(localData || {}).access;
+        const response = await AppInstance.post(url, data, { headers: { ...headers, Authorization: `Bearer ${token}` } });
         return response.data;
     }
     catch (error) {
