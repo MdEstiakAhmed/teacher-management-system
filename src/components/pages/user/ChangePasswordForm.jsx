@@ -6,7 +6,7 @@ export const ChangePasswordForm = ({ onClose }) => {
     
     const handleChangePassword = async(e) => {
         e.preventDefault();
-        const response = await changePassword(formRef.current);
+        const response = await changePassword(formRef);
         response.status && onClose("changePassword");
     }
     const cancelChangePassword = (e) => {
@@ -20,15 +20,15 @@ export const ChangePasswordForm = ({ onClose }) => {
                 <form onSubmit={handleChangePassword} ref={formRef}>
                     <div className="inputBox">
                         <label>Old Password</label>
-                        <input type="password" name="EmployeeID" placeholder="**********" />
+                        <input type="password" name="old_password" placeholder="**********" />
                     </div>
                     <div className="inputBox">
                         <label>New Password</label>
-                        <input type="password" name="Phone" placeholder="**********" />
+                        <input type="password" name="new_password1" placeholder="**********" />
                     </div>
                     <div className="inputBox">
-                        <label>New Password</label>
-                        <input type="password" name="Designation" placeholder="**********" />
+                        <label>New Confirm Password</label>
+                        <input type="password" name="new_password2" placeholder="**********" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                         <input type="submit" name="submit" value="Change" />

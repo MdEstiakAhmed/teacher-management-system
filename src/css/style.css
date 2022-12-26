@@ -378,6 +378,7 @@ input[type="submit"]:hover,
     right: -20px;
     width: 200px;
     padding: 20px;
+    z-index: 3;
 }
 .titleArea .userPopup .userDetails {
     text-align: left;

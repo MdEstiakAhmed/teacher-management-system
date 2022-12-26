@@ -1,6 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
+import { userLoginData } from "../assets/test-data/userLoginData";
 import InputBox from "../components/form/InputBox";
 import { InputSubmit } from "../components/styled/elements/form";
 import { Card, Section } from "../components/styled/pages/login";
@@ -9,7 +10,7 @@ import {Context} from "../store/store.js"
 const Login = () => {
     const formRef = useRef(null);
     const navigate = useNavigate();
-    const {userAction} = useContext(Context)
+    const {userAction, authAction} = useContext(Context)
 
     const formSubmit = async(e) => {
         e.preventDefault();
@@ -20,8 +21,10 @@ const Login = () => {
             }
         })
         const response = await login(formData);
+        // const response = userLoginData;
         if(response.status){
             userAction.setUser(response)
+            authAction.setAuth()
             navigate("/")
         }
         else {

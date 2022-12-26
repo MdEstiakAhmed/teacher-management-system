@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { menuList } from "../../assets/data/dashboardMenu";
+import logo from '../../assets/images/logo.png'
 
 
 
@@ -17,7 +18,7 @@ const Sidebar = () => {
         <>
             <aside className="sidebarArea">
                 <div className="logo">
-                    <img src="images/logo.png" alt="logo" />
+                    <img src={logo} alt="logo" />
                 </div>
                 <div className="menu">
                     <ul>

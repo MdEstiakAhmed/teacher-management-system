@@ -1,4 +1,5 @@
-import { showAlert } from "../utils/alert";
+import { showAlert, showAlertPopup } from "../utils/alert";
+import { domRefToFormData, domRefToObject, objectToFormData } from "../utils/formFieldConverter";
 import { postData } from "../utils/request";
 
 export const baseUrl = '/auth';
@@ -32,20 +33,12 @@ export const signup = async (data) => {
     }
 }
 
-export const changePassword = async (data) => {
+export const changePassword = async (ref) => {
     try {
-        const url = `${baseUrl}/signin/`;
-        const formData = new FormData();
-        for (const property in data) {
-            formData.append(property, data[property]);
-        }
+        const url = `${baseUrl}/change_password/`;
+        const formData = domRefToFormData(ref);
         const response = await postData(url, formData, {});
-        if (response.status) {
-            showAlert.successAlert(response.message);
-        }
-        else {
-            showAlert.errorAlert(response.message);
-        }
+        showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {
         return { status: false, message: error.message };

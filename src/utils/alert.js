@@ -34,3 +34,12 @@ export const showAlert = {
         });
     }
 }
+
+export const showAlertPopup = (status, message) => {
+    if (status) {
+        showAlert.successAlert(message);
+    }
+    else {
+        showAlert.errorAlert(message);
+    }
+}

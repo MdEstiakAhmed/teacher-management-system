@@ -2,12 +2,34 @@ import { useParams } from "react-router-dom";
 import { fetchUser } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { userPersonalInfo as data } from "../assets/test-data/userApiResponse";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
+import InfoSection from "../components/pages/user/InfoSection";
+import { academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
 
 const User = () => {
     const { id } = useParams();
     // const { data, isFetched, error } = useFetch(fetchUser, { id });
+
+    const [userInfo, setUserInfo] = useState({
+        academic: [],
+        training: [],
+        teaching: [],
+        publication: [],
+        awardAndScholarship: [],
+        experience: [],
+    })
+
+    useEffect(() => {
+        setUserInfo({
+            academic: academicInfo.data,
+            training: trainingInfo.data,
+            teaching: teachingInfo.data,
+            publication: publicationInfo.data,
+            awardAndScholarship: awardAndScholarshipInfo.data,
+            experience: experienceInfo.data,
+        })
+    }, [])
 
     const [isModalShow, setIsModalShow] = useState({
         changePassword: false,
@@ -15,10 +37,10 @@ const User = () => {
     });
 
     const handleModalOpen = (type) => {
-        setIsModalShow(prev => ({...prev, [type]: true}));
+        setIsModalShow(prev => ({ ...prev, [type]: true }));
     }
     const handleModalClose = (type) => {
-        setIsModalShow(prev => ({...prev, [type]: false}));
+        setIsModalShow(prev => ({ ...prev, [type]: false }));
     }
 
     return (
@@ -39,7 +61,7 @@ const User = () => {
                         <div className="userHeighlight">
                             <div className="iconCard">
                                 <div className="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </div>
                                 <div className="details">
                                     <h4 className="count">10</h4>
@@ -48,7 +70,7 @@ const User = () => {
                             </div>
                             <div className="iconCard">
                                 <div className="icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </div>
                                 <div className="details">
                                     <h4 className="count">10</h4>
@@ -66,102 +88,46 @@ const User = () => {
                         <div className="buttonArea">
                             <button className="button primaryButton">Edit</button>
                             <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
-                            {/* <button className="button primaryButton danger">Delete</button> */}
                         </div>
                     </div>
                 </div>
                 <div className="rightSide">
-                    <div className="contentArea academicInfo">
-                        <h3 className="title">Academic Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">MSc in CSE</p>
-                            <p>Dhaka University</p>
-                            <p>3.00</p>
-                        </div>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">BSc in CSE</p>
-                            <p>Dhaka University</p>
-                            <p>3.00</p>
-                        </div>
-                    </div>
-                    <div className="contentArea trainingInfo">
-                        <h3 className="title">Training Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">Diploma in Computer</p>
-                            <p>Creative IT institute</p>
-                            <p>6 Months</p>
-                        </div>
-                    </div>
-                    <div className="contentArea teachingInfo">
-                        <h3 className="title">Teaching Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">CSE 301</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">Computer Theory</p>
-                            <p>5 Credit</p>
-                        </div>
-                    </div>
-                    <div className="contentArea publicationInfo">
-                        <h3 className="title">Publication Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">A paper on Computer</p>
-                            <p>International Journal</p>
-                        </div>
-                    </div>
-                    <div className="contentArea awardAndScolarshipInfo">
-                        <h3 className="title">Award and Scolarship Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">Best Student Award</p>
-                            <p>University</p>
-                        </div>
-                    </div>
-                    <div className="contentArea experienceInfo">
-                        <h3 className="title">Experience Information</h3>
-                        <div className="content">
-                            <div className="heading">
-                                <p className="dateTime">2022</p>
-                                <button className="edit">
-                                    <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
-                                </button>
-                            </div>
-                            <p className="infoTitle">Web Developer</p>
-                            <p>Company</p>
-                        </div>
-                    </div>
+                    <InfoSection
+                        type="academic"
+                        title="Academic Information"
+                        data={userInfo.academic}
+                        classes="academicInfo"
+                    />
+                    <InfoSection
+                        type="training"
+                        title="Training Information"
+                        data={userInfo.training}
+                        classes="trainingInfo"
+                    />
+                    <InfoSection
+                        type="teaching"
+                        title="Teaching Information"
+                        data={userInfo.teaching}
+                        classes="teachingInfo"
+                    />
+                    <InfoSection
+                        type="publication"
+                        title="Publication Information"
+                        data={userInfo.publication}
+                        classes="publicationInfo"
+                    />
+                    <InfoSection
+                        type="awardAndScholarship"
+                        title="Award and Scolarship Information"
+                        data={userInfo.awardAndScholarship}
+                        classes="awardAndScolarshipInfo"
+                    />
+                    <InfoSection
+                        type="experience"
+                        title="Experience Information"
+                        data={userInfo.experience}
+                        classes="experienceInfo"
+                    />
                 </div>
             </div>
         </>
