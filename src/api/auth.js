@@ -17,6 +17,20 @@ export const login = async (data) => {
     }
 }
 
+export const signup = async (data) => {
+    try {
+        const url = `${baseUrl}/signup/`;
+        const formData = new FormData();
+        for (const property in data) {
+            formData.append(property, data[property]);
+        }
+        const response = await postData(url, formData, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
 export const changePassword = async (data) => {
     try {
         const url = `${baseUrl}/signin/`;

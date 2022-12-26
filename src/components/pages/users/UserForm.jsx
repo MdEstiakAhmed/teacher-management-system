@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import { signup } from "../../../api/auth";
 import { createUser } from "../../../api/users";
 
 export const UserForm = ({ onClose, type }) => {
@@ -20,7 +21,7 @@ export const UserForm = ({ onClose, type }) => {
     
     const handleAddUser = async(e) => {
         e.preventDefault();
-        const response = await createUser(formRef.current);
+        const response = await signup(formRef.current);
         response.status && onClose();
     }
     return (
