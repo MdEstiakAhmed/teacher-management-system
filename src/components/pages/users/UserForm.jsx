@@ -29,45 +29,20 @@ export const UserForm = ({ onClose, type }) => {
                 <h3 className="title">Add Information</h3>
                 <form onSubmit={handleAddUser} ref={formRef}>
                     <div className="inputBox">
-                        <label>Employee ID</label>
-                        <input type="text" name="EmployeeID" placeholder="Employee ID" />
+                        <label>Username</label>
+                        <input type="text" name="username" placeholder="Username" />
                     </div>
                     <div className="inputBox">
-                        <label>Phone</label>
-                        <input type="text" name="Phone" placeholder="Phone" />
+                        <label>Email</label>
+                        <input type="text" name="email" placeholder="Email" />
                     </div>
                     <div className="inputBox">
-                        <label>Designation</label>
-                        <input type="text" name="Designation" placeholder="Designation" />
+                        <label>Password</label>
+                        <input type="text" name="password1" placeholder="Password" />
                     </div>
                     <div className="inputBox">
-                        <label>Department</label>
-                        <input type="text" name="Department" placeholder="Department" />
-                    </div>
-                    <div className="inputBox">
-                        <label>Gender</label>
-                        <select name="Gender" id="Gender">
-                            <option value="Male">Male</option>
-                            <option value="Female">Female</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div className="inputBox">
-                        <label>Blood Group</label>
-                        <select name="BloodGroup" id="BloodGroup">
-                            <option value="A+">A+</option>
-                            <option value="A-">A-</option>
-                            <option value="B+">B+</option>
-                            <option value="B-">B-</option>
-                            <option value="AB+">AB+</option>
-                            <option value="AB-">AB-</option>
-                            <option value="O+">O+</option>
-                            <option value="O-">O-</option>
-                        </select>
-                    </div>
-                    <div className="inputBox">
-                        <label>Date of Birth</label>
-                        <input type="date" name="DateOfBirth" placeholder="Date of Birth" />
+                        <label>Confirm Password</label>
+                        <input type="text" name="password2" placeholder="Confirm Password" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                         <input type="submit" name="submit" value="Save" />

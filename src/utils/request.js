@@ -22,7 +22,10 @@ export const getData = async (url, headers) => {
 export const postData = async (url, data, headers) => {
     try {
         const localData = await localStorage.getItem("tms_data");
-        const token = JSON.parse(localData || {}).access;
+        let token;
+        if(localData){
+            token = JSON.parse(localData || {}).access;
+        }
         const response = await AppInstance.post(url, data, { headers: { ...headers, Authorization: `Bearer ${token}` } });
         return response.data;
     }
