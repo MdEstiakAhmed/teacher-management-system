@@ -14,7 +14,7 @@ export const UserForm = ({ onClose, type }) => {
         const formData = new FormData(formRef.current);
         for (const key of formData.keys()) {
             console.log(key);
-            console.log(formRef.current.Phone.value);
+            // console.log(formRef.current.Phone.value);
         }
     }
     
