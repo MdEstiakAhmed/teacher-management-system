@@ -21,7 +21,13 @@ export const UserForm = ({ onClose, type }) => {
     
     const handleAddUser = async(e) => {
         e.preventDefault();
-        const response = await signup(formRef.current);
+        const formData = {}
+        ;[...formRef.current].forEach(input => {
+            if(input.type !== 'submit') {
+                formData[input.name] = input.value;
+            }
+        })
+        const response = await signup(formData);
         response.status && onClose();
     }
     return (
@@ -39,11 +45,11 @@ export const UserForm = ({ onClose, type }) => {
                     </div>
                     <div className="inputBox">
                         <label>Password</label>
-                        <input type="text" name="password1" placeholder="Password" />
+                        <input type="password" name="password1" placeholder="Password" />
                     </div>
                     <div className="inputBox">
                         <label>Confirm Password</label>
-                        <input type="text" name="password2" placeholder="Confirm Password" />
+                        <input type="password" name="password2" placeholder="Confirm Password" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                         <input type="submit" name="submit" value="Save" />

@@ -18,6 +18,7 @@ export const login = async (data) => {
 }
 
 export const signup = async (data) => {
+    console.log(data);
     try {
         const url = `${baseUrl}/signup/`;
         const formData = new FormData();
