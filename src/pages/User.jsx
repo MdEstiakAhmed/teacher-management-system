@@ -5,17 +5,18 @@ import { userPersonalInfo as data } from "../assets/test-data/userApiResponse";
 import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
 import InfoSection from "../components/pages/user/InfoSection";
-import { personalInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
+import { userGeneralInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
 import { fetchUserInfo } from "../api/user";
 import useGetContext from "../hooks/useGetContext";
 
 const User = () => {
     const { id } = useParams();
     // const { data, isFetched, error } = useFetch(fetchUser, { id });
-    const {userState} = useGetContext();
+    const { userState } = useGetContext();
 
     const [userInfo, setUserInfo] = useState({
-        personal: [],
+        general: {},
+        personal: {},
         academic: [],
         training: [],
         teaching: [],
@@ -25,21 +26,22 @@ const User = () => {
     })
 
     useEffect(() => {
-        setUserInfo({
-            personal: personalInfo.data,
-            academic: academicInfo.data,
-            training: trainingInfo.data,
-            teaching: teachingInfo.data,
-            publication: publicationInfo.data,
-            awardAndScholarship: awardAndScholarshipInfo.data,
-            experience: experienceInfo.data,
-        })
+        // setUserInfo({
+        //     general: userGeneralInfo.data,
+        //     personal: userGeneralInfo.personal_info,
+        //     academic: academicInfo.data.filter(item => item.user == id),
+        //     training: trainingInfo.data.filter(item => item.user == id),
+        //     teaching: teachingInfo.data.filter(item => item.user == id),
+        //     publication: publicationInfo.data.filter(item => item.user == id),
+        //     awardAndScholarship: awardAndScholarshipInfo.data.filter(item => item.user == id),
+        //     experience: experienceInfo.data.filter(item => item.user == id),
+        // })
 
-        // fetchParallelUserInfo();
+        fetchParallelUserInfo();
     }, [])
 
     const fetchParallelUserInfo = async () => {
-        // const personalInfoPromise = fetchUserInfo("personalinfo");
+        const userGeneralInfo = fetchUser({ id });
         const academicInfoPromise = fetchUserInfo("academicinfo");
         const trainingInfoPromise = fetchUserInfo("traininginfo");
         const teachingInfoPromise = fetchUserInfo("teachinginfo");
@@ -47,17 +49,22 @@ const User = () => {
         const awardScholarshipInfoPromise = fetchUserInfo("awardscholarshipinfo");
         const experienceInfoPromise = fetchUserInfo("experienceinfo");
 
-        const results = await Promise.all([academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
+        const results = await Promise.all([userGeneralInfo, academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
+
+        console.log(results);
+
+
 
         setUserInfo(() => {
             return {
-                // personal: results[0].data.filter(item => item.user === userState.data.id),
-                academic: results[0].data.filter(item => item.user === id),
-                training: results[1].data.filter(item => item.user === id),
-                teaching: results[2].data.filter(item => item.user === id),
-                publication: results[3].data.filter(item => item.user === id),
-                awardAndScholarship: results[4].data.filter(item => item.user === id),
-                experience: results[5].data.filter(item => item.user === id)
+                general: results[0].data || {},
+                personal: results[0].personal_info || {},
+                academic: results[1].data?.filter(item => item.user == id) || [],
+                training: results[2].data?.filter(item => item.user == id) || [],
+                teaching: results[3].data?.filter(item => item.user == id) || [],
+                publication: results[4].data?.filter(item => item.user == id) || [],
+                awardAndScholarship: results[5].data?.filter(item => item.user == id) || [],
+                experience: results[6].data?.filter(item => item.user == id) || [],
             }
         })
     }
@@ -86,8 +93,8 @@ const User = () => {
                     <div className="contentArea">
                         <div className="userIdentity">
                             <img src="images/user.png" alt="user" />
-                            <h3 className="title">{`${data.data.first_name} ${data.data.last_name}`}</h3>
-                            <p className="designation">{data.personal_info.Designation}</p>
+                            <h3 className="title">{`${userInfo.general?.first_name || ""} ${userInfo.general?.last_name || ""}`}</h3>
+                            <p className="designation">{userInfo.personal?.Designation || ""}</p>
                         </div>
                         <div className="userHeighlight">
                             <div className="iconCard">
@@ -110,16 +117,20 @@ const User = () => {
                             </div>
                         </div>
                         <ul className="userDetail">
-                            <li>Department : <span>{data.personal_info.Department}</span></li>
-                            <li>Phone : <span>{data.personal_info.Phone}</span></li>
-                            <li>Gender : <span>{data.personal_info.Gender}</span></li>
-                            <li>Blood Group : <span>{data.personal_info.BloodGroup}</span></li>
-                            <li>DOB : <span>{data.personal_info.DateOfBirth}</span></li>
+                            <li>Department : <span>{userInfo.personal?.Department || ""}</span></li>
+                            <li>Phone : <span>{userInfo.personal?.Phone || ""}</span></li>
+                            <li>Gender : <span>{userInfo.personal?.Gender || ""}</span></li>
+                            <li>Blood Group : <span>{userInfo.personal?.BloodGroup || ""}</span></li>
+                            <li>DOB : <span>{userInfo.personal?.DateOfBirth || ""}</span></li>
                         </ul>
-                        <div className="buttonArea">
-                            <button className="button primaryButton">Edit</button>
-                            <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
-                        </div>
+                        {
+                            id == userState.data.id && (
+                                <div className="buttonArea">
+                                    <button className="button primaryButton">Edit</button>
+                                    <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div className="rightSide">

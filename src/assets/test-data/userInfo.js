@@ -1,3 +1,32 @@
+export const userGeneralInfo = {
+    "status": true,
+    "message": "User detail",
+    "data": {
+        "id": 1,
+        "username": "ESK",
+        "first_name": "Md. Estiak",
+        "last_name": "Ahmed",
+        "email": "estiak@gmail.com",
+        "is_active": true
+    },
+    "personal_info": {
+        "user": 1,
+        "ProfilePic": null,
+        "EmployeeID": "",
+        "Phone": "01766461990",
+        "Designation": "Software Engineer",
+        "Department": "Engineering",
+        "Gender": "2",
+        "BloodGroup": "0",
+        "DateOfBirth": "12-12-1990",
+        "Nationality": "",
+        "NIDNumber": "",
+        "Religion": "0",
+        "MaritalStatus": "0",
+        "PresentAddress": "",
+        "PermanentAddress": ""
+    }
+}
 export const personalInfo = {
     "status": true,
     "message": "Personal info detail",
