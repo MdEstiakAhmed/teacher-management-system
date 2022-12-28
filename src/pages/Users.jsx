@@ -92,12 +92,12 @@ const UserRow = ({ id, name, email, designation, status }) => {
                 <span>{status ? 'Active' : 'Inactive'}</span>
             </td>
             <td className="Actions">
-                <button className="Button secondaryButton">
+                {/* <button className="Button secondaryButton">
                     <EditIcon />
                 </button>
                 <button className="Button secondaryButton">
                     <DeleteIcon />
-                </button>
+                </button> */}
                 <button className="Button secondaryButton">
                     <Link to={`/users/${id}`}>
                         <ViewIcon />

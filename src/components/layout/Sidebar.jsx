@@ -1,13 +1,31 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { menuList } from "../../assets/data/dashboardMenu";
 import logo from '../../assets/images/logo.png'
 
-
+const sidebarList = {
+    "/": "dashboard",
+    "/email": "email",
+    "/chat": "chat",
+    "/todo": "todo",
+    "/event": "event",
+    "/users": "users",
+    "/users/": "users",
+}
 
 const Sidebar = () => {
-    const [activeMenu, setActiveMenu] = useState("dashboard");
+    const [activeMenu, setActiveMenu] = useState("");
     const navigate = useNavigate();
+    const location = useLocation();
+
+    useEffect(() => {
+        if(location.pathname.includes("/users")) {
+            setActiveMenu("users")
+        }
+        else {
+            setActiveMenu(sidebarList[location.pathname])
+        }
+    }, [location.pathname]);
 
     const handleMenuClick = (e, item) => {
         e.preventDefault()

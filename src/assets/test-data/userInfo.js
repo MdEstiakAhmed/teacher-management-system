@@ -1,3 +1,25 @@
+export const personalInfo = {
+    "status": true,
+    "message": "Personal info detail",
+    "data": {
+        "user": 1,
+        "ProfilePic": null,
+        "EmployeeID": "",
+        "Phone": "",
+        "Designation": "",
+        "Department": "",
+        "Gender": "2",
+        "BloodGroup": "0",
+        "DateOfBirth": null,
+        "Nationality": "",
+        "NIDNumber": "",
+        "Religion": "0",
+        "MaritalStatus": "0",
+        "PresentAddress": "",
+        "PermanentAddress": ""
+    }
+}
+
 export const academicInfo = {
     "Status": true,
     "message": "Academic info list",

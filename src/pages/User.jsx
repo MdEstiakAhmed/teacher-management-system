@@ -5,13 +5,17 @@ import { userPersonalInfo as data } from "../assets/test-data/userApiResponse";
 import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
 import InfoSection from "../components/pages/user/InfoSection";
-import { academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
+import { personalInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
+import { fetchUserInfo } from "../api/user";
+import useGetContext from "../hooks/useGetContext";
 
 const User = () => {
     const { id } = useParams();
     // const { data, isFetched, error } = useFetch(fetchUser, { id });
+    const {userState} = useGetContext();
 
     const [userInfo, setUserInfo] = useState({
+        personal: [],
         academic: [],
         training: [],
         teaching: [],
@@ -22,6 +26,7 @@ const User = () => {
 
     useEffect(() => {
         setUserInfo({
+            personal: personalInfo.data,
             academic: academicInfo.data,
             training: trainingInfo.data,
             teaching: teachingInfo.data,
@@ -29,7 +34,33 @@ const User = () => {
             awardAndScholarship: awardAndScholarshipInfo.data,
             experience: experienceInfo.data,
         })
+
+        // fetchParallelUserInfo();
     }, [])
+
+    const fetchParallelUserInfo = async () => {
+        const personalInfoPromise = fetchUserInfo("personalinfo");
+        const academicInfoPromise = fetchUserInfo("academicinfo");
+        const trainingInfoPromise = fetchUserInfo("traininginfo");
+        const teachingInfoPromise = fetchUserInfo("teachinginfo");
+        const publicationInfoPromise = fetchUserInfo("publicationinfo");
+        const awardScholarshipInfoPromise = fetchUserInfo("awardscholarshipinfo");
+        const experienceInfoPromise = fetchUserInfo("experienceinfo");
+
+        const results = await Promise.all([personalInfoPromise, academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
+
+        setUserInfo(() => {
+            return {
+                personal: results[0].data.filter(item => item.user === userState.data.id),
+                academic: results[1].data.filter(item => item.user === userState.data.id),
+                training: results[2].data.filter(item => item.user === userState.data.id),
+                teaching: results[3].data.filter(item => item.user === userState.data.id),
+                publication: results[4].data.filter(item => item.user === userState.data.id),
+                awardAndScholarship: results[5].data.filter(item => item.user === userState.data.id),
+                experience: results[6].data.filter(item => item.user === userState.data.id)
+            }
+        })
+    }
 
     const [isModalShow, setIsModalShow] = useState({
         changePassword: false,

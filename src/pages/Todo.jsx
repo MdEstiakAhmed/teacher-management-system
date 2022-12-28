@@ -59,7 +59,7 @@ const Todo = () => {
                 <ul className="taskList">
                     {
                         // todoListResponse.filter(handlePriorityFilter).map((item, index) => (
-                        isFetched && data.length && data.filter(handlePriorityFilter).map((item, index) => (
+                        isFetched && data.data?.length && data.data.filter(handlePriorityFilter).map((item, index) => (
                             <TodoItem
                                 key={item.id}
                                 item={item}
