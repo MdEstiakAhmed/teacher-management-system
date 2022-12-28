@@ -39,7 +39,7 @@ const User = () => {
     }, [])
 
     const fetchParallelUserInfo = async () => {
-        const personalInfoPromise = fetchUserInfo("personalinfo");
+        // const personalInfoPromise = fetchUserInfo("personalinfo");
         const academicInfoPromise = fetchUserInfo("academicinfo");
         const trainingInfoPromise = fetchUserInfo("traininginfo");
         const teachingInfoPromise = fetchUserInfo("teachinginfo");
@@ -47,17 +47,17 @@ const User = () => {
         const awardScholarshipInfoPromise = fetchUserInfo("awardscholarshipinfo");
         const experienceInfoPromise = fetchUserInfo("experienceinfo");
 
-        const results = await Promise.all([personalInfoPromise, academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
+        const results = await Promise.all([academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
 
         setUserInfo(() => {
             return {
-                personal: results[0].data.filter(item => item.user === userState.data.id),
-                academic: results[1].data.filter(item => item.user === userState.data.id),
-                training: results[2].data.filter(item => item.user === userState.data.id),
-                teaching: results[3].data.filter(item => item.user === userState.data.id),
-                publication: results[4].data.filter(item => item.user === userState.data.id),
-                awardAndScholarship: results[5].data.filter(item => item.user === userState.data.id),
-                experience: results[6].data.filter(item => item.user === userState.data.id)
+                // personal: results[0].data.filter(item => item.user === userState.data.id),
+                academic: results[0].data.filter(item => item.user === id),
+                training: results[1].data.filter(item => item.user === id),
+                teaching: results[2].data.filter(item => item.user === id),
+                publication: results[3].data.filter(item => item.user === id),
+                awardAndScholarship: results[4].data.filter(item => item.user === id),
+                experience: results[5].data.filter(item => item.user === id)
             }
         })
     }
