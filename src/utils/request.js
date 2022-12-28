@@ -33,3 +33,18 @@ export const postData = async (url, data, headers) => {
         return { status: false, message: error.message };
     }
 }
+
+export const putData = async (url, data, headers) => {
+    try {
+        const localData = await localStorage.getItem("tms_data");
+        let token;
+        if(localData){
+            token = JSON.parse(localData || {}).access;
+        }
+        const response = await AppInstance.put(url, data, { headers: { ...headers, Authorization: `Bearer ${token}` } });
+        return response.data;
+    }
+    catch (error) {
+        return { status: false, message: error.message };
+    }
+}

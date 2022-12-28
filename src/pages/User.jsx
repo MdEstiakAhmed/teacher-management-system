@@ -1,13 +1,15 @@
 import { useParams } from "react-router-dom";
-import { fetchUser } from "../api/users";
+// import { fetchUser } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { userPersonalInfo as data } from "../assets/test-data/userApiResponse";
 import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
 import InfoSection from "../components/pages/user/InfoSection";
 import { userGeneralInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
-import { fetchUserInfo } from "../api/user";
+import { fetchUserInfo, fetchUser } from "../api/user";
 import useGetContext from "../hooks/useGetContext";
+import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
+import OtherInformationForm from "../components/pages/user/OtherInformationForm";
 
 const User = () => {
     const { id } = useParams();
@@ -25,19 +27,21 @@ const User = () => {
         experience: [],
     })
 
-    useEffect(() => {
-        // setUserInfo({
-        //     general: userGeneralInfo.data,
-        //     personal: userGeneralInfo.personal_info,
-        //     academic: academicInfo.data.filter(item => item.user == id),
-        //     training: trainingInfo.data.filter(item => item.user == id),
-        //     teaching: teachingInfo.data.filter(item => item.user == id),
-        //     publication: publicationInfo.data.filter(item => item.user == id),
-        //     awardAndScholarship: awardAndScholarshipInfo.data.filter(item => item.user == id),
-        //     experience: experienceInfo.data.filter(item => item.user == id),
-        // })
+    const [otherInfoModalData, setOtherInfoModalData] = useState({})
 
-        fetchParallelUserInfo();
+    useEffect(() => {
+        setUserInfo({
+            general: userGeneralInfo.data,
+            personal: userGeneralInfo.personal_info,
+            academic: academicInfo.data.filter(item => item.user == id),
+            training: trainingInfo.data.filter(item => item.user == id),
+            teaching: teachingInfo.data.filter(item => item.user == id),
+            publication: publicationInfo.data.filter(item => item.user == id),
+            awardAndScholarship: awardAndScholarshipInfo.data.filter(item => item.user == id),
+            experience: experienceInfo.data.filter(item => item.user == id),
+        })
+
+        // fetchParallelUserInfo();
     }, [])
 
     const fetchParallelUserInfo = async () => {
@@ -50,9 +54,6 @@ const User = () => {
         const experienceInfoPromise = fetchUserInfo("experienceinfo");
 
         const results = await Promise.all([userGeneralInfo, academicInfoPromise, trainingInfoPromise, teachingInfoPromise, publicationInfoPromise, awardScholarshipInfoPromise, experienceInfoPromise]);
-
-        console.log(results);
-
 
 
         setUserInfo(() => {
@@ -72,12 +73,15 @@ const User = () => {
     const [isModalShow, setIsModalShow] = useState({
         changePassword: false,
         editInfo: false,
+        generalInfo: false,
+        otherInfo: false,
     });
 
-    const handleModalOpen = (type) => {
-        setIsModalShow(prev => ({ ...prev, [type]: true }));
+    const handleModalOpen = (type, value) => {
+        setIsModalShow(prev => ({ ...prev, [type]: value ? value : true }));
     }
     const handleModalClose = (type) => {
+        setOtherInfoModalData({})
         setIsModalShow(prev => ({ ...prev, [type]: false }));
     }
 
@@ -86,6 +90,28 @@ const User = () => {
             {
                 isModalShow.changePassword && (
                     <ChangePasswordForm onClose={handleModalClose} />
+                )
+            }
+            {
+                isModalShow.generalInfo && (
+                    <GeneralInfoForm
+                        data={{
+                            general: userInfo.general,
+                            personal: userInfo.personal
+                        }}
+                        onClose={handleModalClose}
+                    />
+                )
+            }
+
+            {
+                isModalShow.otherInfo && (
+                    <OtherInformationForm
+                        onClose={handleModalClose}
+                        type={isModalShow.otherInfo}
+                        // data={userInfo[isModalShow.otherInfo]}
+                        data={otherInfoModalData}
+                    />
                 )
             }
             <div className="userDetailArea">
@@ -126,7 +152,7 @@ const User = () => {
                         {
                             id == userState.data.id && (
                                 <div className="buttonArea">
-                                    <button className="button primaryButton">Edit</button>
+                                    <button className="button primaryButton" onClick={() => handleModalOpen("generalInfo")}>Edit</button>
                                     <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
                                 </div>
                             )
@@ -134,42 +160,19 @@ const User = () => {
                     </div>
                 </div>
                 <div className="rightSide">
-                    <InfoSection
-                        type="academic"
-                        title="Academic Information"
-                        data={userInfo.academic}
-                        classes="academicInfo"
-                    />
-                    <InfoSection
-                        type="training"
-                        title="Training Information"
-                        data={userInfo.training}
-                        classes="trainingInfo"
-                    />
-                    <InfoSection
-                        type="teaching"
-                        title="Teaching Information"
-                        data={userInfo.teaching}
-                        classes="teachingInfo"
-                    />
-                    <InfoSection
-                        type="publication"
-                        title="Publication Information"
-                        data={userInfo.publication}
-                        classes="publicationInfo"
-                    />
-                    <InfoSection
-                        type="awardAndScholarship"
-                        title="Award and Scolarship Information"
-                        data={userInfo.awardAndScholarship}
-                        classes="awardAndScolarshipInfo"
-                    />
-                    <InfoSection
-                        type="experience"
-                        title="Experience Information"
-                        data={userInfo.experience}
-                        classes="experienceInfo"
-                    />
+                    {
+                        InfoSectionList.map(item => (
+                            <InfoSection
+                                type={item.type}
+                                title={item.title}
+                                data={userInfo[item.data]}
+                                classes={item.classes}
+                                key={item.type}
+                                handleModalOpen={handleModalOpen}
+                                setOtherInfoModalData={setOtherInfoModalData}
+                            />
+                        ))
+                    }
                 </div>
             </div>
         </>
@@ -177,3 +180,42 @@ const User = () => {
 }
 
 export default User;
+
+const InfoSectionList = [
+    {
+        type: "academic",
+        title: "Academic Information",
+        data: "academic",
+        classes: "academicInfo"
+    },
+    {
+        type: "training",
+        title: "Training Information",
+        data: "training",
+        classes: "trainingInfo"
+    },
+    {
+        type: "teaching",
+        title: "Teaching Information",
+        data: "teaching",
+        classes: "teachingInfo"
+    },
+    {
+        type: "publication",
+        title: "Publication Information",
+        data: "publication",
+        classes: "publicationInfo"
+    },
+    {
+        type: "awardAndScholarship",
+        title: "Award and Scolarship Information",
+        data: "awardAndScholarship",
+        classes: "awardAndScolarshipInfo"
+    },
+    {
+        type: "experience",
+        title: "Experience Information",
+        data: "experience",
+        classes: "experienceInfo"
+    }
+]

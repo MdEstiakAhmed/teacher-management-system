@@ -1,9 +1,14 @@
 import { useParams } from "react-router-dom";
 import useGetContext from "../../../hooks/useGetContext";
 
-const InfoSection = ({ type, title, data, classes }) => {
+const InfoSection = ({ type, title, data, classes, handleModalOpen, setOtherInfoModalData }) => {
     const {userState} = useGetContext()
     const { id } = useParams();
+
+    const handleEditClick = (index) => {
+        setOtherInfoModalData(data[index])
+        handleModalOpen("otherInfo", type);
+    }
     return (
         <>
             <div className={`contentArea ${classes}`}>
@@ -15,7 +20,7 @@ const InfoSection = ({ type, title, data, classes }) => {
                             <div className="heading" style={{ display: 'flex', alignItems: 'flex-start' }}>
                                 {
                                     id == userState.data.id && (
-                                        <button className="edit">
+                                        <button className="edit" onClick={() => handleEditClick(index)}>
                                             <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" width="1em" height="1em" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"><path d="M7 7H6a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2v-1"></path><path d="M20.385 6.585a2.1 2.1 0 0 0-2.97-2.97L9 12v3h3l8.385-8.415zM16 5l3 3"></path></g></svg>
                                         </button>
                                     )

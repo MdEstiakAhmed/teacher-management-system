@@ -17,7 +17,16 @@ export const objectToFormData = (object) => {
 }
 
 export const domRefToFormData = (domRef) => {
-    const objData = domRefToObject(domRef);
-    const formData = objectToFormData(objData);
+    const formData = new FormData();
+    ;[...domRef.current].forEach(input => {
+        if (input.type !== 'submit') {
+            formData.append(input.name, input.value);
+        }
+    })
     return formData;
+
+
+    // const objData = domRefToObject(domRef);
+    // const formData = objectToFormData(objData);
+    // return formData;
 }
