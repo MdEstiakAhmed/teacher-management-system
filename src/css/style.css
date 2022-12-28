@@ -471,6 +471,12 @@ input[type="submit"]:hover,
     border-radius: 50%;
     background-color: var(--primaryColor);
 }
+.todoArea .leftSide .tags li.low.active, .todoArea .leftSide .tags li.medium.active, .todoArea .leftSide .tags li.high.active, .todoArea .leftSide .tags li.urgent.active, .todoArea .leftSide .tags li.all.active {
+    color: var(--primaryColor);
+}
+.todoArea .leftSide .tags li {
+    cursor: pointer;
+}
 .todoArea .leftSide .tags li.low::before {
     background-color: var(--successColor);
 }
@@ -479,6 +485,12 @@ input[type="submit"]:hover,
 }
 .todoArea .leftSide .tags li.high::before {
     background-color: var(--dangerColor);
+}
+.todoArea .leftSide .tags li.urgent::before {
+    background-color: var(--primaryColor);
+}
+.todoArea .leftSide .tags li.all::before {
+    background-color: var(--titleColor);
 }
 .todoArea .leftSide .tags li a {
     line-height: 24px;
