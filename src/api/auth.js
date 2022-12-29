@@ -1,6 +1,6 @@
 import { showAlert, showAlertPopup } from "../utils/alert";
 import { domRefToFormData, domRefToObject, objectToFormData } from "../utils/formFieldConverter";
-import { postData } from "../utils/request";
+import { postData, putData } from "../utils/request";
 
 export const baseUrl = '/auth';
 
@@ -37,7 +37,7 @@ export const changePassword = async (ref) => {
     try {
         const url = `${baseUrl}/change_password/`;
         const formData = domRefToFormData(ref);
-        const response = await postData(url, formData, {});
+        const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {

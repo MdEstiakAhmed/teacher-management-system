@@ -1,14 +1,14 @@
-import { todoListResponse } from "../assets/test-data/todoListResponse";
+import { emailListResponse } from "../assets/test-data/emailResponse";
 import { showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
 import { postData, getData } from "../utils/request";
 
-export const baseUrl = '/todo';
+export const baseUrl = '/email';
 
-export const fetchTodo = async () => {
+export const fetchEmails = async () => {
     try {
         if(process.env.REACT_APP_DATA_TYPE === "json") {
-            return todoListResponse;
+            return emailListResponse;
         }
         const url = `${baseUrl}/`;
         const response = await getData(url, {});
@@ -18,7 +18,7 @@ export const fetchTodo = async () => {
     }
 }
 
-export const addTodo = async (ref) => {
+export const addEmail = async (ref) => {
     try {
         const url = `${baseUrl}/`;
         const formData = domRefToFormData(ref);

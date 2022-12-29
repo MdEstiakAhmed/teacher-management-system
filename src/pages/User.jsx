@@ -13,7 +13,6 @@ import OtherInformationForm from "../components/pages/user/OtherInformationForm"
 
 const User = () => {
     const { id } = useParams();
-    // const { data, isFetched, error } = useFetch(fetchUser, { id });
     const { userState } = useGetContext();
 
     const [userInfo, setUserInfo] = useState({
@@ -30,18 +29,18 @@ const User = () => {
     const [otherInfoModalData, setOtherInfoModalData] = useState({})
 
     useEffect(() => {
-        setUserInfo({
-            general: userGeneralInfo.data,
-            personal: userGeneralInfo.personal_info,
-            academic: academicInfo.data.filter(item => item.user == id),
-            training: trainingInfo.data.filter(item => item.user == id),
-            teaching: teachingInfo.data.filter(item => item.user == id),
-            publication: publicationInfo.data.filter(item => item.user == id),
-            awardAndScholarship: awardAndScholarshipInfo.data.filter(item => item.user == id),
-            experience: experienceInfo.data.filter(item => item.user == id),
-        })
+        // setUserInfo({
+        //     general: userGeneralInfo.data,
+        //     personal: userGeneralInfo.personal_info,
+        //     academic: academicInfo.data.filter(item => item.user == id),
+        //     training: trainingInfo.data.filter(item => item.user == id),
+        //     teaching: teachingInfo.data.filter(item => item.user == id),
+        //     publication: publicationInfo.data.filter(item => item.user == id),
+        //     awardAndScholarship: awardAndScholarshipInfo.data.filter(item => item.user == id),
+        //     experience: experienceInfo.data.filter(item => item.user == id),
+        // })
 
-        // fetchParallelUserInfo();
+        fetchParallelUserInfo();
     }, [])
 
     const fetchParallelUserInfo = async () => {

@@ -652,6 +652,15 @@ input[type="submit"]:hover,
     border-radius: 50%;
     background-color: var(--primaryColor);
 }
+.emailArea .labelList li {
+    cursor: pointer;
+}
+.emailArea .labelList li.all.active, .emailArea .labelList li.personal.active, .emailArea .labelList li.important.active, .emailArea .labelList li.private.active, .emailArea .labelList li.company.active {
+    color: var(--primaryColor);
+}
+.emailArea .labelList li.all::before {
+    background-color: var(--titleColor);
+}
 .emailArea .labelList li.personal::before {
     background-color: var(--successColor);
 }
@@ -660,6 +669,9 @@ input[type="submit"]:hover,
 }
 .emailArea .labelList li.private::before {
     background-color: var(--dangerColor);
+}
+.emailArea .labelList li.company::before {
+    background-color: var(--primaryColor);
 }
 .emailArea .labelList li a {
     line-height: 24px;

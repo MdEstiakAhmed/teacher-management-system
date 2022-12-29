@@ -1,12 +1,17 @@
-import { showAlert } from "../utils/alert";
+import { usersApiResponse } from "../assets/test-data/usersApiResponse";
+import { showAlert, showAlertPopup } from "../utils/alert";
 import { postData, getData } from "../utils/request";
 
 export const baseUrl = '/users';
 
 export const fetchUsers = async () => {
     try {
+        if(process.env.REACT_APP_DATA_TYPE === "json") {
+            return usersApiResponse;
+        }
         const url = `${baseUrl}/`;
         const response = await getData(url, {});
+        showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {
         return { status: false, message: error.message };

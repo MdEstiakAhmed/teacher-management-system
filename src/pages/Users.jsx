@@ -1,9 +1,8 @@
 import useFetch from "../hooks/useFetch";
 import { fetchUsers } from "../api/users";
 import { DeleteIcon, EditIcon, ViewIcon } from "../assets/icons/icons";
-import { usersApiResponse } from "../assets/test-data/usersApiResponse";
 import { UserForm } from "../components/pages/users/UserForm";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import useGetContext from "../hooks/useGetContext";
 
@@ -55,7 +54,6 @@ const Users = () => {
                         </thead>
                         <tbody>
                             {
-                                // true && usersApiResponse.status && usersApiResponse.data.length && usersApiResponse.data.map((user) => (
                                 isFetched && data.status && data.data.length && data.data.map((user) => (
                                     <UserRow
                                         key={user.id}

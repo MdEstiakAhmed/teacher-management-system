@@ -1,10 +1,10 @@
 export const domRefToObject = (domRef) => {
     const Data = {}
-    ;[...domRef.current].forEach(input => {
-        if (input.type !== 'submit') {
-            Data[input.name] = input.value;
-        }
-    })
+        ;[...domRef.current].forEach(input => {
+            if (input.type !== 'submit') {
+                Data[input.name] = input.value;
+            }
+        })
     return Data;
 }
 
@@ -17,13 +17,17 @@ export const objectToFormData = (object) => {
 }
 
 export const domRefToFormData = (domRef) => {
-    const formData = new FormData();
-    ;[...domRef.current].forEach(input => {
-        if (input.type !== 'submit') {
-            formData.append(input.name, input.value);
-        }
-    })
-    return formData;
+    try {
+        const formData = new FormData();
+        ;[...domRef.current].forEach(input => {
+            if (input.type !== 'submit') {
+                formData.append(input.name, input.value);
+            }
+        })
+        return formData;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
 
 
     // const objData = domRefToObject(domRef);
