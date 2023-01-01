@@ -1,7 +1,7 @@
 import { todoListResponse } from "../assets/test-data/todoListResponse";
 import { showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
-import { postData, getData } from "../utils/request";
+import { postData, getData, putData } from "../utils/request";
 
 export const baseUrl = '/todo';
 
@@ -23,6 +23,17 @@ export const addTodo = async (ref) => {
         const url = `${baseUrl}/`;
         const formData = domRefToFormData(ref);
         const response = await postData(url, formData, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+export const updateTodo = async (ref, id) => {
+    try {
+        const url = `${baseUrl}/${id}`;
+        const formData = domRefToFormData(ref);
+        const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {

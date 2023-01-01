@@ -1,25 +1,32 @@
-import { useRef } from "react";
-import { addTodo } from "../../../api/todo";
+import { useEffect, useRef } from "react";
+import { updateTodo } from "../../../api/todo";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
-import useGetContext from "../../../hooks/useGetContext";
 
-const TodoAddForm = ({ onClose }) => {
+const TodoEditForm = ({ taskData, onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
-    const {userState: {data: {id} = {}} = {}} = useGetContext();
 
-    usePseudoElementClick(sectionRef, () => onClose("addForm"));
+    usePseudoElementClick(sectionRef, () => onClose("editForm"));
+
+    useEffect(() => {
+        console.log(taskData);
+        ;[...formRef.current].forEach((input) => {
+            if(input.name !== "submit" && taskData[input.name]){
+                input.value = taskData[input.name];
+            }
+        });
+    }, [taskData])
 
     const closeForm = (e) => {
         e.preventDefault();
-        onClose("addForm", true);
+        onClose("editForm", true);
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response = {};
-        response = await addTodo(formRef);
-        response.status && onClose("addForm");
+        response = await updateTodo(formRef, taskData.id);
+        response.status && onClose("editForm");
     }
     return (
         <>
@@ -27,7 +34,7 @@ const TodoAddForm = ({ onClose }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Add task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <input type="hidden" name="Assignee" value={id} />
+                        <input type="hidden" name="Assignee" />
                         <div className="inputBox">
                             <label>Title</label>
                             <input type="text" name="Title" placeholder="Title" />
@@ -59,4 +66,4 @@ const TodoAddForm = ({ onClose }) => {
         </>
     )
 }
-export default TodoAddForm;
+export default TodoEditForm;

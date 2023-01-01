@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { fetchTodo } from "../api/todo";
 import TodoAddForm from "../components/pages/todo/TodoAddForm";
+import TodoEditForm from "../components/pages/todo/TodoEditForm";
 import useFetch from "../hooks/useFetch";
 
 const Todo = () => {
     const { data, isFetched, error, fetchData } = useFetch(fetchTodo, {});
     const [isModalShow, setIsModalShow] = useState({
-        addForm: false
+        addForm: false,
+        editForm: false,
     });
+    const [selectedTodo, setSelectedTodo] = useState(null);
 
     const [priorityFilter, setPriorityFilter] = useState('');
     const [completedFilter, setCompletedFilter] = useState(false);
@@ -18,7 +21,7 @@ const Todo = () => {
     }
 
     const handleModalClose = (type, isRefetch) => {
-        if(isRefetch) fetchData();
+        if (isRefetch) fetchData();
         setIsModalShow(prev => ({ ...prev, [type]: false }))
     }
 
@@ -37,6 +40,14 @@ const Todo = () => {
             {
                 isModalShow.addForm && (
                     <TodoAddForm
+                        onClose={handleModalClose}
+                    />
+                )
+            }
+            {
+                isModalShow.editForm && selectedTodo && (
+                    <TodoEditForm
+                        taskData={selectedTodo}
                         onClose={handleModalClose}
                     />
                 )
@@ -79,6 +90,8 @@ const Todo = () => {
                                 <TodoItem
                                     key={item.id}
                                     item={item}
+                                    setSelectedTodo={setSelectedTodo}
+                                    handleModalOpen={handleModalOpen}
                                 />
                             ))
                         }
@@ -93,16 +106,22 @@ export default Todo;
 
 // urgent, high, medium, low
 
-const TodoItem = ({ item }) => {
+const TodoItem = ({ item, setSelectedTodo, handleModalOpen }) => {
     let { Title, Priority, DueDate } = item;
+
     const taskPriority = {
         Urgent: 'urgent',
         High: 'high',
         Medium: 'medium',
         Low: 'low'
     };
+
+    const clickOnTask = () => {
+        setSelectedTodo(item)
+        handleModalOpen("editForm")
+    }
     return (
-        <li>
+        <li onClick={clickOnTask}>
             <div className="titleArea">
                 <input type="checkbox" name="" id="" />
                 <button className="button">
