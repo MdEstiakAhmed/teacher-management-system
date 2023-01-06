@@ -10,7 +10,7 @@ const form = {
         { name: "CGPA", label: "CGPA", placeholder: "CGPA" },
     ],
     training: [
-        { name: "Titlee", label: "Titlee", placeholder: "Titlee" },
+        { name: "Title", label: "Title", placeholder: "Title" },
         { name: "Institute", label: "Institute", placeholder: "Institute" },
         { name: "Duration", label: "Duration", placeholder: "Duration" },
         { name: "Year", label: "Year", placeholder: "Year" },
