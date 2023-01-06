@@ -1,7 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
-import { fetchUserInfo } from "../api/user";
+import { fetchUserInfo, fetchUserOtherInfo } from "../api/user";
 import { userLoginData } from "../assets/test-data/userLoginData";
 import InputBox from "../components/form/InputBox";
 import { InputSubmit } from "../components/styled/elements/form";
@@ -26,7 +26,7 @@ const Login = () => {
         // const response = userLoginData;
         if(response.status){
             totalResponse = {...response};
-            let userPersonalData = await fetchUserInfo("personalinfo");
+            let userPersonalData = await fetchUserOtherInfo({id: response.data.id, type: "personalinfo"});
             if(userPersonalData.status) {
                 totalResponse = {...totalResponse, ...userPersonalData.data};
             }
