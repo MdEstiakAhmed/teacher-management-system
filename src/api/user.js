@@ -80,7 +80,7 @@ export const updatePersonalInfo = async (id, ref) => {
 
 export const addOtherInfo = async (type, id, ref) => {
     try {
-        const url = `${baseUrl}/${type}/${id}/`;
+        const url = `${baseUrl}/${type}/`;
         const formData = domRefToFormData(ref);
         const response = await postData(url, formData, {});
         showAlertPopup(response.status, response.message);
