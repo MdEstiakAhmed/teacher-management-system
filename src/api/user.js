@@ -78,6 +78,19 @@ export const updatePersonalInfo = async (id, ref) => {
     }
 }
 
+export const addOtherInfo = async (type, id, ref) => {
+    try {
+        const url = `${baseUrl}/${type}/${id}/`;
+        const formData = domRefToFormData(ref);
+        const response = await postData(url, formData, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        console.log(error);
+        return { status: false, message: error.message };
+    }
+}
+
 export const updateOtherInfo = async (type, id, ref) => {
     try {
         const url = `${baseUrl}/${type}/${id}/`;

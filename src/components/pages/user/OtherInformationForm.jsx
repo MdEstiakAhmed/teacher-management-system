@@ -1,5 +1,5 @@
-import { useEffect, useRef } from "react";
-import { updateOtherInfo } from "../../../api/user";
+import { useEffect, useRef, useState } from "react";
+import { addOtherInfo, updateOtherInfo } from "../../../api/user";
 
 const form = {
     academic: [
@@ -47,26 +47,31 @@ const formType = {
     experience: "experienceinfo"
 }
 
-const OtherInformationForm = ({ data, type, onClose }) => {
+const OtherInformationForm = ({ data, type, onClose, action }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
     useEffect(() => {
-        ;[...formRef.current].forEach((input) => {
-            if(input.name !== "submit" && data[input.name]){
-                input.value = data[input.name];
-            }
-        });
+        if (action === "add") {
+            formRef.current.reset();
+        }
+        else if (action === "edit") {
+            ;[...formRef.current].forEach((input) => {
+                if (input.name !== "submit" && data[input.name]) {
+                    input.value = data[input.name];
+                }
+            });
+        }
     }, [data])
 
     const checkClickEvent = (e) => {
-        if(e.target === sectionRef.current){
+        if (e.target === sectionRef.current) {
             onClose("generalInfo")
         }
     }
 
     useEffect(() => {
-        if(sectionRef.current){
+        if (sectionRef.current) {
             let element = sectionRef.current
             element.addEventListener('click', checkClickEvent);
             return () => {
@@ -78,13 +83,33 @@ const OtherInformationForm = ({ data, type, onClose }) => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         let response = {};
-        response = await updateOtherInfo(formType[type], data.id, formRef);
-        response.status && onClose("otherInfo");
+        if (action === "add") {
+            response = await addOtherInfo(formType[type], data.id, formRef);
+        }
+        else if (action === "edit") {
+            response = await updateOtherInfo(formType[type], data.id, formRef);
+        }
+        else if (action === "delete") {
+
+        }
+        if (response.status) {
+            if (action === "add") {
+                onClose("addOtherInfo")
+            }
+            else if (action === "edit") {
+                onClose("otherInfo")
+            }
+        }
     }
 
     const closeForm = (e) => {
         e.preventDefault();
-        onClose("otherInfo")
+        if (action === "add") {
+            onClose("addOtherInfo")
+        }
+        else if (action === "edit") {
+            onClose("otherInfo")
+        }
     }
 
     return (
@@ -94,7 +119,7 @@ const OtherInformationForm = ({ data, type, onClose }) => {
                     <h3 className="title">{`Update ${type} info`}</h3>
                     <form ref={formRef} onSubmit={handleFormSubmit}>
                         {
-                            form[type].map((item, index) => (
+                            type && form[type].map((item, index) => (
                                 <>
                                     <InputBox
                                         key={index}

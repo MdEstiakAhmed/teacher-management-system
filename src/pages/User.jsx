@@ -74,9 +74,11 @@ const User = () => {
         editInfo: false,
         generalInfo: false,
         otherInfo: false,
+        addOtherInfo: false
     });
 
     const handleModalOpen = (type, value) => {
+        console.log(value);
         setIsModalShow(prev => ({ ...prev, [type]: value ? value : true }));
     }
     const handleModalClose = (type) => {
@@ -104,12 +106,13 @@ const User = () => {
             }
 
             {
-                isModalShow.otherInfo && (
+                (isModalShow.otherInfo || isModalShow.addOtherInfo) && (
                     <OtherInformationForm
                         onClose={handleModalClose}
-                        type={isModalShow.otherInfo}
+                        type={isModalShow.otherInfo || isModalShow.addOtherInfo}
                         // data={userInfo[isModalShow.otherInfo]}
                         data={otherInfoModalData}
+                        action={isModalShow.addOtherInfo ? "add" : "edit"}
                     />
                 )
             }
