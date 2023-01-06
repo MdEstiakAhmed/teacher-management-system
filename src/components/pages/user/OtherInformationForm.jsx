@@ -131,12 +131,11 @@ const OtherInformationForm = ({ data, type, onClose, action }) => {
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             {
                                 action === "edit" ?
-                                    <button className="Button primaryButton warning" onClick={closeForm}>Delete</button> :
+                                    <button className="Button primaryButton warning" onClick={closeForm}>Change</button> :
                                     action === "add" ?
-                                        <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> :
+                                        <button className="Button primaryButton warning" onClick={closeForm}>Add</button> :
                                         ""
                             }
-                            <input type="submit" name="submit" value="Change" />
                             <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
                         </div>
                     </form>

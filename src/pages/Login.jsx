@@ -1,6 +1,7 @@
 import { useRef, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
+import { fetchUserInfo } from "../api/user";
 import { userLoginData } from "../assets/test-data/userLoginData";
 import InputBox from "../components/form/InputBox";
 import { InputSubmit } from "../components/styled/elements/form";
@@ -20,10 +21,16 @@ const Login = () => {
                 formData[input.name] = input.value;
             }
         })
+        let totalResponse = {};
         const response = await login(formData);
         // const response = userLoginData;
         if(response.status){
-            userAction.setUser(response)
+            totalResponse = {...response};
+            let userPersonalData = await fetchUserInfo("personalinfo");
+            if(userPersonalData.status) {
+                totalResponse = {...totalResponse, ...userPersonalData.data};
+            }
+            userAction.setUser(totalResponse)
             authAction.setAuth()
             navigate("/")
         }

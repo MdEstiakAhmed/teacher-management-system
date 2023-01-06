@@ -48,12 +48,12 @@ const Header = () => {
                         </p>
                     </div>
                     <div className="userImage" ref={headerRef}>
-                        <img src={userLogo} alt="user" onClick={handlePopUpShow} />
+                        <img src={`http://127.0.0.1:8000${userState.data?.ProfilePic}`} alt="user" onClick={handlePopUpShow} />
                         {
                             (isShowPopUp) ? (
                                 <ul className="userPopup card" >
                                     <li className="user">
-                                        <img src={userLogo} alt="user" />
+                                        <img src={`http://127.0.0.1:8000${userState.data?.ProfilePic}`} alt="user" />
                                         <div className="userDetails">
                                             <h4 className="userName">{`${userState.data?.first_name} ${userState.data?.last_name}`}</h4>
                                             <p className="userDesignation">{userState.data?.is_superuser ? "Admin" : useState.data?.is_staff ? "Employee" : ""}</p>

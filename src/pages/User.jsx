@@ -120,7 +120,7 @@ const User = () => {
                 <div className="leftSide">
                     <div className="contentArea">
                         <div className="userIdentity">
-                            <img src="images/user.png" alt="user" />
+                            <img src={`http://127.0.0.1:8000${userInfo.personal?.ProfilePic}`} alt="user" />
                             <h3 className="title">{`${userInfo.general?.first_name || ""} ${userInfo.general?.last_name || ""}`}</h3>
                             <p className="designation">{userInfo.personal?.Designation || ""}</p>
                         </div>

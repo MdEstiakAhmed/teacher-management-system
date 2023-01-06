@@ -1,4 +1,4 @@
-import { academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo, userGeneralInfo } from "../assets/test-data/userInfo";
+import { personalinfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo, userGeneralInfo } from "../assets/test-data/userInfo";
 import { showAlert, showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
 import { postData, getData, putData } from "../utils/request";
@@ -10,6 +10,9 @@ export const fetchUserInfo = async (type) => {
         if(process.env.REACT_APP_DATA_TYPE === "json") {
             let res = {};
             switch (type) {
+                case "personalinfo":
+                    res = personalinfo;
+                    break;
                 case "academicinfo":
                     res = academicInfo;
                     break;
@@ -53,6 +56,21 @@ export const fetchUser = async ({ id }) => {
         return { status: false, message: error.message };
     }
 }
+
+export const fetchUserOtherInfo = async ({ id, type }) => {
+    try {
+        if(process.env.REACT_APP_DATA_TYPE === "json") {
+            return userGeneralInfo;
+        }
+        const url = `${baseUrl}/${type}/${id}/`;
+        const response = await getData(url, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
+
 
 export const updateGeneralInfo = async (id, ref) => {
     try {
