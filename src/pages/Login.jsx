@@ -28,7 +28,7 @@ const Login = () => {
             totalResponse = {...response};
             let userPersonalData = await fetchUserOtherInfo({id: response.data.id, type: "personalinfo", token: response.access});
             if(userPersonalData.status) {
-                totalResponse = {...totalResponse, ...userPersonalData.data};
+                totalResponse.data = {...totalResponse.data, ...userPersonalData.data};
             }
             userAction.setUser(totalResponse)
             authAction.setAuth()
