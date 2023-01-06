@@ -7,10 +7,16 @@ const AppInstance = axios.create({
     }
 });
 
-export const getData = async (url, headers) => {
+export const getData = async (url, headers, tempToken) => {
     try {
         const localData = await localStorage.getItem("tms_data");
-        const token = JSON.parse(localData || {}).access;
+        let token;
+        if(tempToken){
+            token = tempToken;
+        }
+        else {
+            token = JSON.parse(localData || {}).access;
+        }
         const response = await AppInstance.get(url, { headers: { ...headers, Authorization: `Bearer ${token}` } });
         return response.data;
     }

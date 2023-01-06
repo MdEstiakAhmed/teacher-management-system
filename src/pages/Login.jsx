@@ -26,7 +26,7 @@ const Login = () => {
         // const response = userLoginData;
         if(response.status){
             totalResponse = {...response};
-            let userPersonalData = await fetchUserOtherInfo({id: response.data.id, type: "personalinfo"});
+            let userPersonalData = await fetchUserOtherInfo({id: response.data.id, type: "personalinfo", token: response.access});
             if(userPersonalData.status) {
                 totalResponse = {...totalResponse, ...userPersonalData.data};
             }
