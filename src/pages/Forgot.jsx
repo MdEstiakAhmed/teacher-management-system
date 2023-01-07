@@ -19,7 +19,7 @@ const Forgot = () => {
                 }
             })
         const response = await forgot(formData);
-        if (response.status === "ok") {
+        if (response.status === "OK") {
             navigate("/reset")
         }
         else {

@@ -19,8 +19,11 @@ const Reset = () => {
                 }
             })
         const response = await reset(formData);
-        if (response.status === "ok") {
+        if (response.status === "OK") {
             navigate("/login")
+        }
+        else if(response.password) {
+            showAlertPopup(false, response.password[0]);
         }
         else {
             showAlertPopup(false, "Invalid OTP");
