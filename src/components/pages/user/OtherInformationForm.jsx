@@ -47,7 +47,7 @@ const formType = {
     experience: "experienceinfo"
 }
 
-const OtherInformationForm = ({ data, type, onClose, action }) => {
+const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
@@ -95,9 +95,11 @@ const OtherInformationForm = ({ data, type, onClose, action }) => {
         if (response.status) {
             if (action === "add") {
                 onClose("addOtherInfo")
+                setRefetchData(true);
             }
             else if (action === "edit") {
                 onClose("otherInfo")
+                setRefetchData(true);
             }
         }
     }

@@ -10,10 +10,13 @@ import { fetchUserInfo, fetchUser } from "../api/user";
 import useGetContext from "../hooks/useGetContext";
 import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
 import OtherInformationForm from "../components/pages/user/OtherInformationForm";
+import GeneralInfoAddForm from "../components/pages/user/GeneralInfoAddForm";
 
 const User = () => {
     const { id } = useParams();
     const { userState } = useGetContext();
+
+    const [refetchData, setRefetchData] = useState(false);
 
     const [userInfo, setUserInfo] = useState({
         general: {},
@@ -41,7 +44,7 @@ const User = () => {
         // })
 
         fetchParallelUserInfo();
-    }, [])
+    }, [refetchData])
 
     const fetchParallelUserInfo = async () => {
         const userGeneralInfo = fetchUser({ id });
@@ -74,7 +77,8 @@ const User = () => {
         editInfo: false,
         generalInfo: false,
         otherInfo: false,
-        addOtherInfo: false
+        addOtherInfo: false,
+        generalInfoAdd: false
     });
 
     const handleModalOpen = (type, value) => {
@@ -94,6 +98,18 @@ const User = () => {
                 )
             }
             {
+                isModalShow.generalInfoAdd && (
+                    <GeneralInfoAddForm
+                        // data={{
+                        //     general: userInfo.general,
+                        //     personal: userInfo.personal
+                        // }}
+                        onClose={handleModalClose}
+                        setRefetchData={setRefetchData}
+                    />
+                )
+            }
+            {
                 isModalShow.generalInfo && (
                     <GeneralInfoForm
                         data={{
@@ -101,6 +117,7 @@ const User = () => {
                             personal: userInfo.personal
                         }}
                         onClose={handleModalClose}
+                        setRefetchData={setRefetchData}
                     />
                 )
             }
@@ -113,6 +130,7 @@ const User = () => {
                         // data={userInfo[isModalShow.otherInfo]}
                         data={otherInfoModalData}
                         action={isModalShow.addOtherInfo ? "add" : "edit"}
+                        setRefetchData={setRefetchData}
                     />
                 )
             }
@@ -145,16 +163,37 @@ const User = () => {
                             </div>
                         </div>
                         <ul className="userDetail">
-                            <li>Department : <span>{userInfo.personal?.Department || ""}</span></li>
-                            <li>Phone : <span>{userInfo.personal?.Phone || ""}</span></li>
-                            <li>Gender : <span>{userInfo.personal?.Gender || ""}</span></li>
-                            <li>Blood Group : <span>{userInfo.personal?.BloodGroup || ""}</span></li>
-                            <li>DOB : <span>{userInfo.personal?.DateOfBirth || ""}</span></li>
+                            <li>Email : <span>{userInfo.general?.email || ""}</span></li>
+                            {
+                                Object.keys(userInfo.personal).length ? (
+                                    <>
+                                        <li>Phone : <span>{userInfo.personal?.Phone || ""}</span></li>
+                                        <li>Employee Id : <span>{userInfo.personal?.EmployeeID || ""}</span></li>
+                                        <li>Department : <span>{userInfo.personal?.Department || ""}</span></li>
+                                        <li>Gender : <span>{userInfo.personal?.Gender || ""}</span></li>
+                                        <li>Blood Group : <span>{userInfo.personal?.BloodGroup || ""}</span></li>
+                                        <li>Date of Birth : <span>{userInfo.personal?.DateOfBirth || ""}</span></li>
+                                        <li>Nationality : <span>{userInfo.personal?.Nationality || ""}</span></li>
+                                        <li>NID Number : <span>{userInfo.personal?.NIDNumber || ""}</span></li>
+                                        <li>Religion : <span>{userInfo.personal?.Religion || ""}</span></li>
+                                        <li>Marital Status : <span>{userInfo.personal?.MaritalStatus || ""}</span></li>
+                                        <li>Present Address : <span>{userInfo.personal?.PresentAddress || ""}</span></li>
+                                        <li>Permanent Address : <span>{userInfo.personal?.PermanentAddress || ""}</span></li>
+
+                                    </>
+                                ) : ""
+                            }
                         </ul>
                         {
                             id == userState.data.id && (
                                 <div className="buttonArea">
-                                    <button className="button primaryButton" onClick={() => handleModalOpen("generalInfo")}>Edit</button>
+                                    {
+                                        Object.keys(userInfo.personal).length ? (
+                                            <button className="button primaryButton" onClick={() => handleModalOpen("generalInfo")}>Edit</button>
+                                        ) : (
+                                            <button className="button primaryButton" onClick={() => handleModalOpen("generalInfoAdd")}>Add</button>
+                                        )
+                                    }
                                     <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
                                 </div>
                             )
@@ -172,6 +211,7 @@ const User = () => {
                                 key={item.type}
                                 handleModalOpen={handleModalOpen}
                                 setOtherInfoModalData={setOtherInfoModalData}
+                                setRefetchData={setRefetchData}
                             />
                         ))
                     }

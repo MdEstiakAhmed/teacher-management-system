@@ -9,23 +9,23 @@ export const userGeneralInfo = {
         "email": "estiak@gmail.com",
         "is_active": true
     },
-    "personal_info": {
-        "user": 1,
-        "ProfilePic": null,
-        "EmployeeID": "",
-        "Phone": "01766461990",
-        "Designation": "Software Engineer",
-        "Department": "Engineering",
-        "Gender": "2",
-        "BloodGroup": "3",
-        "DateOfBirth": "1990-12-12",
-        "Nationality": "",
-        "NIDNumber": "",
-        "Religion": "0",
-        "MaritalStatus": "0",
-        "PresentAddress": "",
-        "PermanentAddress": ""
-    }
+    // "personal_info": {
+    //     "user": 1,
+    //     "ProfilePic": null,
+    //     "EmployeeID": "",
+    //     "Phone": "01766461990",
+    //     "Designation": "Software Engineer",
+    //     "Department": "Engineering",
+    //     "Gender": "2",
+    //     "BloodGroup": "3",
+    //     "DateOfBirth": "1990-12-12",
+    //     "Nationality": "",
+    //     "NIDNumber": "",
+    //     "Religion": "0",
+    //     "MaritalStatus": "0",
+    //     "PresentAddress": "",
+    //     "PermanentAddress": ""
+    // }
 }
 export const personalInfo = {
     "status": true,

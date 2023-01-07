@@ -11,7 +11,6 @@ export const fetchUsers = async () => {
         }
         const url = `${baseUrl}/`;
         const response = await getData(url, {});
-        showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {
         return { status: false, message: error.message };

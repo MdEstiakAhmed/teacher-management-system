@@ -215,6 +215,9 @@ input[type="submit"]:hover,
 .primaryButton.warning:hover {
     box-shadow: 0 8px 25px -8px var(--warningColor);;
 }
+.secondaryButton:hover {
+    color: var(--primaryColor);
+}
 
 
 

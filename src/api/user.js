@@ -1,7 +1,7 @@
 import { personalInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo, userGeneralInfo } from "../assets/test-data/userInfo";
 import { showAlert, showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
-import { postData, getData, putData } from "../utils/request";
+import { postData, getData, putData, deleteData } from "../utils/request";
 
 export const baseUrl = '/users';
 
@@ -72,6 +72,29 @@ export const fetchUserOtherInfo = async ({ id, type, token }) => {
 
 
 
+export const addGeneralInfo = async (id, ref) => {
+    try {
+        const url = `${baseUrl}/${id}/`;
+        const formData = domRefToFormData(ref);
+        const response = await putData(url, formData, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
+export const addPersonalInfo = async (id, ref) => {
+    try {
+        const url = `${baseUrl}/personalinfo/add/`;
+        const formData = domRefToFormData(ref);
+        const response = await postData(url, formData, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
 export const updateGeneralInfo = async (id, ref) => {
     try {
         const url = `${baseUrl}/${id}/`;
@@ -86,7 +109,7 @@ export const updateGeneralInfo = async (id, ref) => {
 
 export const updatePersonalInfo = async (id, ref) => {
     try {
-        const url = `${baseUrl}/${id}/`;
+        const url = `${baseUrl}/personalinfo/${id}/`;
         const formData = domRefToFormData(ref);
         const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
@@ -122,3 +145,14 @@ export const updateOtherInfo = async (type, id, ref) => {
     }
 }
 
+export const deleteOtherInfo = async (type, id) => {
+    try {
+        const url = `${baseUrl}/${type}/${id}/`;
+        const response = await deleteData(url, {}, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        console.log(error);
+        return { status: false, message: error.message };
+    }
+}

@@ -1,25 +1,25 @@
 import { useEffect, useRef } from "react";
-import { updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
+import { addGeneralInfo, addPersonalInfo, updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
 
-const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
+const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
     const generalInfoForm = useRef(null);
     const personalInfoInfoForm = useRef(null);
 
-    useEffect(() => {
-        ;[...generalInfoForm.current].forEach((input) => {
-            input.value = data.general[input.name];
-        });
-        ;[...personalInfoInfoForm.current].forEach((input) => {
-            if (input.type === "date") {
-                // console.log(data.personal[input.name]);
-            }
-            input.value = data.personal[input.name];
-        });
-    }, [data])
+    // useEffect(() => {
+    //     ;[...generalInfoForm.current].forEach((input) => {
+    //         input.value = data.general[input.name];
+    //     });
+    //     ;[...personalInfoInfoForm.current].forEach((input) => {
+    //         if(input.type === "date"){
+    //             // console.log(data.personal[input.name]);
+    //         }
+    //         input.value = data.personal[input.name];
+    //     });
+    // }, [data])
 
     useEffect(() => {
-        if (sectionRef.current) {
+        if(sectionRef.current){
             let element = sectionRef.current
             element.addEventListener('click', checkClickEvent);
             return () => {
@@ -30,35 +30,35 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        let generalInfoResponse = await updateGeneralInfo(generalInfoForm.current);
-        let personalInfoResponse = await updatePersonalInfo(personalInfoInfoForm.current);
+        let generalInfoResponse = await addGeneralInfo(generalInfoForm.current);
+        let personalInfoResponse = await addPersonalInfo(personalInfoInfoForm.current);
         // response.status && onClose("generalInfo");
-        if (generalInfoResponse.status && personalInfoResponse.status) {
+        if(generalInfoResponse.status && personalInfoResponse.status){
             setRefetchData(true);
-            onClose("generalInfo");
+            onClose("generalInfoAdd");
         }
     }
 
     const checkClickEvent = (e) => {
-        if (e.target === sectionRef.current) {
-            onClose("generalInfo")
+        if(e.target === sectionRef.current){
+            onClose("generalInfoAdd")
         }
     }
     const closeForm = (e) => {
         e.preventDefault();
-        onClose("generalInfo")
+        onClose("generalInfoAdd")
     }
     return (
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">Update User Info</h3>
+                    <h3 className="title">Add User Info</h3>
                     <form ref={generalInfoForm}>
-                        <div className="inputBox">
+                        {/* <div className="inputBox">
                             <label>Username</label>
                             <input type="text" name="username" placeholder="Username" />
-                        </div>
-                        <div className="inputBox">
+                        </div> */}
+                        {/* <div className="inputBox">
                             <label>First name</label>
                             <input type="text" name="first_name" placeholder="First name" />
                         </div>
@@ -66,8 +66,16 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
                             <label>Last name</label>
                             <input type="text" name="last_name" placeholder="Last name" />
                         </div>
+                        <div className="inputBox">
+                            <label>Email</label>
+                            <input type="text" name="email" placeholder="example@example.com" />
+                        </div> */}
                     </form>
                     <form ref={personalInfoInfoForm}>
+                        <div className="inputBox">
+                            <label>EmployeeID</label>
+                            <input type="text" name="EmployeeID" placeholder="Employee ID" />
+                        </div>
                         <div className="inputBox">
                             <label>Phone</label>
                             <input type="text" name="Phone" placeholder="Phone" />
@@ -156,4 +164,4 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
         </>
     )
 }
-export default GeneralInfoForm;
+export default GeneralInfoAddForm;

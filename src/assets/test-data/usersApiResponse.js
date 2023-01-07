@@ -9,23 +9,23 @@ export const usersApiResponse = {
             "last_name": "Nahid",
             "email": "siyam14.boy@gmail.com",
             "is_active": true,
-            "personal_info": {
-                "user": 1,
-                "ProfilePic": null,
-                "EmployeeID": "001",
-                "Phone": "",
-                "Designation": "Admin",
-                "Department": "",
-                "Gender": "1",
-                "BloodGroup": "0",
-                "DateOfBirth": null,
-                "Nationality": "",
-                "NIDNumber": "",
-                "Religion": "0",
-                "MaritalStatus": "0",
-                "PresentAddress": "",
-                "PermanentAddress": ""
-            }
+            // "personal_info": {
+            //     "user": 1,
+            //     "ProfilePic": null,
+            //     "EmployeeID": "001",
+            //     "Phone": "",
+            //     "Designation": "Admin",
+            //     "Department": "",
+            //     "Gender": "1",
+            //     "BloodGroup": "0",
+            //     "DateOfBirth": null,
+            //     "Nationality": "",
+            //     "NIDNumber": "",
+            //     "Religion": "0",
+            //     "MaritalStatus": "0",
+            //     "PresentAddress": "",
+            //     "PermanentAddress": ""
+            // }
         },
         {
             "id": 2,
