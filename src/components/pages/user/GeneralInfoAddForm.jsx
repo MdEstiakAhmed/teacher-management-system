@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import { addGeneralInfo, addPersonalInfo, updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
+import useGetContext from "../../../hooks/useGetContext";
 
 const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
     const generalInfoForm = useRef(null);
     const personalInfoInfoForm = useRef(null);
+
+    const {userState} = useGetContext()
 
     // useEffect(() => {
     //     ;[...generalInfoForm.current].forEach((input) => {
@@ -30,8 +33,8 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        let generalInfoResponse = await addGeneralInfo(generalInfoForm.current);
-        let personalInfoResponse = await addPersonalInfo(personalInfoInfoForm.current);
+        let generalInfoResponse = await addGeneralInfo(userState.data?.id, generalInfoForm);
+        let personalInfoResponse = await addPersonalInfo(personalInfoInfoForm);
         // response.status && onClose("generalInfo");
         if(generalInfoResponse.status && personalInfoResponse.status){
             setRefetchData(prev => !prev);
