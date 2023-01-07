@@ -8,6 +8,8 @@ import Dashboard from "../pages/Dashboard";
 import Email from "../pages/Email";
 import Event from "../pages/Event";
 import Login from '../pages/Login'
+import Forgot from '../pages/Forgot'
+import Reset from '../pages/Reset'
 import Todo from "../pages/Todo";
 import User from "../pages/User";
 import Users from "../pages/Users";
@@ -81,6 +83,8 @@ const PublicRoute = () => {
 	return (
 		<Routes>
 			<Route path="/login" element={<Login />} />
+			<Route path="/forgot" element={<Forgot />} />
+			<Route path="/reset" element={<Reset />} />
 		</Routes>
 	)
 }

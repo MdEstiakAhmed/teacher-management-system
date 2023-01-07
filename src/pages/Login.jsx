@@ -1,5 +1,5 @@
 import { useRef, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login } from "../api/auth";
 import { fetchUserInfo, fetchUserOtherInfo } from "../api/user";
 import { userLoginData } from "../assets/test-data/userLoginData";
@@ -65,6 +65,7 @@ const Login = () => {
                             value="Sign In"
                         />
                     </form>
+                    <Link to="/forgot">Forget password</Link>
                 </Card>
             </Section>
         </>

@@ -17,6 +17,32 @@ export const login = async (data) => {
         return { status: false, message: error.message };
     }
 }
+export const forgot = async (data) => {
+    try {
+        const url = `${baseUrl}/password_reset/`;
+        const formData = new FormData();
+        for (const property in data) {
+            formData.append(property, data[property]);
+        }
+        const response = await postData(url, formData, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+export const reset = async (data) => {
+    try {
+        const url = `${baseUrl}/password_reset/confirm/`;
+        const formData = new FormData();
+        for (const property in data) {
+            formData.append(property, data[property]);
+        }
+        const response = await postData(url, formData, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
 
 export const signup = async (data) => {
     console.log(data);
