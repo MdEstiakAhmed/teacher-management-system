@@ -5,6 +5,15 @@ import { DeleteIcon } from "../../../assets/icons/icons";
 import useGetContext from "../../../hooks/useGetContext";
 import { ModalContainer, ModalContent } from "../../styled/elements/modal";
 
+const formType = {
+    academic: "academicinfo",
+    training: "traininginfo",
+    teaching: "teachinginfo",
+    publication: "publicationinfo",
+    awardAndScholarship: "awardscholarshipinfo",
+    experience: "experienceinfo"
+}
+
 const InfoSection = ({ type, title, data, classes, handleModalOpen, setOtherInfoModalData, setRefetchData }) => {
     const { userState } = useGetContext()
     const { id } = useParams();
@@ -28,7 +37,7 @@ const InfoSection = ({ type, title, data, classes, handleModalOpen, setOtherInfo
     }
 
     const handleDelete = async() => {
-        const response = await deleteOtherInfo(type, deleteItemId);
+        const response = await deleteOtherInfo(formType[type], deleteItemId);
         if(response.status){
             setRefetchData(true);
             setIsDeleteModalShow(false);
@@ -53,9 +62,13 @@ const InfoSection = ({ type, title, data, classes, handleModalOpen, setOtherInfo
                 <div >
                     <h3 className="title" style={{ display: 'flex', justifyContent: 'space-between', alignItems: "center" }}>
                         {title}
-                        <button className="Button secondaryButton" onClick={() => handleAddClick()}>
-                            Add
-                        </button>
+                        {
+                            id == userState.data.id && (
+                                <button className="Button secondaryButton" onClick={() => handleAddClick()}>
+                                    Add
+                                </button>
+                            )
+                        }
                     </h3>
 
                 </div>

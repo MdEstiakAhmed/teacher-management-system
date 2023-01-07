@@ -30,8 +30,8 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
-        let generalInfoResponse = await updateGeneralInfo(generalInfoForm.current);
-        let personalInfoResponse = await updatePersonalInfo(personalInfoInfoForm.current);
+        let generalInfoResponse = await updateGeneralInfo(generalInfoForm);
+        let personalInfoResponse = await updatePersonalInfo(personalInfoInfoForm);
         // response.status && onClose("generalInfo");
         if (generalInfoResponse.status && personalInfoResponse.status) {
             setRefetchData(true);
@@ -54,10 +54,10 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Update User Info</h3>
                     <form ref={generalInfoForm}>
-                        <div className="inputBox">
+                        {/* <div className="inputBox">
                             <label>Username</label>
                             <input type="text" name="username" placeholder="Username" />
-                        </div>
+                        </div> */}
                         <div className="inputBox">
                             <label>First name</label>
                             <input type="text" name="first_name" placeholder="First name" />
