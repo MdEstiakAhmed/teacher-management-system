@@ -11,6 +11,7 @@ import useGetContext from "../hooks/useGetContext";
 import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
 import OtherInformationForm from "../components/pages/user/OtherInformationForm";
 import GeneralInfoAddForm from "../components/pages/user/GeneralInfoAddForm";
+import { bloodGroup, gender, maritalStatus, religion } from "../utils/selectFieldConvert";
 
 const User = () => {
     const { id } = useParams();
@@ -170,13 +171,13 @@ const User = () => {
                                         <li>Phone : <span>{userInfo.personal?.Phone || ""}</span></li>
                                         <li>Employee Id : <span>{userInfo.personal?.EmployeeID || ""}</span></li>
                                         <li>Department : <span>{userInfo.personal?.Department || ""}</span></li>
-                                        <li>Gender : <span>{userInfo.personal?.Gender || ""}</span></li>
-                                        <li>Blood Group : <span>{userInfo.personal?.BloodGroup || ""}</span></li>
+                                        <li>Gender : <span>{gender[userInfo.personal?.Gender] || ""}</span></li>
+                                        <li>Blood Group : <span>{bloodGroup[userInfo.personal?.BloodGroup] || ""}</span></li>
                                         <li>Date of Birth : <span>{userInfo.personal?.DateOfBirth || ""}</span></li>
                                         <li>Nationality : <span>{userInfo.personal?.Nationality || ""}</span></li>
                                         <li>NID Number : <span>{userInfo.personal?.NIDNumber || ""}</span></li>
-                                        <li>Religion : <span>{userInfo.personal?.Religion || ""}</span></li>
-                                        <li>Marital Status : <span>{userInfo.personal?.MaritalStatus || ""}</span></li>
+                                        <li>Religion : <span>{religion[userInfo.personal?.Religion] || ""}</span></li>
+                                        <li>Marital Status : <span>{maritalStatus[userInfo.personal?.MaritalStatus] || ""}</span></li>
                                         <li>Present Address : <span>{userInfo.personal?.PresentAddress || ""}</span></li>
                                         <li>Permanent Address : <span>{userInfo.personal?.PermanentAddress || ""}</span></li>
 
