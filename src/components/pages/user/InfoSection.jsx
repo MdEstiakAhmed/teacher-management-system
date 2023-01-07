@@ -39,7 +39,7 @@ const InfoSection = ({ type, title, data, classes, handleModalOpen, setOtherInfo
     const handleDelete = async() => {
         const response = await deleteOtherInfo(formType[type], deleteItemId);
         if(response.status){
-            setRefetchData(true);
+            setRefetchData(prev => !prev);
             setIsDeleteModalShow(false);
         }
     }

@@ -34,7 +34,7 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
         let personalInfoResponse = await updatePersonalInfo(personalInfoInfoForm);
         // response.status && onClose("generalInfo");
         if (generalInfoResponse.status && personalInfoResponse.status) {
-            setRefetchData(true);
+            setRefetchData(prev => !prev);
             onClose("generalInfo");
         }
     }

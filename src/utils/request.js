@@ -62,7 +62,7 @@ export const deleteData = async (url, data={}, headers) => {
         if(localData){
             token = JSON.parse(localData || {}).access;
         }
-        const response = await AppInstance.delete(url, data, { headers: { ...headers, Authorization: `Bearer ${token}` } });
+        const response = await AppInstance.delete(url, { headers: { ...headers, Authorization: `Bearer ${token}` } });
         return response.data;
     }
     catch (error) {

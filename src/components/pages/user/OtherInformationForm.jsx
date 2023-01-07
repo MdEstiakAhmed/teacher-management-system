@@ -95,11 +95,11 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
         if (response.status) {
             if (action === "add") {
                 onClose("addOtherInfo")
-                setRefetchData(true);
+                setRefetchData(prev => !prev);
             }
             else if (action === "edit") {
                 onClose("otherInfo")
-                setRefetchData(true);
+                setRefetchData(prev => !prev);
             }
         }
     }
