@@ -26,7 +26,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
         e.preventDefault();
         let response = {};
         response = await updateTodo(formRef, taskData.id);
-        response.status && onClose("editForm");
+        response.status && onClose("editForm", true);
     }
     return (
         <>

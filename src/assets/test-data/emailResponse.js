@@ -61,3 +61,23 @@ export const emailListResponse = {
         }
     ]
 }
+
+export const emailResponse = {
+    "status": true,
+    "message": "Receiver email detail",
+    "data": {
+        "id": 1,
+        "Sender": 1,
+        "Receiver": 2,
+        "Cc": [
+            3
+        ],
+        "Subject": "Test",
+        "Body": "This is test message",
+        "Date": "2023-01-06T10:19:01.844525Z",
+        "ReceiverLabel": "None",
+        "ReceiverImportant": true,
+        "ReceiverTrash": false,
+        "ReceiverDelete": false
+    }
+}

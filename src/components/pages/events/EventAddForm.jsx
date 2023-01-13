@@ -1,12 +1,10 @@
 import { useRef } from "react";
-import { addTodo } from "../../../api/todo";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
-import useGetContext from "../../../hooks/useGetContext";
+import { addEvent } from "../../../api/event";
 
-const TodoAddForm = ({ onClose }) => {
+const EventAddForm = ({ onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
-    const {userState: {data: {id} = {}} = {}} = useGetContext();
 
     usePseudoElementClick(sectionRef, () => onClose("addForm"));
 
@@ -18,32 +16,46 @@ const TodoAddForm = ({ onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response = {};
-        response = await addTodo(formRef);
+        response = await addEvent(formRef);
         response.status && onClose("addForm", true);
     }
     return (
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">Add task</h3>
+                    <h3 className="title">Add Event</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <input type="hidden" name="Assignee" value={id} />
                         <div className="inputBox">
                             <label>Title</label>
                             <input type="text" name="Title" placeholder="Title" />
                         </div>
+                        <div className="inputBox">
+                            <label>Label</label>
+                            <input type="text" name="Label" placeholder="Label" />
+                        </div>
                         <div class="inputBox">
-                            <label>Due Date</label>
-                            <input type="date" name="DueDate" placeholder="Due Date" />
+                            <label>Start Date Time</label>
+                            <input type="datetime-local" name="StartDateTime" placeholder="Start Date Time" />
+                        </div>
+                        <div class="inputBox">
+                            <label>End Date Time</label>
+                            <input type="datetime-local" name="EndDateTime" placeholder="End Date Time" />
                         </div>
                         <div className="inputBox">
-                            <label>Priority</label>
-                            <select name="Priority" id="Priority">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
+                            <label>Whole Day</label>
+                            <select name="WholeDay" id="WholeDay">
+                                <option value="">Select</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
                             </select>
+                        </div>
+                        <div className="inputBox">
+                            <label>Event URL</label>
+                            <input type="text" name="EventURL" placeholder="Event URL" />
+                        </div>
+                        <div className="inputBox">
+                            <label>Location</label>
+                            <input type="text" name="Location" placeholder="Location" />
                         </div>
                         <div class="inputBox">
                             <label>Description</label>
@@ -59,4 +71,4 @@ const TodoAddForm = ({ onClose }) => {
         </>
     )
 }
-export default TodoAddForm;
+export default EventAddForm;

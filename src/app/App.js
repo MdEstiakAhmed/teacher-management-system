@@ -14,6 +14,8 @@ import Todo from "../pages/Todo";
 import User from "../pages/User";
 import Users from "../pages/Users";
 import { Context } from "../store/store";
+import EmailLayout from "../components/pages/email/EmailLayout";
+import Emails from "../pages/Emails";
 
 const App = () => {
 	const { userAction, authState, authAction } = useContext(Context)
@@ -62,7 +64,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 							<Route path="/event" element={<Event />} />
 							<Route path="/todo" element={<Todo />} />
 							<Route path="/chat" element={<Chat />} />
-							<Route path="/email" element={<Email />} />
+							<Route path="/emails" element={<EmailLayout />}>
+								<Route index element={<Emails />} />
+								<Route path=":emailId" element={<Email />} />
+							</Route>
 							<Route path="/" element={<Dashboard />} />
 							<Route path="*" element={<Navigate to="/" />} />
 						</Routes>

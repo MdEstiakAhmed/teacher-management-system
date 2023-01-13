@@ -1,37 +1,9 @@
-import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink,  } from "react-router-dom";
 import { menuList } from "../../assets/data/dashboardMenu";
 import logo from '../../assets/images/logo.png'
 
-const sidebarList = {
-    "/": "dashboard",
-    "/email": "email",
-    "/chat": "chat",
-    "/todo": "todo",
-    "/event": "event",
-    "/users": "users",
-    "/users/": "users",
-}
-
 const Sidebar = () => {
-    const [activeMenu, setActiveMenu] = useState("");
-    const navigate = useNavigate();
-    const location = useLocation();
 
-    useEffect(() => {
-        if(location.pathname.includes("/users")) {
-            setActiveMenu("users")
-        }
-        else {
-            setActiveMenu(sidebarList[location.pathname])
-        }
-    }, [location.pathname]);
-
-    const handleMenuClick = (e, item) => {
-        e.preventDefault()
-        navigate(item.url)
-        setActiveMenu(item.name)
-    }
     return (
         <>
             <aside className="sidebarArea">
@@ -43,10 +15,10 @@ const Sidebar = () => {
                         {
                             menuList.map((item, index) => (
                                 <li key={index}>
-                                    <span className={activeMenu === item.name ? "active" : ""} onClick={(e) => handleMenuClick(e, item)}>
+                                    <NavLink to={item.url} className={({isActive}) => isActive ? "active" : ""}>
                                         {item.icon}
                                         <span>{item.title}</span>
-                                    </span>
+                                    </NavLink>
                                 </li>
                             ))
                         }

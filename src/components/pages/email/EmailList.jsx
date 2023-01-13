@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const EmailList = ({data}) => {
     const [search, setSearch] = useState("");
@@ -52,9 +53,10 @@ export default EmailList;
 
 const EmailItem = ({item}) => {
     // company, private, personal, important
-    const {Subject, Label, Date, Sender} = item;
+    const {Subject, Label, Date, Sender, id} = item;
+    const navigate = useNavigate()
     return (
-        <li>
+        <li onClick={() => navigate(`/emails/${id}`)}>
             <div className="buttonArea">
                 <input type="checkbox" name="" id="" />
                 <button className="button">

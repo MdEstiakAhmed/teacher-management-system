@@ -3,7 +3,7 @@ export const headerTitle = {
     '/event': 'Event',
     '/todo': 'Todo',
     '/chat': 'Chat',
-    '/email': 'Email',
+    '/emails': 'Emails',
     '/users': 'Users',
     
 }

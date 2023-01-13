@@ -2,7 +2,10 @@ export const domRefToObject = (domRef) => {
     const Data = {}
         ;[...domRef.current].forEach(input => {
             if (input.type !== 'submit') {
-                Data[input.name] = input.value;
+                let value = input.value;
+                if(value === 'true') { value = 1; }
+                else if (value === 'false') { value = 0; }
+                Data[input.name] = value;
             }
         })
     return Data;
@@ -21,7 +24,10 @@ export const domRefToFormData = (domRef) => {
         const formData = new FormData();
         ;[...domRef.current].forEach(input => {
             if (input.type !== 'submit') {
-                formData.append(input.name, input.value);
+                let value = input.value;
+                if(value === 'true') { value = 1; }
+                else if (value === 'false') { value = 0; }
+                formData.append(input.name, value);
             }
         })
         return formData;
