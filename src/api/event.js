@@ -29,3 +29,15 @@ export const addEvent = async (ref) => {
         return { status: false, message: error.message };
     }
 }
+
+export const updateEvent = async (ref, id) => {
+    try {
+        const url = `${baseUrl}/${id}`;
+        const formData = domRefToFormData(ref);
+        const response = await putData(url, formData, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}

@@ -1,21 +1,20 @@
 import { useEffect, useRef } from "react";
-import { updateTodo } from "../../../api/todo";
+import { updateEvent } from "../../../api/event";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
-const EventEditForm = ({ taskData, onClose }) => {
+const EventEditForm = ({ data, onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
-        console.log(taskData);
         ;[...formRef.current].forEach((input) => {
-            if(input.name !== "submit" && taskData[input.name]){
-                input.value = taskData[input.name];
+            if (input.name !== "submit" && data[input.name]) {
+                input.value = data[input.name];
             }
         });
-    }, [taskData])
+    }, [data])
 
     const closeForm = (e) => {
         e.preventDefault();
@@ -25,7 +24,7 @@ const EventEditForm = ({ taskData, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         let response = {};
-        response = await updateTodo(formRef, taskData.id);
+        response = await updateEvent(formRef, data.id);
         response.status && onClose("editForm", true);
     }
     return (
@@ -34,23 +33,37 @@ const EventEditForm = ({ taskData, onClose }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Add task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <input type="hidden" name="Assignee" />
                         <div className="inputBox">
                             <label>Title</label>
                             <input type="text" name="Title" placeholder="Title" />
                         </div>
+                        <div className="inputBox">
+                            <label>Label</label>
+                            <input type="text" name="Label" placeholder="Label" />
+                        </div>
                         <div class="inputBox">
-                            <label>Due Date</label>
-                            <input type="date" name="DueDate" placeholder="Due Date" />
+                            <label>Start Date Time</label>
+                            <input type="datetime-local" name="StartDateTime" placeholder="Start Date Time" />
+                        </div>
+                        <div class="inputBox">
+                            <label>End Date Time</label>
+                            <input type="datetime-local" name="EndDateTime" placeholder="End Date Time" />
                         </div>
                         <div className="inputBox">
-                            <label>Priority</label>
-                            <select name="Priority" id="Priority">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
+                            <label>Whole Day</label>
+                            <select name="WholeDay" id="WholeDay">
+                                <option value="">Select</option>
+                                <option value="true">Yes</option>
+                                <option value="false">No</option>
                             </select>
+                        </div>
+                        <div className="inputBox">
+                            <label>Event URL</label>
+                            <input type="text" name="EventURL" placeholder="Event URL" />
+                        </div>
+                        <div className="inputBox">
+                            <label>Location</label>
+                            <input type="text" name="Location" placeholder="Location" />
                         </div>
                         <div class="inputBox">
                             <label>Description</label>

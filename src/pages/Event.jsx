@@ -6,6 +6,7 @@ import useFetch from '../hooks/useFetch'
 import { fetchEvents } from '../api/event'
 import { useCallback, useEffect, useState } from 'react'
 import EventAddForm from '../components/pages/events/EventAddForm'
+import EventEditForm from '../components/pages/events/EventEditForm'
 
 const localizer = momentLocalizer(moment)
 
@@ -29,9 +30,9 @@ const Event = () => {
     }
 
     const handleSelectEvent = useCallback(
-        // (event) => handleModalOpen("editForm", event),
+        (event) => handleModalOpen("editForm", event),
         []
-      )
+    )
 
     useEffect(() => {
         if (data?.data?.length) {
@@ -53,6 +54,14 @@ const Event = () => {
             {
                 isModalShow.addForm && (
                     <EventAddForm
+                        onClose={handleModalClose}
+                    />
+                )
+            }
+            {
+                isModalShow.editForm && (
+                    <EventEditForm
+                        data={isModalShow.editForm}
                         onClose={handleModalClose}
                     />
                 )
