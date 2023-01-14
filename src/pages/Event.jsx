@@ -29,7 +29,6 @@ const Event = () => {
     }
 
     const handleSelectEvent = useCallback(
-        (event) => console.log(event),
         // (event) => handleModalOpen("editForm", event),
         []
       )
