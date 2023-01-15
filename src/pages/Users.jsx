@@ -62,6 +62,7 @@ const Users = () => {
                                         email={user.email}
                                         designation={user.personal_info?.Designation || "N/A"}
                                         status={user.is_active}
+                                        image={`${process.env.REACT_APP_SERVER_BASE_URL}${user.personal_info?.ProfilePic}`}
                                     />
                                 ))
                             }
@@ -75,11 +76,11 @@ const Users = () => {
 
 export default Users;
 
-const UserRow = ({ id, name, email, designation, status }) => {
+const UserRow = ({ id, name, email, designation, status, image }) => {
     return (
         <tr>
             <td className="User">
-                <img src="images/user.png" alt="user" />
+                <img src={image} alt="user" />
                 <div className="userDetails">
                     <h4 className="userName">{name}</h4>
                     <p className="userEmail">{email}</p>
