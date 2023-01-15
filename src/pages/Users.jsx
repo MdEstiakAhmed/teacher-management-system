@@ -82,7 +82,9 @@ const UserRow = ({ id, name, email, designation, status, image }) => {
             <td className="User">
                 <img src={image} alt="user" />
                 <div className="userDetails">
-                    <h4 className="userName">{name}</h4>
+                    <Link to={`/users/${id}`}>
+                        <h4 className="userName">{name}</h4>
+                    </Link>
                     <p className="userEmail">{email}</p>
                 </div>
             </td>
