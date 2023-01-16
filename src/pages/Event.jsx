@@ -20,6 +20,8 @@ const Event = () => {
         editForm: false,
     });
 
+    const [priorityFilter, setPriorityFilter] = useState('');
+
     const handleModalOpen = (type, value) => {
         setIsModalShow(prev => ({ ...prev, [type]: value ? value : true }))
     }
@@ -33,6 +35,11 @@ const Event = () => {
         (event) => handleModalOpen("editForm", event),
         []
     )
+
+    const handlePriorityFilter = (item) => {
+        if (!priorityFilter) return true;
+        return item.Label === priorityFilter;
+    }
 
     useEffect(() => {
         if (data?.data?.length) {
@@ -66,21 +73,37 @@ const Event = () => {
                     />
                 )
             }
-            <div className="contentArea">
-                <div className="userListHeader">
+            <div className="contentArea todoArea">
+                <div className="leftSide">
+                    <button className="Button primaryButton" onClick={() => handleModalOpen("addForm")}>Add Event</button>
+                    <div className="tags">
+                        <h4 className="tagTitle">Label</h4>
+                        <ul className="tagList">
+                            <li className={`all ${priorityFilter === '' && 'active'}`} onClick={() => setPriorityFilter("")}>All</li>
+                            <li className={`low ${priorityFilter === 'Personal' && 'active'}`} onClick={() => setPriorityFilter("Personal")}>Personal</li>
+                            <li className={`medium ${priorityFilter === 'Work' && 'active'}`} onClick={() => setPriorityFilter("Work")}>Work</li>
+                            <li className={`high ${priorityFilter === 'Family' && 'active'}`} onClick={() => setPriorityFilter("Family")}>Family</li>
+                            <li className={`urgent ${priorityFilter === 'Holiday' && 'active'}`} onClick={() => setPriorityFilter("Holiday")}>Holiday</li>
+                            <li className={`other ${priorityFilter === 'Other' && 'active'}`} onClick={() => setPriorityFilter("Other")}>Other</li>
+                        </ul>
+                    </div>
+                </div>
+                {/* <div className="userListHeader">
                     <div className="userListActions">
                         <button className="Button primaryButton" onClick={() => handleModalOpen("addForm")}>Add Event</button>
                     </div>
-                </div>
-                <div className='height600'>
-                    <Calendar
-                        localizer={localizer}
-                        events={eventData}
-                        startAccessor="start"
-                        endAccessor="end"
-                        popup
-                        onSelectEvent={handleSelectEvent}
-                    />
+                </div> */}
+                <div className="rightSide">
+                    <div className='height600'>
+                        <Calendar
+                            localizer={localizer}
+                            events={eventData.filter(handlePriorityFilter)}
+                            startAccessor="start"
+                            endAccessor="end"
+                            popup
+                            onSelectEvent={handleSelectEvent}
+                        />
+                    </div>
                 </div>
             </div>
         </>

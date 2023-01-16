@@ -5,6 +5,6 @@ export const menuList = [
     {name: "emails", title: "Emails", icon: <MailIcon />, url: "emails"},
     {name: "chat", title: "Chat", icon: <MessageIcon />, url: "chat"},
     {name: "todo", title: "Todo", icon: <CheckboxIcon />, url: "todo"},
-    {name: "event", title: "Event", icon: <CalenderIcon />, url: "event"},
-    {name: "users", title: "users", icon: <UserIcon />, url: "users"},
+    {name: "event", title: "Events", icon: <CalenderIcon />, url: "event"},
+    {name: "users", title: "Users", icon: <UserIcon />, url: "users"},
 ]

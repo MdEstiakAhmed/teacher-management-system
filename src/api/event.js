@@ -22,6 +22,13 @@ export const addEvent = async (ref) => {
     try {
         const url = `${baseUrl}/`;
         const formData = domRefToFormData(ref);
+        formData.delete('users');
+        ;[...ref.current].forEach(input => {
+            if(input.name === "users") {
+                console.log(input.value);
+                formData.append("users[]", input.value);
+            }
+        });
         const response = await postData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;

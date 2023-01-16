@@ -1,10 +1,27 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import Select from 'react-select';
 import { updateEvent } from "../../../api/event";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
+import useFetch from "../../../hooks/useFetch";
+import { fetchUsers } from "../../../api/users";
 
 const EventEditForm = ({ data, onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
+
+    const [users, setUsers] = useState([])
+
+    const { data: userData } = useFetch(fetchUsers, {});
+
+    useEffect(() => {
+        if (userData?.data?.length) {
+            setUsers(
+                userData.data.reduce((acc, item) => {
+                    return [...acc, { value: item.id, label: item.username }]
+                }, [])
+            )
+        }
+    }, [userData]);
 
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
@@ -38,8 +55,26 @@ const EventEditForm = ({ data, onClose }) => {
                             <input type="text" name="Title" placeholder="Title" />
                         </div>
                         <div className="inputBox">
+                            <label>Guest</label>
+                            <Select
+                                defaultValue={[users[0]]}
+                                isMulti
+                                name="users"
+                                options={users}
+                                className="basic-multi-select"
+                                classNamePrefix="select"
+                            />
+                        </div>
+                        <div className="inputBox">
                             <label>Label</label>
-                            <input type="text" name="Label" placeholder="Label" />
+                            <select name="Label" id="Label">
+                                <option value="None">Select</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Work">Work</option>
+                                <option value="Family">Family</option>
+                                <option value="Holiday">Holiday</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
                         <div class="inputBox">
                             <label>Start Date Time</label>
@@ -70,7 +105,7 @@ const EventEditForm = ({ data, onClose }) => {
                             <textarea name="Description" placeholder="Description" />
                         </div>
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                            <input type="submit" name="submit" value="Change" />
+                            <input type="submit" name="submit" value="Update" />
                             <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
                         </div>
                     </form>
