@@ -39,7 +39,7 @@ export const addEvent = async (ref) => {
 
 export const updateEvent = async (ref, id) => {
     try {
-        const url = `${baseUrl}/${id}`;
+        const url = `${baseUrl}/${id}/`;
         const formData = domRefToFormData(ref);
         const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);

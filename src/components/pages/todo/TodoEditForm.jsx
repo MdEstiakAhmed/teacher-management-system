@@ -1,17 +1,40 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateTodo } from "../../../api/todo";
+import { fetchUsers } from "../../../api/users";
+import useFetch from "../../../hooks/useFetch";
+import useGetContext from "../../../hooks/useGetContext";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
 const TodoEditForm = ({ taskData, onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
+    const { userState: { data: { id } = {} } = {} } = useGetContext();
+
+    const [users, setUsers] = useState([])
+    const { data } = useFetch(fetchUsers, {});
+
+    useEffect(() => {
+        if (data?.data?.length) {
+            setUsers(
+                data.data.reduce((acc, item) => {
+                    if (item.id !== id) {
+                        return [...acc, { value: item.id, label: item.username }]
+                    }
+                    else {
+                        return acc;
+                    }
+                }, [])
+            )
+        }
+    }, [data]);
+
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
         console.log(taskData);
         ;[...formRef.current].forEach((input) => {
-            if(input.name !== "submit" && taskData[input.name]){
+            if (input.name !== "submit" && taskData[input.name]) {
                 input.value = taskData[input.name];
             }
         });
@@ -34,10 +57,20 @@ const TodoEditForm = ({ taskData, onClose }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Add task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <input type="hidden" name="Assignee" />
                         <div className="inputBox">
                             <label>Title</label>
                             <input type="text" name="Title" placeholder="Title" />
+                        </div>
+                        <div className="inputBox">
+                            <label>Assignee</label>
+                            <select name="Assignee" id="Assignee">
+                                <option value="">Select User</option>
+                                {
+                                    users.map(item => (
+                                        <option value={item.value}>{item.label}</option>
+                                    ))
+                                }
+                            </select>
                         </div>
                         <div class="inputBox">
                             <label>Due Date</label>
@@ -57,7 +90,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
                             <textarea name="Description" placeholder="Description" />
                         </div>
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                            <input type="submit" name="submit" value="Change" />
+                            <input type="submit" name="submit" value="Update" />
                             <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
                         </div>
                     </form>

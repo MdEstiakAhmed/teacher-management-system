@@ -53,7 +53,7 @@ const EventAddForm = ({ onClose }) => {
                             <Select
                                 defaultValue={[users[0]]}
                                 isMulti
-                                name="users"
+                                name="Guests"
                                 options={users}
                                 className="basic-multi-select"
                                 classNamePrefix="select"
