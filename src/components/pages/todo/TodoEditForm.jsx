@@ -29,10 +29,15 @@ const TodoEditForm = ({ taskData, onClose }) => {
         }
     }, [data]);
 
+    useEffect(() => {
+        if(users.length){
+            formRef.current["Assignee"].value = taskData["Assignee"]
+        }
+    }, [users]);
+
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
-        console.log(taskData);
         ;[...formRef.current].forEach((input) => {
             if (input.name !== "submit" && taskData[input.name]) {
                 input.value = taskData[input.name];
@@ -67,7 +72,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                 <option value="">Select User</option>
                                 {
                                     users.map(item => (
-                                        <option value={item.value}>{item.label}</option>
+                                        <option key={item.value} value={item.value}>{item.label}</option>
                                     ))
                                 }
                             </select>
