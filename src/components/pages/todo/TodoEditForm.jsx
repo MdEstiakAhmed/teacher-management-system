@@ -9,10 +9,21 @@ const TodoEditForm = ({ taskData, onClose }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
-    const { userState: { data: { id } = {} } = {} } = useGetContext();
+    const { userState: { data: { id, is_superuser } = {} } = {} } = useGetContext();
 
     const [users, setUsers] = useState([])
     const { data } = useFetch(fetchUsers, {});
+
+    const [access, setAccess] = useState("limited"); // Access: "all" or "limited"
+
+    useEffect(() => {
+        if (is_superuser || id === taskData.user) {
+            setAccess("all");
+        }
+        else {
+            setAccess("limited");
+        }
+    }, []);
 
     useEffect(() => {
         if (data?.data?.length) {
@@ -30,7 +41,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
     }, [data]);
 
     useEffect(() => {
-        if(users.length){
+        if (users.length) {
             formRef.current["Assignee"].value = taskData["Assignee"]
         }
     }, [users]);
@@ -62,38 +73,68 @@ const TodoEditForm = ({ taskData, onClose }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Add task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <div className="inputBox">
-                            <label>Title</label>
-                            <input type="text" name="Title" placeholder="Title" />
+                        {
+                            access === "all" ? (
+                                <>
+                                    <div className="inputBox">
+                                        <label>Title</label>
+                                        <input type="text" name="Title" placeholder="Title" />
+                                    </div>
+                                    <div className="inputBox">
+                                        <label>Assignee</label>
+                                        <select name="Assignee" id="Assignee">
+                                            <option value="">Select User</option>
+                                            {
+                                                users.map(item => (
+                                                    <option key={item.value} value={item.value}>{item.label}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <div class="inputBox">
+                                        <label>Due Date</label>
+                                        <input type="date" name="DueDate" placeholder="Due Date" />
+                                    </div>
+                                    <div className="inputBox">
+                                        <label>Priority</label>
+                                        <select name="Priority" id="Priority">
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High">High</option>
+                                            <option value="Urgent">Urgent</option>
+                                        </select>
+                                    </div>
+
+
+                                </>
+                            ) : ""
+                        }
+                        <div className="inputBox" style={{ display: "flex" }}>
+                            <input type="checkbox" name="Important" id="Important" />
+                            <label for="Important">Important</label>
                         </div>
-                        <div className="inputBox">
-                            <label>Assignee</label>
-                            <select name="Assignee" id="Assignee">
-                                <option value="">Select User</option>
-                                {
-                                    users.map(item => (
-                                        <option key={item.value} value={item.value}>{item.label}</option>
-                                    ))
-                                }
-                            </select>
-                        </div>
-                        <div class="inputBox">
-                            <label>Due Date</label>
-                            <input type="date" name="DueDate" placeholder="Due Date" />
-                        </div>
-                        <div className="inputBox">
-                            <label>Priority</label>
-                            <select name="Priority" id="Priority">
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
-                            </select>
+                        <div className="inputBox" style={{ display: "flex" }}>
+                            <input type="checkbox" name="Completed" id="Completed" />
+                            <label for="Completed">Completed</label>
                         </div>
                         <div class="inputBox">
                             <label>Description</label>
                             <textarea name="Description" placeholder="Description" />
                         </div>
+                        {
+                            access === "all" ? (
+                                <>
+                                    <div class="inputBox">
+                                        <label>Comment</label>
+                                        <textarea name="Comment" placeholder="Comment" />
+                                    </div>
+                                    <div className="inputBox" style={{ display: "flex" }}>
+                                        <input type="checkbox" name="TaskCompleted" id="TaskCompleted" />
+                                        <label for="TaskCompleted">Task Completed</label>
+                                    </div>
+                                </>
+                            ) : ""
+                        }
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             <input type="submit" name="submit" value="Update" />
                             <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>

@@ -11,6 +11,6 @@ export const userLoginData = {
         "last_name": "",
         "is_active": true,
         "is_staff": true,
-        "is_superuser": true
+        "is_superuser": false
     }
 };

@@ -31,7 +31,7 @@ export const addTodo = async (ref) => {
 }
 export const updateTodo = async (ref, id) => {
     try {
-        const url = `${baseUrl}/${id}`;
+        const url = `${baseUrl}/${id}/`;
         const formData = domRefToFormData(ref);
         const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
