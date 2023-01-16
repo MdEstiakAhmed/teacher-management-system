@@ -41,7 +41,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
     }, [data]);
 
     useEffect(() => {
-        if (users.length) {
+        if (users.length && formRef.current["Assignee"].value) {
             formRef.current["Assignee"].value = taskData["Assignee"]
         }
     }, [users]);
@@ -51,7 +51,12 @@ const TodoEditForm = ({ taskData, onClose }) => {
     useEffect(() => {
         ;[...formRef.current].forEach((input) => {
             if (input.name !== "submit" && taskData[input.name]) {
-                input.value = taskData[input.name];
+                if(input.type === "checkbox"){
+                    input.checked = taskData[input.name];
+                }
+                else {
+                    input.value = taskData[input.name];
+                }
             }
         });
     }, [taskData])
@@ -91,7 +96,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                             }
                                         </select>
                                     </div>
-                                    <div class="inputBox">
+                                    <div className="inputBox">
                                         <label>Due Date</label>
                                         <input type="date" name="DueDate" placeholder="Due Date" />
                                     </div>
@@ -111,26 +116,26 @@ const TodoEditForm = ({ taskData, onClose }) => {
                         }
                         <div className="inputBox" style={{ display: "flex" }}>
                             <input type="checkbox" name="Important" id="Important" />
-                            <label for="Important">Important</label>
+                            <label htmlFor="Important">Important</label>
                         </div>
                         <div className="inputBox" style={{ display: "flex" }}>
                             <input type="checkbox" name="Completed" id="Completed" />
-                            <label for="Completed">Completed</label>
+                            <label htmlFor="Completed">Completed</label>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Description</label>
                             <textarea name="Description" placeholder="Description" />
                         </div>
                         {
                             access === "all" ? (
                                 <>
-                                    <div class="inputBox">
+                                    <div className="inputBox">
                                         <label>Comment</label>
                                         <textarea name="Comment" placeholder="Comment" />
                                     </div>
                                     <div className="inputBox" style={{ display: "flex" }}>
                                         <input type="checkbox" name="TaskCompleted" id="TaskCompleted" />
-                                        <label for="TaskCompleted">Task Completed</label>
+                                        <label htmlFor="TaskCompleted">Task Completed</label>
                                     </div>
                                 </>
                             ) : ""

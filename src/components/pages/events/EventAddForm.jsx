@@ -70,11 +70,11 @@ const EventAddForm = ({ onClose }) => {
                                 <option value="Other">Other</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Start Date Time</label>
                             <input type="datetime-local" name="StartDateTime" placeholder="Start Date Time" />
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>End Date Time</label>
                             <input type="datetime-local" name="EndDateTime" placeholder="End Date Time" />
                         </div>
@@ -94,7 +94,7 @@ const EventAddForm = ({ onClose }) => {
                             <label>Location</label>
                             <input type="text" name="Location" placeholder="Location" />
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Description</label>
                             <textarea name="Description" placeholder="Description" />
                         </div>

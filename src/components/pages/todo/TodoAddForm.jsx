@@ -62,7 +62,7 @@ const TodoAddForm = ({ onClose }) => {
                                 }
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Due Date</label>
                             <input type="date" name="DueDate" placeholder="Due Date" />
                         </div>
@@ -75,7 +75,7 @@ const TodoAddForm = ({ onClose }) => {
                                 <option value="Urgent">Urgent</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Description</label>
                             <textarea name="Description" placeholder="Description" />
                         </div>

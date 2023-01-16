@@ -91,7 +91,7 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                             <label>Department</label>
                             <input type="text" name="Department" placeholder="Department" />
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Gender</label>
                             <select name="Gender" id="Gender">
                                 <option value="0">Select</option>
@@ -100,7 +100,7 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                                 <option value="3">Other</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Blood Group</label>
                             <select name="BloodGroup" id="BloodGroup">
                                 <option value="0">Select</option>
@@ -114,7 +114,7 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                                 <option value="8">O-</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Date of Birth</label>
                             <input type="date" name="DateOfBirth" placeholder="Date of Birth" />
                         </div>
@@ -137,7 +137,7 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                                 <option value="5">Others</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Marital Status</label>
                             <select name="MaritalStatus" id="MaritalStatus">
                                 <option value="0">Select</option>
@@ -147,11 +147,11 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                                 <option value="4">Widowed</option>
                             </select>
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Present Address</label>
                             <textarea name="PresentAddress" placeholder="Present Address" />
                         </div>
-                        <div class="inputBox">
+                        <div className="inputBox">
                             <label>Permanent Address</label>
                             <textarea name="PermanentAddress" placeholder="Permanent Address" />
                         </div>
