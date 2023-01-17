@@ -60,7 +60,7 @@ const Todo = () => {
     const handleSectionFilter = (item) => {
         if (taskSection.all) return item.Assignee === id;
         if (taskSection.supervisor) return (item.user === id && !item.TaskCompleted);
-        if (taskSection.important) return item.Important;
+        if (taskSection.important) return (item.Important && !item.TaskCompleted);
         if (taskSection.completed) return item.TaskCompleted;
     }
 
@@ -77,6 +77,7 @@ const Todo = () => {
                 isModalShow.editForm && selectedTodo && (
                     <TodoEditForm
                         taskData={selectedTodo}
+                        taskSection={taskSection}
                         onClose={handleModalClose}
                     />
                 )

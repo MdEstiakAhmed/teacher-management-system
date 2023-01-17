@@ -5,7 +5,7 @@ import useFetch from "../../../hooks/useFetch";
 import useGetContext from "../../../hooks/useGetContext";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
-const TodoEditForm = ({ taskData, onClose }) => {
+const TodoEditForm = ({ taskData, onClose, taskSection }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
@@ -32,7 +32,13 @@ const TodoEditForm = ({ taskData, onClose }) => {
         if (data?.data?.length) {
             setUsers(
                 data.data.reduce((acc, item) => {
-                    if(item.id !== id && !item.is_superuser){
+                    if(!item.is_superuser){
+                        return [...acc, { value: item.id, label: item.username }]
+                    }
+                    else if(taskSection === "all"){
+                        return [...acc, { value: item.id, label: item.username }]
+                    }
+                    else if(taskSection === "supervisor" && !id){
                         return [...acc, { value: item.id, label: item.username }]
                     }
                     else {
