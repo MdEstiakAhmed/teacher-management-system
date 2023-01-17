@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import placeholder from "../../assets/images/placeholder.jpg";
 
 const EmailList = ({data}) => {
     const [search, setSearch] = useState("");

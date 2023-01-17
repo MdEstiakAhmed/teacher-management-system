@@ -20,7 +20,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
         if (is_superuser || id === taskData.user) {
             setAccess("all");
         }
-        else if(taskData.Assignee === id){
+        else if (taskData.Assignee === id) {
             setAccess("limited");
         }
         else {
@@ -32,7 +32,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
         if (data?.data?.length) {
             setUsers(
                 data.data.reduce((acc, item) => {
-                    if (item.id !== id) {
+                    if(item.id !== id && !item.is_superuser){
                         return [...acc, { value: item.id, label: item.username }]
                     }
                     else {
@@ -52,13 +52,14 @@ const TodoEditForm = ({ taskData, onClose }) => {
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
-        if(taskData && access){
+        if (taskData && access) {
             ;[...formRef.current].forEach((input) => {
                 if (input.name !== "submit" && taskData[input.name]) {
-                    if(input.type === "checkbox"){
+                    if (input.type === "checkbox") {
                         input.checked = taskData[input.name];
                     }
                     else {
+                        console.log(input.name, taskData[input.name]);
                         input.value = taskData[input.name];
                     }
                 }
@@ -83,112 +84,103 @@ const TodoEditForm = ({ taskData, onClose }) => {
                 <div className="popUp contentArea">
                     <h3 className="title">Edit task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        {
-                            access === "all" ? (
-                                <>
-                                    <div className="inputBox">
-                                        <label>Title</label>
-                                        <input type="text" name="Title" placeholder="Title" />
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Assignee</label>
-                                        <select name="Assignee" id="Assignee">
-                                            <option value="">Select User</option>
-                                            {
-                                                users.map(item => (
-                                                    <option key={item.value} value={item.value}>{item.label}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Due Date</label>
-                                        <input type="date" name="DueDate" placeholder="Due Date" />
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Priority</label>
-                                        <select name="Priority" id="Priority">
-                                            <option value="Low">Low</option>
-                                            <option value="Medium">Medium</option>
-                                            <option value="High">High</option>
-                                            <option value="Urgent">Urgent</option>
-                                        </select>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="inputBox">
-                                        <label>Title</label>
-                                        <input type="text" disabled="disabled" name="Title" placeholder="Title" />
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Assignee</label>
-                                        <select name="Assignee" id="Assignee">
-                                            <option value="">Select User</option>
-                                            {
-                                                users.map(item => (
-                                                    <option key={item.value} value={item.value}>{item.label}</option>
-                                                ))
-                                            }
-                                        </select>
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Due Date</label>
-                                        <input type="date" disabled="disabled" name="DueDate" placeholder="Due Date" />
-                                    </div>
-                                    <div className="inputBox">
-                                        <label>Priority</label>
-                                        <select name="Priority" id="Priority">
-                                            <option value="Low">Low</option>
-                                            <option value="Medium">Medium</option>
-                                            <option value="High">High</option>
-                                            <option value="Urgent">Urgent</option>
-                                        </select>
-                                    </div>
-                                </>
-                            )
-                        }
+                        <div className="inputBox">
+                            <label>Title</label>
+                            <input
+                                type="text"
+                                name="Title"
+                                placeholder="Title"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            />
+                        </div>
+                        <div className="inputBox">
+                            <label>Assignee</label>
+                            <select
+                                name="Assignee"
+                                id="Assignee"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            >
+                                <option value="">Select User</option>
+                                {
+                                    users.map(item => (
+                                        <option key={item.value} value={item.value}>{item.label}</option>
+                                    ))
+                                }
+                            </select>
+                        </div>
+                        <div className="inputBox">
+                            <label>Due Date</label>
+                            <input
+                                type="date"
+                                name="DueDate"
+                                placeholder="Due Date"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            />
+                        </div>
+                        <div className="inputBox">
+                            <label>Priority</label>
+                            <select
+                                name="Priority"
+                                id="Priority"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            >
+                                <option value="Low">Low</option>
+                                <option value="Medium">Medium</option>
+                                <option value="High">High</option>
+                                <option value="Urgent">Urgent</option>
+                            </select>
+                        </div>
                         <div className="inputBox" style={{ display: "flex" }}>
-                            <input type="checkbox" name="Important" id="Important" />
+                            <input
+                                type="checkbox"
+                                name="Important"
+                                id="Important"
+                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                            />
                             <label htmlFor="Important">Important</label>
                         </div>
                         <div className="inputBox" style={{ display: "flex" }}>
-                            <input type="checkbox" name="Completed" id="Completed" />
+                            <input
+                                type="checkbox"
+                                name="Completed"
+                                id="Completed"
+                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                            />
                             <label htmlFor="Completed">Completed</label>
                         </div>
                         <div className="inputBox">
                             <label>Description</label>
-                            <textarea name="Description" placeholder="Description" />
+                            <textarea
+                                name="Description"
+                                placeholder="Description"
+                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                            />
+                        </div>
+                        <div className="inputBox">
+                            <label>Comment</label>
+                            <textarea
+                                name="Comment"
+                                placeholder="Comment"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            />
+                        </div>
+                        <div className="inputBox" style={{ display: "flex" }}>
+                            <input
+                                type="checkbox"
+                                name="TaskCompleted"
+                                id="TaskCompleted"
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
+                            />
+                            <label htmlFor="TaskCompleted">Task Completed</label>
                         </div>
                         {
-                            access === "all" ? (
-                                <>
-                                    <div className="inputBox">
-                                        <label>Comment</label>
-                                        <textarea name="Comment" placeholder="Comment" />
-                                    </div>
-                                    <div className="inputBox" style={{ display: "flex" }}>
-                                        <input type="checkbox" name="TaskCompleted" id="TaskCompleted" />
-                                        <label htmlFor="TaskCompleted">Task Completed</label>
-                                    </div>
-                                </>
-                            ) : (
-                                <>
-                                    <div className="inputBox">
-                                        <label>Comment</label>
-                                        <textarea name="Comment" disabled="disabled" placeholder="Comment" />
-                                    </div>
-                                    <div className="inputBox" style={{ display: "flex" }}>
-                                        <input type="checkbox" disabled="disabled" name="TaskCompleted" id="TaskCompleted" />
-                                        <label htmlFor="TaskCompleted">Task Completed</label>
-                                    </div>
-                                </>
-                            )
+                            !taskData.TaskCompleted ? (
+                                <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
+                                    <input type="submit" name="submit" value="Update" />
+                                    <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                                </div>
+                            ) : ""
                         }
-                        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                            <input type="submit" name="submit" value="Update" />
-                            <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
-                        </div>
                     </form>
                 </div>
             </section>

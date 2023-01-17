@@ -5,6 +5,7 @@ import { UserForm } from "../components/pages/users/UserForm";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useGetContext from "../hooks/useGetContext";
+import placeholder from "../assets/images/placeholder.jpg";
 
 
 
@@ -62,7 +63,7 @@ const Users = () => {
                                         email={user.email}
                                         designation={user.personal_info?.Designation || "N/A"}
                                         status={user.is_active}
-                                        image={`${process.env.REACT_APP_SERVER_BASE_URL}${user.personal_info?.ProfilePic}`}
+                                        image={user.personal_info?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${user.personal_info?.ProfilePic}` : placeholder}
                                     />
                                 ))
                             }

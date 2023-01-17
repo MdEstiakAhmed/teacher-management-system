@@ -12,6 +12,7 @@ import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
 import OtherInformationForm from "../components/pages/user/OtherInformationForm";
 import GeneralInfoAddForm from "../components/pages/user/GeneralInfoAddForm";
 import { bloodGroup, gender, maritalStatus, religion } from "../utils/selectFieldConvert";
+import placeholder from "../assets/images/placeholder.jpg";
 
 const User = () => {
     const { id } = useParams();
@@ -139,7 +140,7 @@ const User = () => {
                 <div className="leftSide">
                     <div className="contentArea">
                         <div className="userIdentity">
-                            <img src={`http://127.0.0.1:8000${userInfo.personal?.ProfilePic}`} alt="user" />
+                            <img src={userInfo.personal?.ProfilePic ? `http://127.0.0.1:8000${userInfo.personal?.ProfilePic}` : placeholder} alt="user" />
                             <h3 className="title">{`${userInfo.general?.first_name || ""} ${userInfo.general?.last_name || ""}`}</h3>
                             <p className="designation">{userInfo.personal?.Designation || ""}</p>
                         </div>

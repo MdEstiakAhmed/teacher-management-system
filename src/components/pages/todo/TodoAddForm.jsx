@@ -17,7 +17,7 @@ const TodoAddForm = ({ onClose }) => {
         if (data?.data?.length) {
             setUsers(
                 data.data.reduce((acc, item) => {
-                    if(item.id !== id){
+                    if(item.id !== id && !item.is_superuser){
                         return [...acc, { value: item.id, label: item.username }]
                     }
                     else {

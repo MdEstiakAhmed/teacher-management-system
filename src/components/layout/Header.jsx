@@ -4,7 +4,7 @@ import { headerTitle } from "../../assets/data/headerTitle";
 import { CheckboxIcon, ProfileIcon, SignOutIcon } from "../../assets/icons/icons";
 import useGetContext from "../../hooks/useGetContext";
 import useOutsideClick from "../../hooks/useOutsideClick";
-import userLogo from "../../assets/images/user.png";
+import placeholder from "../../assets/images/placeholder.jpg";
 
 const Header = () => {
     const location = useLocation();
@@ -48,12 +48,12 @@ const Header = () => {
                         </p>
                     </div>
                     <div className="userImage" ref={headerRef}>
-                        <img src={`${userState.data?.ProfilePic}`} alt="user" onClick={handlePopUpShow} />
+                        <img src={`${userState.data?.ProfilePic || placeholder}`} alt="user" onClick={handlePopUpShow} />
                         {
                             (isShowPopUp) ? (
                                 <ul className="userPopup card" >
                                     <li className="user">
-                                        <img src={`${userState.data?.ProfilePic}`} alt="user" />
+                                        <img src={`${userState.data?.ProfilePic || placeholder}`} alt="user" />
                                         <div className="userDetails">
                                             <h4 className="userName">{`${userState.data?.first_name} ${userState.data?.last_name}`}</h4>
                                             <p className="userDesignation">{userState.data?.is_superuser ? "Admin" : useState.data?.is_staff ? "Employee" : ""}</p>
