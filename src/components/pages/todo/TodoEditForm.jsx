@@ -58,8 +58,11 @@ const TodoEditForm = ({ taskData, onClose }) => {
                     if (input.type === "checkbox") {
                         input.checked = taskData[input.name];
                     }
+                    else if(input.type === "select-one") {
+                        input.defaultValue = taskData[input.name];
+                        input.value = taskData[input.name];
+                    }
                     else {
-                        console.log(input.name, taskData[input.name]);
                         input.value = taskData[input.name];
                     }
                 }
@@ -103,7 +106,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                 <option value="">Select User</option>
                                 {
                                     users.map(item => (
-                                        <option key={item.value} value={item.value}>{item.label}</option>
+                                        <option key={item.value} value={item.value} selected={!!(taskData["Assignee"] === item.value)}>{item.label}</option>
                                     ))
                                 }
                             </select>
@@ -124,10 +127,10 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                 id="Priority"
                                 disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
                             >
-                                <option value="Low">Low</option>
-                                <option value="Medium">Medium</option>
-                                <option value="High">High</option>
-                                <option value="Urgent">Urgent</option>
+                                <option value="Low" selected={!!(taskData["Priority"] === "Low")}>Low</option>
+                                <option value="Medium" selected={!!(taskData["Priority"] === "Medium")}>Medium</option>
+                                <option value="High" selected={!!(taskData["Priority"] === "High")}>High</option>
+                                <option value="Urgent" selected={!!(taskData["Priority"] === "Urgent")}>Urgent</option>
                             </select>
                         </div>
                         <div className="inputBox" style={{ display: "flex" }}>
