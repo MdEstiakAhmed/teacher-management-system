@@ -3,9 +3,11 @@ import { fetchTodo, updateTodoWithObj } from "../api/todo";
 import TodoAddForm from "../components/pages/todo/TodoAddForm";
 import TodoEditForm from "../components/pages/todo/TodoEditForm";
 import useFetch from "../hooks/useFetch";
+import useGetContext from "../hooks/useGetContext";
 
 const Todo = () => {
     const { data, isFetched, error, fetchData } = useFetch(fetchTodo, {});
+    const { userState: { data: { id } = {} } = {} } = useGetContext();
     const [isModalShow, setIsModalShow] = useState({
         addForm: false,
         editForm: false,
@@ -16,19 +18,23 @@ const Todo = () => {
     const [search, setSearch] = useState('');
     const [taskSection, setTaskSection] = useState({
         all: true,
+        supervisor: false,
         important: false,
         completed: false,
     });
 
     const updateSection = (type) => {
         if (type === "all") {
-            setTaskSection(prev => ({ ...prev, all: true, important: false, completed: false }))
+            setTaskSection(prev => ({ ...prev, all: true, supervisor: false, important: false, completed: false }))
+        }
+        else if (type === "supervisor") {
+            setTaskSection(prev => ({ ...prev, all: false, supervisor: true, important: false, completed: false }))
         }
         else if (type === "important") {
-            setTaskSection(prev => ({ ...prev, all: false, important: true, completed: false }))
+            setTaskSection(prev => ({ ...prev, all: false, supervisor: false, important: true, completed: false }))
         }
         else if (type === "completed") {
-            setTaskSection(prev => ({ ...prev, all: false, important: false, completed: true }))
+            setTaskSection(prev => ({ ...prev, all: false, supervisor: false, important: false, completed: true }))
         }
     }
 
@@ -52,7 +58,8 @@ const Todo = () => {
     }
 
     const handleSectionFilter = (item) => {
-        if (taskSection.all) return !item.TaskCompleted;
+        if (taskSection.all) return item.Assignee === id;
+        if (taskSection.supervisor) return item.user === id;
         if (taskSection.important) return item.Important;
         if (taskSection.completed) return item.TaskCompleted;
     }
@@ -81,6 +88,10 @@ const Todo = () => {
                         <li onClick={() => updateSection("all")} className={taskSection.all && "active"}>
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             My Task
+                        </li>
+                        <li onClick={() => updateSection("supervisor")} className={taskSection.supervisor && "active"}>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            Me as supervisor
                         </li>
                         <li onClick={() => updateSection("important")} className={taskSection.important && "active"}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-star font-medium-3 me-50"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>

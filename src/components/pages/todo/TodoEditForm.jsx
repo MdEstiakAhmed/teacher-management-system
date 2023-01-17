@@ -20,6 +20,9 @@ const TodoEditForm = ({ taskData, onClose }) => {
         if (is_superuser || id === taskData.user) {
             setAccess("all");
         }
+        else if(taskData.Assignee === id){
+            setAccess("limited");
+        }
         else {
             setAccess("limited");
         }
@@ -76,7 +79,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">Add task</h3>
+                    <h3 className="title">Edit task</h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
                         {
                             access === "all" ? (
