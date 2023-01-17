@@ -162,11 +162,13 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
     };
 
     const clickOnTask = () => {
+        if (TaskCompleted) return;
         setSelectedTodo(item)
         handleModalOpen("editForm")
     }
 
     const clickOnImportant = async () => {
+        if (TaskCompleted) return;
         let req = {
             Important: !Important
         }
@@ -177,6 +179,7 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
     }
 
     const clickOnCompleted = async () => {
+        if (TaskCompleted) return;
         let req = {
             Completed: !Completed
         }

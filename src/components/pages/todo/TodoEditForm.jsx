@@ -14,7 +14,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
     const [users, setUsers] = useState([])
     const { data } = useFetch(fetchUsers, {});
 
-    const [access, setAccess] = useState("limited"); // Access: "all" or "limited"
+    const [access, setAccess] = useState(""); // Access: "all" or "limited"
 
     useEffect(() => {
         if (is_superuser || id === taskData.user) {
@@ -44,7 +44,7 @@ const TodoEditForm = ({ taskData, onClose }) => {
     }, [data]);
 
     useEffect(() => {
-        if (users.length && formRef.current["Assignee"].value) {
+        if (users.length && formRef.current["Assignee"]?.value) {
             formRef.current["Assignee"].value = taskData["Assignee"]
         }
     }, [users]);
@@ -52,17 +52,19 @@ const TodoEditForm = ({ taskData, onClose }) => {
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
-        ;[...formRef.current].forEach((input) => {
-            if (input.name !== "submit" && taskData[input.name]) {
-                if(input.type === "checkbox"){
-                    input.checked = taskData[input.name];
+        if(taskData && access){
+            ;[...formRef.current].forEach((input) => {
+                if (input.name !== "submit" && taskData[input.name]) {
+                    if(input.type === "checkbox"){
+                        input.checked = taskData[input.name];
+                    }
+                    else {
+                        input.value = taskData[input.name];
+                    }
                 }
-                else {
-                    input.value = taskData[input.name];
-                }
-            }
-        });
-    }, [taskData])
+            });
+        }
+    }, [taskData, access])
 
     const closeForm = (e) => {
         e.preventDefault();
@@ -112,10 +114,39 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                             <option value="Urgent">Urgent</option>
                                         </select>
                                     </div>
-
-
                                 </>
-                            ) : ""
+                            ) : (
+                                <>
+                                    <div className="inputBox">
+                                        <label>Title</label>
+                                        <input type="text" disabled="disabled" name="Title" placeholder="Title" />
+                                    </div>
+                                    <div className="inputBox">
+                                        <label>Assignee</label>
+                                        <select name="Assignee" id="Assignee">
+                                            <option value="">Select User</option>
+                                            {
+                                                users.map(item => (
+                                                    <option key={item.value} value={item.value}>{item.label}</option>
+                                                ))
+                                            }
+                                        </select>
+                                    </div>
+                                    <div className="inputBox">
+                                        <label>Due Date</label>
+                                        <input type="date" disabled="disabled" name="DueDate" placeholder="Due Date" />
+                                    </div>
+                                    <div className="inputBox">
+                                        <label>Priority</label>
+                                        <select name="Priority" id="Priority">
+                                            <option value="Low">Low</option>
+                                            <option value="Medium">Medium</option>
+                                            <option value="High">High</option>
+                                            <option value="Urgent">Urgent</option>
+                                        </select>
+                                    </div>
+                                </>
+                            )
                         }
                         <div className="inputBox" style={{ display: "flex" }}>
                             <input type="checkbox" name="Important" id="Important" />
@@ -141,7 +172,18 @@ const TodoEditForm = ({ taskData, onClose }) => {
                                         <label htmlFor="TaskCompleted">Task Completed</label>
                                     </div>
                                 </>
-                            ) : ""
+                            ) : (
+                                <>
+                                    <div className="inputBox">
+                                        <label>Comment</label>
+                                        <textarea name="Comment" disabled="disabled" placeholder="Comment" />
+                                    </div>
+                                    <div className="inputBox" style={{ display: "flex" }}>
+                                        <input type="checkbox" disabled="disabled" name="TaskCompleted" id="TaskCompleted" />
+                                        <label htmlFor="TaskCompleted">Task Completed</label>
+                                    </div>
+                                </>
+                            )
                         }
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             <input type="submit" name="submit" value="Update" />

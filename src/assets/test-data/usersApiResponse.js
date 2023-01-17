@@ -33,7 +33,7 @@ export const usersApiResponse = {
             "first_name": "Md. Estiak",
             "last_name": "Ahmed",
             "email": "user1@gmail.com",
-            "is_active": false
+            "is_active": true
         }
     ]
 }
