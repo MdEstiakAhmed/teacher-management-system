@@ -641,6 +641,9 @@ input[type="submit"]:hover,
     border-radius: 50%;
 }
 
+/* ============= For Event ============= */
+.eventArea .rightSide {}
+
 
 
 
@@ -931,7 +934,7 @@ input[type="submit"]:hover,
     background: var(--bgColor);
     box-shadow: var(--boxShadow);
     z-index: 9;
-    display: none;
+    /* display: none; */
 }
 .emailDetailArea .detailHeader .emailActions .dropdown li {
     padding: 0;

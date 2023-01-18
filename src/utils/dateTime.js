@@ -7,5 +7,10 @@ let options = {
 };
 
 export const formattedDate = (date) => {
-    return new Intl.DateTimeFormat('en-GB', options).format(new Date(date))
+    try {
+        console.log(date);
+        return new Intl.DateTimeFormat('en-GB', options).format(new Date(date))
+    } catch (error) {
+        return "invalid date"
+    }
 } 

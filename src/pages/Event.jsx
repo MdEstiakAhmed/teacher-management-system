@@ -73,7 +73,7 @@ const Event = () => {
                     />
                 )
             }
-            <div className="contentArea todoArea">
+            <div className="contentArea todoArea eventArea">
                 <div className="leftSide">
                     <button className="Button primaryButton" onClick={() => handleModalOpen("addForm")}>Add Event</button>
                     <div className="tags">

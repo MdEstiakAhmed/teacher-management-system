@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formattedDate } from "../../../utils/dateTime";
 
 const EmailList = ({data}) => {
     const [search, setSearch] = useState("");
+
+    useEffect(() => {
+        console.log(data);
+    }, []);
 
     const handleSearchFilter = (item) => {
         if (!search) return true;
@@ -67,7 +71,7 @@ const EmailItem = ({item}) => {
             <div className="emailDetail">
                 <img src="images/user.png" alt="user" className="userThumb" />
                 <div className="emailInfo">
-                    <h4 className="emailSender">{Sender}</h4>
+                    {/* <h4 className="emailSender">{Sender}</h4> */}
                     <p className="emailSubject">{Subject}</p>
                 </div>
             </div>
