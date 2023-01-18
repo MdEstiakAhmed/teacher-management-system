@@ -36,7 +36,7 @@ export const domRefToFormData = (domRef) => {
                     let value = input.value;
                     if(value === 'true') { value = 1; }
                     else if (value === 'false') { value = 0; }
-                    formData.append(input.name, value);
+                    value && formData.append(input.name, value);
                 }
             }
         })

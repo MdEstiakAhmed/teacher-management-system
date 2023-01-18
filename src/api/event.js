@@ -7,7 +7,7 @@ export const baseUrl = '/event';
 
 export const fetchEvents = async () => {
     try {
-        if(process.env.REACT_APP_DATA_TYPE === "json") {
+        if (process.env.REACT_APP_DATA_TYPE === "json") {
             return eventListResponse;
         }
         const url = `${baseUrl}/`;
@@ -24,8 +24,7 @@ export const addEvent = async (ref) => {
         const formData = domRefToFormData(ref);
         formData.delete('users');
         ;[...ref.current].forEach(input => {
-            if(input.name === "users") {
-                console.log(input.value);
+            if (input.name === "users") {
                 formData.append("users[]", input.value);
             }
         });
