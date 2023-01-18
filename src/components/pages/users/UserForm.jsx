@@ -28,7 +28,7 @@ export const UserForm = ({ onClose, type }) => {
             }
         })
         const response = await signup(formData);
-        response.status && onClose();
+        response.status && onClose(true);
     }
     return (
         <section className="addFormArea">

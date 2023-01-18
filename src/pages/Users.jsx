@@ -10,7 +10,7 @@ import placeholder from "../assets/images/placeholder.jpg";
 
 
 const Users = () => {
-    const { data, isFetched, error } = useFetch(fetchUsers, {});
+    const { data, isFetched, error, fetchData } = useFetch(fetchUsers, {});
     const { userState } = useGetContext()
     const [isAddModalShow, setIsAddModalShow] = useState(false);
 
@@ -19,7 +19,8 @@ const Users = () => {
     const handleModalOpen = () => {
         setIsAddModalShow(true)
     }
-    const handleModalClose = () => {
+    const handleModalClose = (isRefetch) => {
+        if (isRefetch) fetchData();
         setIsAddModalShow(false);
     }
 
