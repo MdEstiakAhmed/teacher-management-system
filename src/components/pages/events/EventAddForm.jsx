@@ -81,9 +81,8 @@ const EventAddForm = ({ onClose }) => {
                         <div className="inputBox">
                             <label>Whole Day</label>
                             <select name="WholeDay" id="WholeDay">
-                                <option value="">Select</option>
-                                <option value="true">Yes</option>
                                 <option value="false">No</option>
+                                <option value="true">Yes</option>
                             </select>
                         </div>
                         <div className="inputBox">

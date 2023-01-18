@@ -14,6 +14,7 @@ const EventEditForm = ({ data, onClose }) => {
     const { data: userData } = useFetch(fetchUsers, {});
 
     useEffect(() => {
+        // console.log(data);
         if (userData?.data?.length) {
             setUsers(
                 userData.data.reduce((acc, item) => {
@@ -23,12 +24,23 @@ const EventEditForm = ({ data, onClose }) => {
         }
     }, [userData]);
 
+    useEffect(() => {
+        if(users.length) {
+            console.log(users.filter((user) => data.Guests.includes(user.value)).map((user) => user.value));
+        }
+    }, [users]);
+
     usePseudoElementClick(sectionRef, () => onClose("editForm"));
 
     useEffect(() => {
         ;[...formRef.current].forEach((input) => {
             if (input.name !== "submit" && data[input.name]) {
-                input.value = data[input.name];
+                if(input.type === "datetime-local"){
+                    input.value = new Date(data[input.name]).toISOString().slice(0, 16);
+                }
+                else {
+                    input.value = data[input.name];
+                }
             }
         });
     }, [data])
@@ -56,14 +68,18 @@ const EventEditForm = ({ data, onClose }) => {
                         </div>
                         <div className="inputBox">
                             <label>Guest</label>
-                            <Select
-                                defaultValue={[users[0]]}
-                                isMulti
-                                name="users"
-                                options={users}
-                                className="basic-multi-select"
-                                classNamePrefix="select"
-                            />
+                            {
+                                users.length ? (
+                                    <Select
+                                        defaultValue={users.filter((user) => data.Guests.includes(user.value))}
+                                        isMulti
+                                        name="Guests"
+                                        options={users}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                    />
+                                ) : ""
+                            }
                         </div>
                         <div className="inputBox">
                             <label>Label</label>
@@ -87,9 +103,8 @@ const EventEditForm = ({ data, onClose }) => {
                         <div className="inputBox">
                             <label>Whole Day</label>
                             <select name="WholeDay" id="WholeDay">
-                                <option value="">Select</option>
-                                <option value="true">Yes</option>
                                 <option value="false">No</option>
+                                <option value="true">Yes</option>
                             </select>
                         </div>
                         <div className="inputBox">

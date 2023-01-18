@@ -40,6 +40,12 @@ export const updateEvent = async (ref, id) => {
     try {
         const url = `${baseUrl}/${id}/`;
         const formData = domRefToFormData(ref);
+        formData.delete('Guests');
+        ;[...ref.current].forEach(input => {
+            if (input.name === "Guests") {
+                formData.append("Guests[]", input.value);
+            }
+        });
         const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;
