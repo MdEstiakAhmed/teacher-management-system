@@ -33,6 +33,7 @@ export const domRefToFormData = (domRef) => {
                     formData.append(input.name, input.checked);
                 }
                 else {
+                    console.log(input.name, input.value);
                     let value = input.value;
                     if(value === 'true') { value = 1; }
                     else if (value === 'false') { value = 0; }
