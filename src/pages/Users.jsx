@@ -14,11 +14,23 @@ const Users = () => {
     const { userState } = useGetContext()
     const [isAddModalShow, setIsAddModalShow] = useState(false);
 
+    const [search, setSearch] = useState('');
+
     const handleModalOpen = () => {
         setIsAddModalShow(true)
     }
     const handleModalClose = () => {
         setIsAddModalShow(false);
+    }
+
+    const handleSearchFilter = (item) => {
+        if (!search) return true;
+
+        return (
+            item.first_name.toLowerCase().includes(search.toLowerCase()) ||
+            item.last_name.toLowerCase().includes(search.toLowerCase()) ||
+            item.email.toLowerCase().includes(search.toLowerCase())
+        );
     }
     return (
         <>
@@ -33,7 +45,7 @@ const Users = () => {
             <div className="userList contentArea">
                 <div className="userListHeader">
                     <div className="userSearch">
-                        <input type="text" placeholder="Search" />
+                        <input type="text" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     </div>
                     {
                         userState.data.is_superuser && (
@@ -55,7 +67,7 @@ const Users = () => {
                         </thead>
                         <tbody>
                             {
-                                isFetched && data.status && data.data.length && data.data.map((user) => (
+                                isFetched && data.status && data.data.length && data.data.filter(handleSearchFilter).map((user) => (
                                     <UserRow
                                         key={user.id}
                                         id={user.id}
