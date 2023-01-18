@@ -1,42 +1,61 @@
-import { useEffect } from "react";
-import { useOutletContext  } from "react-router-dom";
-import { fetchEmails } from "../api/email";
+import { useState } from "react";
+import { useOutletContext, useParams } from "react-router-dom";
 import EmailForm from "../components/pages/email/EmailForm";
-import EmailList from "../components/pages/email/EmailList";
-import useFetch from "../hooks/useFetch";
+import Draft from "./emails/Draft";
+import Important from "./emails/Important";
+import Inbox from "./emails/Inbox";
+import Sent from "./emails/Sent";
+import Trash from "./emails/Trash";
 
 const Emails = () => {
-    const { data, isFetched, error, fetchData } = useFetch(fetchEmails, {});
-
+    const { type } = useParams();
     const [isModalShow, setIsModalShow, labelFilter] = useOutletContext();
 
-    // useEffect(() => {
-    //     console.log(data.Receiver.concat(data.Cc, data.Bcc).sort((a, b) => b.id - a.id));
-    // }, [data]);
+    const [isRefetch, setIsRefetch] = useState()
 
-    const handleLabelFilter = (item) => {
-        if (!labelFilter) return true;
-        return (item.ReceiverLabel === labelFilter || item.CcLabel === labelFilter || item.BccLabel === labelFilter);
-    }
-
-    const handleModalClose = (type, isRefetch) => {
-        isRefetch && fetchData();
+    const handleModalClose = (type, refetch) => {
+        setIsRefetch(refetch)
         setIsModalShow(prev => ({ ...prev, [type]: false }))
     }
 
     return (
         <>
             {
-                isFetched && data.status && (
-                    <EmailList
-                        data={
-                            data.Receiver.concat(data.Cc, data.Bcc)
-                            .sort((a, b) => b.id - a.id)
-                            .filter(handleLabelFilter)
-                        }
-                        // data={data.data.filter(handleLabelFilter)}
+                type === "inbox" ? (
+                    <Inbox
+                        labelFilter={labelFilter}
+                        isRefetch={isRefetch}
+                        setIsRefetch={setIsRefetch}
                     />
-                )
+                ) :
+                    type === "sent" ? (
+                        <Sent
+                            labelFilter={labelFilter}
+                            isRefetch={isRefetch}
+                            setIsRefetch={setIsRefetch}
+                        />
+                    ) :
+                        type === "draft" ? (
+                            <Draft
+                                labelFilter={labelFilter}
+                                isRefetch={isRefetch}
+                                setIsRefetch={setIsRefetch}
+                            />
+                        ) :
+                            type === "starred" ? (
+                                <Important
+                                    labelFilter={labelFilter}
+                                    isRefetch={isRefetch}
+                                    setIsRefetch={setIsRefetch}
+                                />
+                            ) :
+                                type === "trash" ? (
+                                    <Trash
+                                        labelFilter={labelFilter}
+                                        isRefetch={isRefetch}
+                                        setIsRefetch={setIsRefetch}
+                                    />
+                                ) : ""
             }
             {
                 isModalShow.addForm && (

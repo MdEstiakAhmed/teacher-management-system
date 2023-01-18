@@ -101,7 +101,7 @@ const Email = () => {
                     <div className="emailDetail">
                         <div className="header">
                             <div className="senderInfo">
-                                <img src={senderData.personal_info.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` : placeholder} alt={senderData?.email} className="thumb" />
+                                <img src={senderData?.personal_info?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` : placeholder} alt={senderData?.email} className="thumb" />
                                 <div className="details">
                                     <h3 className="name">{senderData?.first_name}&nbsp;{senderData?.last_name}</h3>
                                     <p className="email">{senderData?.email}</p>

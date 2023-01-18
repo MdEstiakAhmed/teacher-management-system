@@ -1,6 +1,7 @@
-import { NavLink,  } from "react-router-dom";
+import { NavLink, Outlet, } from "react-router-dom";
 import { menuList } from "../../assets/data/dashboardMenu";
 import logo from '../../assets/images/logo.png'
+import Header from "./Header";
 
 const Sidebar = () => {
 
@@ -15,7 +16,7 @@ const Sidebar = () => {
                         {
                             menuList.map((item, index) => (
                                 <li key={index}>
-                                    <NavLink to={item.url} className={({isActive}) => isActive ? "active" : ""}>
+                                    <NavLink to={item.url} className={(data) => data.isActive ? "active" : ""}>
                                         {item.icon}
                                         <span>{item.title}</span>
                                     </NavLink>
@@ -25,6 +26,12 @@ const Sidebar = () => {
                     </ul>
                 </div>
             </aside>
+            <main className="mainArea">
+                <div className="container">
+                    <Header />
+                    <Outlet />
+                </div>
+            </main>
         </>
     );
 }

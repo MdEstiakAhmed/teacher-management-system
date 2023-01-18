@@ -54,26 +54,23 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 	return (
 		<>
 			<section className="dashboardArea">
-				<Sidebar />
-				<main className="mainArea">
-					<div className="container">
-						<Header />
-						<Routes>
-							<Route path="/users/:id" element={<User />} />
-							<Route path="/users" element={<Users />} />
-							<Route path="/event" element={<Event />} />
-							<Route path="/todo" element={<Todo />} />
-							<Route path="/chat" element={<Chat />} />
-							<Route path="/emails" element={<EmailLayout />}>
+				<Routes>
+					<Route element={<Sidebar />}>
+						<Route path="/users/:id" element={<User />} />
+						<Route path="/users" element={<Users />} />
+						<Route path="/event" element={<Event />} />
+						<Route path="/todo" element={<Todo />} />
+						<Route path="/chat" element={<Chat />} />
+						<Route path="/emails" element={<EmailLayout />}>
+							<Route path=":type">
 								<Route index element={<Emails />} />
 								<Route path=":emailId" element={<Email />} />
 							</Route>
-							<Route path="/" element={<Dashboard />} />
-							<Route path="*" element={<Navigate to="/" />} />
-						</Routes>
-
-					</div>
-				</main>
+						</Route>
+						<Route path="/" element={<Dashboard />} />
+						<Route path="*" element={<Navigate to="/" />} />
+					</Route>
+				</Routes>
 			</section>
 		</>
 	)

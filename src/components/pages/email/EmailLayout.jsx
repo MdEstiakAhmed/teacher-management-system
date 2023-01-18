@@ -1,10 +1,22 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { fetchInboxEmails, fetchSentEmails } from "../../../api/email";
+import useFetch from "../../../hooks/useFetch";
 import EmailFilter from "./EmailFilter";
 
 const EmailLayout = () => {
-    const [labelFilter, setLabelFilter] = useState("");
+    const navigate = useNavigate();
 
+    useEffect(() => {
+        navigate("inbox")
+    }, []);
+
+    // const { data: inboxMails, isFetched: isInboxFetched } = useFetch(fetchInboxEmails, {});
+    // const { data: sentMails, isFetched: isSentFetched } = useFetch(fetchSentEmails, {}, {isManual: true});
+
+    // const [allMails, setAllMails] = useState([])
+    
+    const [labelFilter, setLabelFilter] = useState("");
     const [isModalShow, setIsModalShow] = useState({
         addForm: false
     });

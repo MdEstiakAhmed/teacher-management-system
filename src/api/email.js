@@ -1,16 +1,29 @@
-import { emailListResponse, emailResponse } from "../assets/test-data/emailResponse";
+import { inboxEmailListResponse, emailResponse, sentEmailListResponse } from "../assets/test-data/emailResponse";
 import { showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
 import { postData, getData } from "../utils/request";
 
 export const baseUrl = '/email';
 
-export const fetchEmails = async () => {
+export const fetchInboxEmails = async () => {
     try {
         if(process.env.REACT_APP_DATA_TYPE === "json") {
-            return emailListResponse;
+            return inboxEmailListResponse;
         }
         const url = `${baseUrl}/`;
+        const response = await getData(url, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
+export const fetchSentEmails = async () => {
+    try {
+        if(process.env.REACT_APP_DATA_TYPE === "json") {
+            return sentEmailListResponse;
+        }
+        const url = `${baseUrl}/sent/`;
         const response = await getData(url, {});
         return response;
     } catch (error) {

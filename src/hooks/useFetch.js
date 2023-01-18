@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 // import { showAlert } from "../utils/alert";
 
-const useFetch = (apiFunction, obj={}) => {
+const useFetch = (apiFunction, obj={}, {isManual}={}) => {
     const [data, setData] = useState({});
     const [isLoading, setIsLoading] = useState(false);
     const [isFetched, setIsFetched] = useState(false);
@@ -9,7 +9,7 @@ const useFetch = (apiFunction, obj={}) => {
     const [error, setError] = useState(null);
 
     useEffect(() => {
-        fetchData();
+        !isManual && fetchData();
     }, []);
 
     const fetchData = async (options) => {
