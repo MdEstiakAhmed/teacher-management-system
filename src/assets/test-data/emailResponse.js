@@ -1,63 +1,70 @@
 export const emailListResponse = {
     "status": true,
     "message": "Email list",
-    "data": [
-        {
-            "id": 1,
-            "Subject": "hello",
-            "Body": "This is test message",
-            "Date": "2022-12-28T17:25:09.646296Z",
-            "Label": "None",
-            "Draft": false,
-            "Important": false,
-            "Read": false,
-            "Deleted": false,
-            "Sender": 3,
-            "Receiver": 2,
-            "CarbonCopy": [
-                1
-            ],
-            "BlindCarbonCopy": [
-                1
-            ]
-        },
+    "Receiver": [
         {
             "id": 2,
-            "Subject": "bye",
-            "Body": "This is test message",
-            "Date": "2022-12-28T17:25:46.255373Z",
-            "Label": "personal",
-            "Draft": false,
-            "Important": false,
-            "Read": false,
-            "Deleted": false,
-            "Sender": 3,
-            "Receiver": 2,
-            "CarbonCopy": [
-                1
+            "Sender": 1,
+            "Receiver": 3,
+            "Cc": [
+                4
             ],
-            "BlindCarbonCopy": [
-                1
-            ]
+            "Subject": "Test 1",
+            "Body": "This is test message",
+            "Date": "2023-01-04T10:19:22.400953Z",
+            "ReceiverLabel": "None",
+            "ReceiverImportant": false,
+            "ReceiverTrash": false,
+            "ReceiverDelete": false
+        }
+    ],
+    "Cc": [
+        {
+            "id": 1,
+            "Sender": 1,
+            "Receiver": 2,
+            "Cc": [
+                3
+            ],
+            "Subject": "Test 2",
+            "Body": "This is test message",
+            "Date": "2023-01-03T10:19:01.844525Z",
+            "CcLabel": "None",
+            "CcImportant": false,
+            "CcTrash": false,
+            "CcDelete": false
         },
         {
-            "id": 3,
-            "Subject": "hi",
-            "Body": "This is test message",
-            "Date": "2022-12-28T17:26:32.938309Z",
-            "Label": "private",
-            "Draft": false,
-            "Important": false,
-            "Read": false,
-            "Deleted": false,
-            "Sender": 3,
+            "id": 4,
+            "Sender": 1,
             "Receiver": 2,
-            "CarbonCopy": [
-                1
+            "Cc": [
+                3
             ],
-            "BlindCarbonCopy": [
-                1
-            ]
+            "Subject": "Test 3",
+            "Body": "This is test message",
+            "Date": "2023-01-06T17:11:49.253726Z",
+            "CcLabel": "None",
+            "CcImportant": false,
+            "CcTrash": false,
+            "CcDelete": false
+        }
+    ],
+    "Bcc": [
+        {
+            "id": 3,
+            "Sender": 1,
+            "Receiver": 2,
+            "Cc": [
+                4
+            ],
+            "Subject": "Test 4",
+            "Body": "This is test message",
+            "Date": "2023-01-05T15:14:34.300244Z",
+            "BccLabel": "None",
+            "BccImportant": false,
+            "BccTrash": false,
+            "BccDelete": false
         }
     ]
 }

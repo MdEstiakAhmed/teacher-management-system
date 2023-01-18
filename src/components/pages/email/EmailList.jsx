@@ -1,12 +1,28 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { fetchUsers } from "../../../api/users";
+import useFetch from "../../../hooks/useFetch";
 import { formattedDate } from "../../../utils/dateTime";
+import placeholder from "../../../assets/images/placeholder.jpg";
 
-const EmailList = ({data}) => {
+const EmailList = ({ data }) => {
     const [search, setSearch] = useState("");
 
+    const { data: userData } = useFetch(fetchUsers, {});
+    const [users, setUsers] = useState([]);
     useEffect(() => {
-        console.log(data);
+        if (userData.status) {
+            // console.log(userData.data);
+            setUsers(
+                userData.data.reduce((acc, item) => {
+                    return [...acc, { userId: item.id, image: item.personal_info?.ProfilePic }]
+                }, [])
+            )
+        }
+    }, [data]);
+
+    useEffect(() => {
+        // console.log(data);
     }, []);
 
     const handleSearchFilter = (item) => {
@@ -46,6 +62,7 @@ const EmailList = ({data}) => {
                             <EmailItem
                                 key={item.id}
                                 item={item}
+                                users={users || []}
                             />
                         ))
                     }
@@ -56,20 +73,29 @@ const EmailList = ({data}) => {
 }
 export default EmailList;
 
-const EmailItem = ({item}) => {
+const EmailItem = ({ item, users }) => {
     // company, private, personal, important
-    const {Subject, Label, Date: date, Sender, id} = item;
+    const { Subject, Label, Date: date, Sender, id } = item;
+    const user = users.find(user => user.userId === Sender);
+    // console.log(userId, image);
     const navigate = useNavigate()
     return (
-        <li onClick={() => navigate(`/emails/${id}`)}>
+        <li>
             <div className="buttonArea">
                 <input type="checkbox" name="" id="" />
                 <button className="button">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </button>
             </div>
-            <div className="emailDetail">
-                <img src="images/user.png" alt="user" className="userThumb" />
+            <div className="emailDetail" onClick={() => navigate(`/emails/${id}`)}>
+                <img
+                    src={
+                        user?.image ?
+                        `${process.env.REACT_APP_SERVER_BASE_URL}${user.image}` : placeholder
+                    }
+                    alt="user"
+                    className="userThumb"
+                />
                 <div className="emailInfo">
                     {/* <h4 className="emailSender">{Sender}</h4> */}
                     <p className="emailSubject">{Subject}</p>

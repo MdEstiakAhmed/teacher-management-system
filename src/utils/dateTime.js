@@ -8,7 +8,7 @@ let options = {
 
 export const formattedDate = (date) => {
     try {
-        console.log(date);
+        // console.log(date);
         return new Intl.DateTimeFormat('en-GB', options).format(new Date(date))
     } catch (error) {
         return "invalid date"

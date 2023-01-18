@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useOutletContext  } from "react-router-dom";
 import { fetchEmails } from "../api/email";
 import EmailForm from "../components/pages/email/EmailForm";
@@ -9,9 +10,13 @@ const Emails = () => {
 
     const [isModalShow, setIsModalShow, labelFilter] = useOutletContext();
 
+    // useEffect(() => {
+    //     console.log(data.Receiver.concat(data.Cc, data.Bcc).sort((a, b) => b.id - a.id));
+    // }, [data]);
+
     const handleLabelFilter = (item) => {
         if (!labelFilter) return true;
-        return item.Label === labelFilter;
+        return (item.ReceiverLabel === labelFilter || item.CcLabel === labelFilter || item.BccLabel === labelFilter);
     }
 
     const handleModalClose = (type, isRefetch) => {
@@ -22,9 +27,14 @@ const Emails = () => {
     return (
         <>
             {
-                isFetched && data.data?.length && (
+                isFetched && data.status && (
                     <EmailList
-                        data={data.data.filter(handleLabelFilter)}
+                        data={
+                            data.Receiver.concat(data.Cc, data.Bcc)
+                            .sort((a, b) => b.id - a.id)
+                            .filter(handleLabelFilter)
+                        }
+                        // data={data.data.filter(handleLabelFilter)}
                     />
                 )
             }

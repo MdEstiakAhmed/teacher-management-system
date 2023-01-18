@@ -10,7 +10,7 @@ export const fetchEmails = async () => {
         if(process.env.REACT_APP_DATA_TYPE === "json") {
             return emailListResponse;
         }
-        const url = `${baseUrl}/sent/`;
+        const url = `${baseUrl}/`;
         const response = await getData(url, {});
         return response;
     } catch (error) {

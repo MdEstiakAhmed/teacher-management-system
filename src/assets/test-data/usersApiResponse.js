@@ -12,7 +12,7 @@ export const usersApiResponse = {
             "is_active": true,
             "personal_info": {
                 "user": 1,
-                "ProfilePic": "/media/profile_pics/WhatsApp_Image_2023-01-14_at_9.55.46_PM.jpeg",
+                "ProfilePic": "",
                 "EmployeeID": "0001",
                 "Phone": "01798198256",
                 "Designation": "test",
