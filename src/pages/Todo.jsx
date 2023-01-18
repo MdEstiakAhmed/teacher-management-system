@@ -4,6 +4,7 @@ import TodoAddForm from "../components/pages/todo/TodoAddForm";
 import TodoEditForm from "../components/pages/todo/TodoEditForm";
 import useFetch from "../hooks/useFetch";
 import useGetContext from "../hooks/useGetContext";
+import { formattedDate } from "../utils/dateTime";
 
 const Todo = () => {
     const { data, isFetched, error, fetchData } = useFetch(fetchTodo, {});
@@ -206,7 +207,7 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
                 >
                     {Priority}
                 </div>
-                <div className="taskDate">{DueDate}</div>
+                <div className="taskDate">{formattedDate(DueDate)}</div>
                 {/* <img src="images/user.png" alt="userName" className="userThumb" /> */}
             </div>
         </li>

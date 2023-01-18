@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { formattedDate } from "../../../utils/dateTime";
 
 const EmailList = ({data}) => {
     const [search, setSearch] = useState("");
@@ -53,7 +54,7 @@ export default EmailList;
 
 const EmailItem = ({item}) => {
     // company, private, personal, important
-    const {Subject, Label, Date, Sender, id} = item;
+    const {Subject, Label, Date: date, Sender, id} = item;
     const navigate = useNavigate()
     return (
         <li onClick={() => navigate(`/emails/${id}`)}>
@@ -74,7 +75,7 @@ const EmailItem = ({item}) => {
                 <div className="labels">
                     <span className={Label}></span>
                 </div>
-                <p className="date">{Date}</p>
+                <p className="date">{formattedDate(date)}</p>
             </div>
         </li>
     )
