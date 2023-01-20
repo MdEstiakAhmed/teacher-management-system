@@ -15,9 +15,8 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
     const [showCC, setShowCC] = useState(false);
     const [showBCC, setShowBCC] = useState(false);
 
-    useEffect(() => {
-        console.log(type, draftMailId);
-    }, []);
+    const [draftData, setDraftData] = useState()
+
 
     useEffect(() => {
         if (data?.data?.length) {
@@ -31,7 +30,6 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
 
     useEffect(() => {
         if(type === "draft") {
-            console.log(type);
             fetchDraftData()
         }
     }, [type]);
@@ -52,14 +50,16 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
 
     const fetchDraftData = async () => {
         const response = await fetchDraftEmail({emailId: draftMailId});
-        console.log(response);
         if(!response.status) {
             return
         }
 
+        setDraftData(response.data);
+
         ;[...formRef.current].forEach((input) => {
-            if (input.name !== "submit" && data[input.name]) {
-                input.value = data[input.name];
+            if (input.name !== "submit" && response.data[input.name]) {
+
+                input.value = response.data[input.name];
             }
         });
     }
@@ -103,7 +103,9 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                 {/* <input type="text" name="Receiver" id="Receiver" /> */}
                                 <div>
                                     <Select
-                                        // defaultValue={[users[0]]}
+                                        defaultValue={
+                                            type === "draft" ? users.filter(item => draftData?.Receiver?.includes(item.value)) : []
+                                        }
                                         isMulti
                                         name="Receiver"
                                         options={users}
@@ -125,7 +127,9 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                     <label htmlFor="cc">Cc: </label>
                                     {/* <input type="text" placeholder="" name="Cc" id="Cc" /> */}
                                     <Select
-                                        // defaultValue={[users[0]]}
+                                        defaultValue={
+                                            type === "draft" ? users.filter(item => draftData?.Cc?.includes(item.value)) : []
+                                        }
                                         isMulti
                                         name="Cc"
                                         options={users}
@@ -141,7 +145,9 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                     <label htmlFor="Bcc">Bcc: </label>
                                     {/* <input type="text" name="Bcc" id="Bcc" placeholder="" /> */}
                                     <Select
-                                        // defaultValue={[users[0]]}
+                                        defaultValue={
+                                            type === "draft" ? users.filter(item => draftData?.Bcc?.includes(item.value)) : []
+                                        }
                                         isMulti
                                         name="Bcc"
                                         options={users}

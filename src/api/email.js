@@ -86,7 +86,7 @@ export const updateEmailStarred = async ({emailId, type, starred}) => {
 
 export const fetchDraftEmail = ({emailId}) => {
     try {
-        const url = `${baseUrl}/${emailId}/`;
+        const url = `${baseUrl}/draft/${emailId}/`;
         const response = getData(url, {});
         return response;
     } catch (error) {
@@ -96,7 +96,7 @@ export const fetchDraftEmail = ({emailId}) => {
 
 export const updateDraftEmail = async ({ref, isDraft, emailId}) => {
     try {
-        const url = `${baseUrl}/draft/${emailId}}/`;
+        const url = `${baseUrl}/draft/${emailId}/`;
         const formData = domRefToFormData(ref);
         isDraft && formData.append("Draft", 1);
         !isDraft && formData.append("Draft", 0);
@@ -114,7 +114,7 @@ export const updateDraftEmail = async ({ref, isDraft, emailId}) => {
                 input.value && formData.append("Bcc[]", input.value);
             }
         });
-        const response = await postData(url, formData, {});
+        const response = await putData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;
     } catch (error) {

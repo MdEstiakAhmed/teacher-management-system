@@ -21,9 +21,6 @@ const EmailList = ({ data, type, handleModalOpen, setIsRefetch, setSelectedDraft
         }
     }, [data]);
 
-    useEffect(() => {
-        // console.log(data);
-    }, []);
 
     const handleSearchFilter = (item) => {
         if (!search) return true;
