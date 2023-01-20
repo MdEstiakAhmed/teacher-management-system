@@ -31,13 +31,14 @@ const EmailForm = ({ onClose }) => {
 
     const closeForm = (e) => {
         e.preventDefault();
-        onClose("addForm");
+        handleSubmit(e, true);
+        // onClose("addForm");
     }
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = async (e, isDraft) => {
         e.preventDefault();
         let response = {};
-        response = await addEmail(formRef);
+        response = await addEmail(formRef, isDraft);
         response.status && onClose("addForm", true);
     }
     return (

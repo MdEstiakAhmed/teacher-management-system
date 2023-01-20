@@ -44,10 +44,12 @@ export const fetchEmail = async ({emailId}) => {
     }
 }
 
-export const addEmail = async (ref) => {
+export const addEmail = async (ref, isDraft) => {
     try {
         const url = `${baseUrl}/sent/`;
         const formData = domRefToFormData(ref);
+        isDraft && formData.append("Draft", 1);
+        !isDraft && formData.append("Draft", 0);
         formData.delete('Receiver');
         formData.delete('Cc');
         formData.delete('Bcc');
