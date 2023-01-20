@@ -102,16 +102,20 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                 <label htmlFor="Receiver">To: </label>
                                 {/* <input type="text" name="Receiver" id="Receiver" /> */}
                                 <div>
-                                    <Select
-                                        defaultValue={
-                                            type === "draft" ? users.filter(item => draftData?.Receiver?.includes(item.value)) : []
-                                        }
-                                        isMulti
-                                        name="Receiver"
-                                        options={users}
-                                        className="basic-multi-select"
-                                        classNamePrefix="select"
-                                    />
+                                    {
+                                        users.length ? (
+                                            <Select
+                                                defaultValue={
+                                                    type === "draft" ? users.filter(item => draftData?.Receiver?.includes(item.value)) : []
+                                                }
+                                                isMulti
+                                                name="Receiver"
+                                                options={users}
+                                                className="basic-multi-select"
+                                                classNamePrefix="select"
+                                            />
+                                        ) : ""
+                                    }
                                 </div>
                             </div>
 
@@ -126,16 +130,20 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                 <div className="inputBox">
                                     <label htmlFor="cc">Cc: </label>
                                     {/* <input type="text" placeholder="" name="Cc" id="Cc" /> */}
-                                    <Select
-                                        defaultValue={
-                                            type === "draft" ? users.filter(item => draftData?.Cc?.includes(item.value)) : []
-                                        }
-                                        isMulti
-                                        name="Cc"
-                                        options={users}
-                                        className="basic-multi-select"
-                                        classNamePrefix="select"
-                                    />
+                                    {
+                                        users.length ? (
+                                            <Select
+                                                defaultValue={
+                                                    type === "draft" ? users.filter(item => draftData?.Cc?.includes(item.value)) : []
+                                                }
+                                                isMulti
+                                                name="Cc"
+                                                options={users}
+                                                className="basic-multi-select"
+                                                classNamePrefix="select"
+                                            />
+                                        ) : ""
+                                    }
                                 </div>
                             )
                         }
@@ -144,16 +152,20 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                 <div className="inputBox">
                                     <label htmlFor="Bcc">Bcc: </label>
                                     {/* <input type="text" name="Bcc" id="Bcc" placeholder="" /> */}
-                                    <Select
-                                        defaultValue={
-                                            type === "draft" ? users.filter(item => draftData?.Bcc?.includes(item.value)) : []
-                                        }
-                                        isMulti
-                                        name="Bcc"
-                                        options={users}
-                                        className="basic-multi-select"
-                                        classNamePrefix="select"
-                                    />
+                                    {
+                                        users.length ? (
+                                            <Select
+                                                defaultValue={
+                                                    type === "draft" ? users.filter(item => draftData?.Bcc?.includes(item.value)) : []
+                                                }
+                                                isMulti
+                                                name="Bcc"
+                                                options={users}
+                                                className="basic-multi-select"
+                                                classNamePrefix="select"
+                                            />
+                                        ) : ""
+                                    }
                                 </div>
                             )
                         }
