@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import Select from 'react-select';
 import { addEmail } from "../../../api/email";
 import { fetchUsers } from "../../../api/users";
 import useFetch from "../../../hooks/useFetch";
@@ -9,9 +10,20 @@ const EmailForm = ({ onClose }) => {
     const formRef = useRef(null);
 
     const { data, isFetched, error } = useFetch(fetchUsers, {});
+    const [users, setUsers] = useState([])
 
     const [showCC, setShowCC] = useState(false);
     const [showBCC, setShowBCC] = useState(false);
+
+    useEffect(() => {
+        if (data?.data?.length) {
+            setUsers(
+                data.data.reduce((acc, item) => {
+                    return [...acc, { value: item.id, label: item.username }]
+                }, [])
+            )
+        }
+    }, [data]);
 
 
 
@@ -40,17 +52,41 @@ const EmailForm = ({ onClose }) => {
                 </div>
                 <div className="composeBody">
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        <div className="inputBox">
-                            <label htmlFor="Receiver">To: </label>
-                            <input type="text" name="Receiver" id="Receiver" />
-                            <span className="cursor" onClick={() => setShowCC(prev => !prev)}>Cc</span>
-                            <span className="cursor" onClick={() => setShowBCC(prev => !prev)}>Bcc</span>
+                        <div className="inputBox flex flex-align-center gap-10 flex-justify-between">
+                            <div className="flex flex-align-center gap-10">
+                                <label htmlFor="Receiver">To: </label>
+                                {/* <input type="text" name="Receiver" id="Receiver" /> */}
+                                <div>
+                                    <Select
+                                        // defaultValue={[users[0]]}
+                                        isMulti
+                                        name="Receiver"
+                                        options={users}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                    />
+                                </div>
+                            </div>
+
+                            <div className="flex flex-align-center gap-10">
+                                <span className="cursor" onClick={() => setShowCC(prev => !prev)}>Cc</span>
+                                <span className="cursor" onClick={() => setShowBCC(prev => !prev)}>Bcc</span>
+                            </div>
+
                         </div>
                         {
                             showCC && (
                                 <div className="inputBox">
                                     <label htmlFor="cc">Cc: </label>
-                                    <input type="text" placeholder="" name="Cc" id="Cc" />
+                                    {/* <input type="text" placeholder="" name="Cc" id="Cc" /> */}
+                                    <Select
+                                        // defaultValue={[users[0]]}
+                                        isMulti
+                                        name="Cc"
+                                        options={users}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                    />
                                 </div>
                             )
                         }
@@ -58,7 +94,15 @@ const EmailForm = ({ onClose }) => {
                             showBCC && (
                                 <div className="inputBox">
                                     <label htmlFor="Bcc">Bcc: </label>
-                                    <input type="text" name="Bcc" id="Bcc" placeholder="" />
+                                    {/* <input type="text" name="Bcc" id="Bcc" placeholder="" /> */}
+                                    <Select
+                                        // defaultValue={[users[0]]}
+                                        isMulti
+                                        name="Bcc"
+                                        options={users}
+                                        className="basic-multi-select"
+                                        classNamePrefix="select"
+                                    />
                                 </div>
                             )
                         }

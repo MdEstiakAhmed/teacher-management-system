@@ -48,6 +48,20 @@ export const addEmail = async (ref) => {
     try {
         const url = `${baseUrl}/sent/`;
         const formData = domRefToFormData(ref);
+        formData.delete('Receiver');
+        formData.delete('Cc');
+        formData.delete('Bcc');
+        ;[...ref.current].forEach(input => {
+            if (input.name === "Receiver") {
+                formData.append("Receiver[]", input.value);
+            }
+            if (input.name === "Cc") {
+                formData.append("Cc[]", input.value);
+            }
+            if (input.name === "Bcc") {
+                formData.append("Bcc[]", input.value);
+            }
+        });
         const response = await postData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;

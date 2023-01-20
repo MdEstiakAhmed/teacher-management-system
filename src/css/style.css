@@ -71,6 +71,30 @@ p, span, ul, li, a, th, td, td, thead, tbody {
     height: 600px;
 }
 
+.flex {
+    display: flex;
+}
+
+.flex-row {
+    flex-direction: row;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-align-center {
+    align-items: center;
+}
+
+.flex-justify-between {
+    justify-content: space-between;
+}
+
+.gap-10 {
+    gap: 10px;
+}
+
 /* event custom css start */
 .rbc-event, .rbc-day-slot .rbc-background-event{
     background-color: var(--primaryColor);
