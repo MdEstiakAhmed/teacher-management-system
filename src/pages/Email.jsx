@@ -22,7 +22,13 @@ const Email = () => {
         }
     }, [userList]);
 
-    console.log(data);
+    const [labelType, setLabelType] = useState(null);
+
+    useEffect(() => {
+        if (data.data) {
+            setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
+        }
+    }, [data]);
 
     const [isLabelMenuShow, setIsLabelMenuShow] = useState(false);
 
@@ -103,16 +109,16 @@ const Email = () => {
                         </div>
                         <div className="labelsArea">
                             {
-                                data.data["ReceiverLabel" || "CcLabel" || "BccLabel" || "SenderLabel"] === "Personal" ? (
+                                data.data[labelType] === "Personal" ? (
                                     <span className="personal">Personal</span>
                                 ) :
-                                    data.data["ReceiverLabel" || "CcLabel" || "BccLabel" || "SenderLabel"] === "Important" ? (
+                                    data.data[labelType] === "Important" ? (
                                         <span className="important">Important</span>
                                     ) :
-                                        data.data["ReceiverLabel" || "CcLabel" || "BccLabel" || "SenderLabel"] === "Private" ? (
+                                        data.data[labelType] === "Private" ? (
                                             <span className="private">Private</span>
                                         ) :
-                                            data.data["ReceiverLabel" || "CcLabel" || "BccLabel" || "SenderLabel"] === "Company" ? (
+                                            data.data[labelType] === "Company" ? (
                                                 <span className="company">Company</span>
                                             ) : ""
                             }
