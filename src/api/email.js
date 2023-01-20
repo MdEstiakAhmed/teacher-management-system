@@ -55,13 +55,13 @@ export const addEmail = async (ref, isDraft) => {
         formData.delete('Bcc');
         ;[...ref.current].forEach(input => {
             if (input.name === "Receiver") {
-                formData.append("Receiver[]", input.value);
+                input.value && formData.append("Receiver[]", input.value);
             }
             if (input.name === "Cc") {
-                formData.append("Cc[]", input.value);
+                input.value && formData.append("Cc[]", input.value);
             }
             if (input.name === "Bcc") {
-                formData.append("Bcc[]", input.value);
+                input.value && formData.append("Bcc[]", input.value);
             }
         });
         const response = await postData(url, formData, {});
