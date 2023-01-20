@@ -41,8 +41,8 @@ const EmailForm = ({ onClose }) => {
                 <div className="composeBody">
                     <form ref={formRef} onSubmit={handleSubmit}>
                         <div className="inputBox">
-                            <label htmlFor="Receivere">To: </label>
-                            <input type="text" name="Receivere" id="Receivere" />
+                            <label htmlFor="Receiver">To: </label>
+                            <input type="text" name="Receiver" id="Receiver" />
                             <span className="cursor" onClick={() => setShowCC(prev => !prev)}>Cc</span>
                             <span className="cursor" onClick={() => setShowBCC(prev => !prev)}>Bcc</span>
                         </div>
