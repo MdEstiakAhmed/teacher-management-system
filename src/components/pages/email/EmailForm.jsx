@@ -14,6 +14,11 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
 
     const [showCC, setShowCC] = useState(false);
     const [showBCC, setShowBCC] = useState(false);
+    const [showTo, setShowTo] = useState(false);
+
+    useEffect(() => {
+        type !== "draft" && setShowTo(true)
+    }, []);
 
     const [draftData, setDraftData] = useState()
 
@@ -62,6 +67,10 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                 input.value = response.data[input.name];
             }
         });
+
+        setShowBCC(true)
+        setShowCC(true)
+        setShowTo(true)
     }
 
 
@@ -103,7 +112,7 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                                 {/* <input type="text" name="Receiver" id="Receiver" /> */}
                                 <div>
                                     {
-                                        users.length ? (
+                                        (showTo && users.length) ? (
                                             <Select
                                                 defaultValue={
                                                     type === "draft" ? users.filter(item => draftData?.Receiver?.includes(item.value)) : []
