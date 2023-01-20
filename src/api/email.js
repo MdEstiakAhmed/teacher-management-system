@@ -72,10 +72,10 @@ export const addEmail = async (ref, isDraft) => {
     }
 }
 
-export const updateEmailStarred = async ({emailId, type, starred}) => {
+export const updateEmailStarred = async ({emailId, type, starred, state}) => {
     try {
         let url;
-        if(type === "sent"){
+        if(state === "sent"){
             url = `${baseUrl}/sent/${emailId}/`;
         }
         else {

@@ -91,9 +91,9 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
     }
 
     const updateStar = async () => {
-        let type;
-        item.CcImportant !== undefined ? type = "CcImportant" : item.BccImportant !== undefined ? type = "BccImportant" : type = "ReceiverImportant";
-        let response = await updateEmailStarred({ emailId: item.id, type, starred: !item[type] });
+        let importantType;
+        item.CcImportant !== undefined ? importantType = "CcImportant" : item.BccImportant !== undefined ? importantType = "BccImportant" : importantType = "ReceiverImportant";
+        let response = await updateEmailStarred({ emailId: item.id, type: importantType, starred: !item[importantType], state: type });
         if (response.status) {
             setIsRefetch(true);
         }
