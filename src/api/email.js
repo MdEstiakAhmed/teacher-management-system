@@ -75,14 +75,16 @@ export const addEmail = async (ref, isDraft) => {
 export const updateEmailStarred = async ({emailId, type, starred, state}) => {
     try {
         let url;
+        let importantType = type;
         if(state === "sent"){
             url = `${baseUrl}/sent/${emailId}/`;
+            importantType = "SenderImportant"
         }
         else {
             url = `${baseUrl}/${emailId}/`;
         }
         const formData = new FormData();
-        formData.append(type, starred ? 1 : 0);
+        formData.append(importantType, starred ? 1 : 0);
         const response = await putData(url, formData, {});
         return response;
     } catch (error) {
