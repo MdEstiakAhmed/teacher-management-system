@@ -992,7 +992,7 @@ input[type="submit"]:hover,
     gap: 10px;
     margin: 20px 0;
 }
-.emailDetailArea .labelsArea a {
+.emailDetailArea .labelsArea span {
     position: relative;
     padding: 3px 8px;
     font-size: var(--textFontSm);
@@ -1000,7 +1000,7 @@ input[type="submit"]:hover,
     font-weight: var(--fontMedium);
     color: var(--primaryColor);
 }
-.emailDetailArea .labelsArea a::before {
+.emailDetailArea .labelsArea span::before {
     content: '';
     background: var(--primaryColor);
     position: absolute;
@@ -1011,22 +1011,22 @@ input[type="submit"]:hover,
     border-radius: 3px;
     opacity: 0.1;
 }
-.emailDetailArea .labelsArea a.personal {
+.emailDetailArea .labelsArea span.personal {
     color: var(--successColor);
 }
-.emailDetailArea .labelsArea a.personal::before {
+.emailDetailArea .labelsArea span.personal::before {
     background: var(--successColor);
 }
-.emailDetailArea .labelsArea a.important {
+.emailDetailArea .labelsArea span.important {
     color: var(--warningColor);
 }
-.emailDetailArea .labelsArea a.important::before {
+.emailDetailArea .labelsArea span.important::before {
     background: var(--warningColor);
 }
-.emailDetailArea .labelsArea a.private {
+.emailDetailArea .labelsArea span.private {
     color: var(--dangerColor);
 }
-.emailDetailArea .labelsArea a.private::before {
+.emailDetailArea .labelsArea span.private::before {
     background: var(--dangerColor);
 }
 

@@ -75,7 +75,7 @@ export default EmailList;
 
 const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
     // company, private, personal, important
-    const { Subject, Label, Date: date, Sender, id, BccImportant, CcImportant, ReceiverImportant } = item;
+    const { Subject, Label, Date: date, Sender, id, BccImportant, CcImportant, ReceiverImportant, SenderImportant } = item;
     const user = users.find(user => user.userId === Sender);
     const navigate = useNavigate()
     const { type } = useParams()
@@ -105,7 +105,7 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
                 {
                     type !== "draft" ? (
                         <button className="button" onClick={updateStar}>
-                            <svg className={(BccImportant === true || CcImportant === true || ReceiverImportant === true) ? "active" : ""} xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                            <svg className={(BccImportant === true || CcImportant === true || ReceiverImportant === true || SenderImportant === true) ? "active" : ""} xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                         </button>
                     ) : ""
                 }

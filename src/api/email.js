@@ -92,6 +92,29 @@ export const updateEmailStarred = async ({emailId, type, starred, state}) => {
     }
 }
 
+// type: ReceiverLabel, CcLabel, BccLabel, SenderLabel
+// label: None, Personal, Important, Private, Company
+// state: inbox, sent
+export const updateEmailLabel = async ({emailId, type, label, state}) => {
+    try {
+        let url;
+        let labelType = type;
+        if(state === "sent"){
+            url = `${baseUrl}/sent/${emailId}/`;
+            labelType = "SenderLabel"
+        }
+        else {
+            url = `${baseUrl}/${emailId}/`;
+        }
+        const formData = new FormData();
+        formData.append(labelType, label);
+        const response = await putData(url, formData, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
 export const fetchDraftEmail = ({emailId}) => {
     try {
         const url = `${baseUrl}/draft/${emailId}/`;
