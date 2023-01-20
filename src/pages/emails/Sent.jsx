@@ -26,6 +26,7 @@ const Sent = ({ labelFilter, isRefetch, setIsRefetch }) => {
             {
                 isFetched && data.status && (
                     <EmailList
+                        type="sent"
                         setIsRefetch={setIsRefetch}
                         data={
                             data.data
