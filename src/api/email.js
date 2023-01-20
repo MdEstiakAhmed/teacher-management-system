@@ -74,7 +74,13 @@ export const addEmail = async (ref, isDraft) => {
 
 export const updateEmailStarred = async ({emailId, type, starred}) => {
     try {
-        const url = `${baseUrl}/${emailId}/`;
+        let url;
+        if(type === "sent"){
+            url = `${baseUrl}/sent/${emailId}/`;
+        }
+        else {
+            url = `${baseUrl}/${emailId}/`;
+        }
         const formData = new FormData();
         formData.append(type, starred ? 1 : 0);
         const response = await putData(url, formData, {});
