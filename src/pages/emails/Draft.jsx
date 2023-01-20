@@ -3,7 +3,7 @@ import { fetchSentEmails } from "../../api/email";
 import EmailList from "../../components/pages/email/EmailList";
 import useFetch from "../../hooks/useFetch";
 
-const Draft = ({ labelFilter, isRefetch, setIsRefetch }) => {
+const Draft = ({ labelFilter, isRefetch, setIsRefetch, handleModalOpen, setSelectedDraft }) => {
     const { data, isFetched, fetchData } = useFetch(fetchSentEmails, {});
 
     useEffect(() => {
@@ -25,12 +25,16 @@ const Draft = ({ labelFilter, isRefetch, setIsRefetch }) => {
             {
                 isFetched && data.status && (
                     <EmailList
+                        setIsRefetch={setIsRefetch}
                         data={
                             data.data
-                            .sort((a, b) => b.id - a.id)
-                            .filter(handleDraftFilter)
-                            .filter(handleLabelFilter)
+                                .sort((a, b) => b.id - a.id)
+                                .filter(handleDraftFilter)
+                                .filter(handleLabelFilter)
                         }
+                        type="draft"
+                        handleModalOpen={handleModalOpen}
+                        setSelectedDraft={setSelectedDraft}
                     />
                 )
             }

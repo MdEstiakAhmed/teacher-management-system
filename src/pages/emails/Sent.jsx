@@ -26,11 +26,12 @@ const Sent = ({ labelFilter, isRefetch, setIsRefetch }) => {
             {
                 isFetched && data.status && (
                     <EmailList
+                        setIsRefetch={setIsRefetch}
                         data={
                             data.data
-                            .sort((a, b) => b.id - a.id)
-                            .filter(handleNotInDraftFilter)
-                            .filter(handleLabelFilter)
+                                .sort((a, b) => b.id - a.id)
+                                .filter(handleNotInDraftFilter)
+                                .filter(handleLabelFilter)
                         }
                     />
                 )

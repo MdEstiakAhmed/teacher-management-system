@@ -11,10 +11,10 @@ const Trash = ({ labelFilter, isRefetch, setIsRefetch }) => {
 
     useEffect(() => {
         let tempMails = [];
-        if(isInboxFetched && inboxData.status){
+        if (isInboxFetched && inboxData.status) {
             tempMails = tempMails.concat(inboxData.Receiver, inboxData.Cc, inboxData.Bcc);
         }
-        if(isSentFetched && sentData.status){
+        if (isSentFetched && sentData.status) {
             tempMails = tempMails.concat(sentData.data);
         }
         console.log(tempMails);
@@ -43,11 +43,12 @@ const Trash = ({ labelFilter, isRefetch, setIsRefetch }) => {
             {
                 allMails.length ? (
                     <EmailList
+                        setIsRefetch={setIsRefetch}
                         data={
                             allMails
-                            .filter(handleTrashFilter)
-                            .filter(handleLabelFilter)
-                            .sort((a, b) => b.id - a.id)
+                                .filter(handleTrashFilter)
+                                .filter(handleLabelFilter)
+                                .sort((a, b) => b.id - a.id)
                         }
                     />
                 ) : ""

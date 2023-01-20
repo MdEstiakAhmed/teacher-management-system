@@ -36,7 +36,7 @@ const EmailLayout = () => {
                     />
                 </div>
                 <div className="rightSide">
-                    <Outlet context={[isModalShow, setIsModalShow, labelFilter]} />
+                    <Outlet context={[isModalShow, setIsModalShow, labelFilter, handleModalOpen]} />
                 </div>
             </div>
         </>

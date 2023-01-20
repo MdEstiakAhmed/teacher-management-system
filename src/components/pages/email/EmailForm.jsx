@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from "react";
 import Select from 'react-select';
-import { addEmail } from "../../../api/email";
+import { addEmail, fetchDraftEmail, updateDraftEmail } from "../../../api/email";
 import { fetchUsers } from "../../../api/users";
 import useFetch from "../../../hooks/useFetch";
 import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
-const EmailForm = ({ onClose }) => {
+const EmailForm = ({ onClose, type, draftMailId }) => {
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
@@ -14,6 +14,10 @@ const EmailForm = ({ onClose }) => {
 
     const [showCC, setShowCC] = useState(false);
     const [showBCC, setShowBCC] = useState(false);
+
+    useEffect(() => {
+        console.log(type, draftMailId);
+    }, []);
 
     useEffect(() => {
         if (data?.data?.length) {
@@ -25,20 +29,60 @@ const EmailForm = ({ onClose }) => {
         }
     }, [data]);
 
+    useEffect(() => {
+        if(type === "draft") {
+            console.log(type);
+            fetchDraftData()
+        }
+    }, [type]);
+
+
+    useEffect(() => {
+        ;[...formRef.current].forEach((input) => {
+            if (input.name !== "submit" && data[input.name]) {
+                if(input.type === "datetime-local"){
+                    input.value = new Date(data[input.name]).toISOString().slice(0, 16);
+                }
+                else {
+                    input.value = data[input.name];
+                }
+            }
+        });
+    }, [data])
+
+    const fetchDraftData = async () => {
+        const response = await fetchDraftEmail({emailId: draftMailId});
+        console.log(response);
+        if(!response.status) {
+            return
+        }
+
+        ;[...formRef.current].forEach((input) => {
+            if (input.name !== "submit" && data[input.name]) {
+                input.value = data[input.name];
+            }
+        });
+    }
+
 
 
     usePseudoElementClick(sectionRef, () => onClose("addForm"));
 
     const closeForm = (e) => {
         e.preventDefault();
-        handleSubmit(e, true);
+        handleSubmit(e, true, true);
         // onClose("addForm");
     }
 
-    const handleSubmit = async (e, isDraft) => {
+    const handleSubmit = async (e, isDraft, keepInDraft) => {
         e.preventDefault();
         let response = {};
-        response = await addEmail(formRef, isDraft);
+        let tempForDraft = keepInDraft ? true : false;
+        if(type === "draft") {
+            response = await updateDraftEmail({ref: formRef, isDraft: tempForDraft, emailId: draftMailId});
+        }else {
+            response = await addEmail(formRef, isDraft);
+        }
         response.status && onClose("addForm", true);
     }
     return (

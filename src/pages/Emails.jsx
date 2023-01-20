@@ -9,11 +9,13 @@ import Trash from "./emails/Trash";
 
 const Emails = () => {
     const { type } = useParams();
-    const [isModalShow, setIsModalShow, labelFilter] = useOutletContext();
+    const [isModalShow, setIsModalShow, labelFilter, handleModalOpen] = useOutletContext();
 
+    const [selectedDraft, setSelectedDraft] = useState(null);
     const [isRefetch, setIsRefetch] = useState()
 
     const handleModalClose = (type, refetch) => {
+        setSelectedDraft(null)
         setIsRefetch(refetch)
         setIsModalShow(prev => ({ ...prev, [type]: false }))
     }
@@ -40,6 +42,8 @@ const Emails = () => {
                                 labelFilter={labelFilter}
                                 isRefetch={isRefetch}
                                 setIsRefetch={setIsRefetch}
+                                handleModalOpen={handleModalOpen}
+                                setSelectedDraft={setSelectedDraft}
                             />
                         ) :
                             type === "starred" ? (
@@ -61,6 +65,8 @@ const Emails = () => {
                 isModalShow.addForm && (
                     <EmailForm
                         onClose={handleModalClose}
+                        type={type}
+                        draftMailId={selectedDraft}
                     />
                 )
             }

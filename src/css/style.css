@@ -830,6 +830,10 @@ input[type="submit"]:hover,
     margin: 0;
     transition: all 0.3s;
 }
+.emailArea .emailList ul .buttonArea .button svg.active {
+    stroke: var(--warningColor);
+    fill: var(--warningColor);
+}
 .emailArea .emailList ul .buttonArea .button::after,
 .todoArea .rightSide .titleArea .button::after {
     content: '';

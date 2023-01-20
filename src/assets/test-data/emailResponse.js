@@ -12,6 +12,7 @@ export const inboxEmailListResponse = {
             "Subject": "Test 2",
             "Body": "This is test message",
             "Date": "2023-01-04T10:19:22.400953Z",
+            "Draft": true,
             "ReceiverLabel": "Personal",
             "ReceiverImportant": true,
             "ReceiverTrash": false,

@@ -4,8 +4,9 @@ import { fetchUsers } from "../../../api/users";
 import useFetch from "../../../hooks/useFetch";
 import { formattedDate } from "../../../utils/dateTime";
 import placeholder from "../../../assets/images/placeholder.jpg";
+import { updateEmailStarred } from "../../../api/email";
 
-const EmailList = ({ data }) => {
+const EmailList = ({ data, type, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
     const [search, setSearch] = useState("");
 
     const { data: userData } = useFetch(fetchUsers, {});
@@ -62,6 +63,9 @@ const EmailList = ({ data }) => {
                                 key={item.id}
                                 item={item}
                                 users={users || []}
+                                handleModalOpen={handleModalOpen}
+                                setIsRefetch={setIsRefetch}
+                                setSelectedDraft={setSelectedDraft}
                             />
                         ))
                     }
@@ -72,25 +76,44 @@ const EmailList = ({ data }) => {
 }
 export default EmailList;
 
-const EmailItem = ({ item, users }) => {
+const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
     // company, private, personal, important
-    const { Subject, Label, Date: date, Sender, id } = item;
+    const { Subject, Label, Date: date, Sender, id, BccImportant, CcImportant, ReceiverImportant } = item;
     const user = users.find(user => user.userId === Sender);
     const navigate = useNavigate()
-    const {type} = useParams()
+    const { type } = useParams()
+
+    const handleMailClick = () => {
+        if (type === "draft") {
+            setSelectedDraft && setSelectedDraft(id)
+            handleModalOpen("addForm")
+        }
+        else {
+            navigate(`/emails/${type}/${id}`)
+        }
+    }
+
+    const updateStar = async() => {
+        let type;
+        item.CcImportant !== undefined ? type = "CcImportant" : item.BccImportant !== undefined ? type = "BccImportant" : type = "ReceiverImportant";
+        let response = await updateEmailStarred({emailId: item.id, type, starred: !item[type]});
+        if(response.status) {
+            setIsRefetch(true);
+        }
+    }
     return (
         <li>
             <div className="buttonArea">
                 <input type="checkbox" name="" id="" />
-                <button className="button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <button className="button" onClick={updateStar}>
+                    <svg className={(BccImportant === true || CcImportant === true || ReceiverImportant === true) ? "active" : ""} xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </button>
             </div>
-            <div className="emailDetail" onClick={() => navigate(`/emails/${type}/${id}`)}>
+            <div className="emailDetail" onClick={() => handleMailClick()}>
                 <img
                     src={
                         user?.image ?
-                        `${process.env.REACT_APP_SERVER_BASE_URL}${user.image}` : placeholder
+                            `${process.env.REACT_APP_SERVER_BASE_URL}${user.image}` : placeholder
                     }
                     alt="user"
                     className="userThumb"

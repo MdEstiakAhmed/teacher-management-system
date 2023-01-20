@@ -18,13 +18,19 @@ const Inbox = ({ labelFilter, isRefetch, setIsRefetch }) => {
         return (item.ReceiverLabel === labelFilter || item.CcLabel === labelFilter || item.BccLabel === labelFilter);
     }
 
+    const removeDraft = (item) => {
+        if (!item.Draft) return true;
+    }
+
     return (
         <>
             {
                 isFetched && data.status && (
                     <EmailList
+                        setIsRefetch={setIsRefetch}
                         data={
                             data.Receiver.concat(data.Cc, data.Bcc)
+                                .filter(removeDraft)
                                 .sort((a, b) => b.id - a.id)
                                 .filter(handleLabelFilter)
                         }
