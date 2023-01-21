@@ -6,7 +6,7 @@ import { formattedDate } from "../../../utils/dateTime";
 import placeholder from "../../../assets/images/placeholder.jpg";
 import { updateEmailStarred } from "../../../api/email";
 
-const EmailList = ({ data, type, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
+const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
     const [search, setSearch] = useState("");
 
     const { data: userData } = useFetch(fetchUsers, {});
@@ -19,7 +19,7 @@ const EmailList = ({ data, type, handleModalOpen, setIsRefetch, setSelectedDraft
                 }, [])
             )
         }
-    }, [data]);
+    }, [data, userData]);
 
 
     const handleSearchFilter = (item) => {
@@ -79,14 +79,17 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
         Subject, 
         Label, 
         Date: date, 
-        Sender, 
+        Sender,
+        Receiver, 
+        Cc,
+        Bcc,
         id, 
         BccImportant, CcImportant, ReceiverImportant, SenderImportant,
         BccRead, CcRead, ReceiverRead
      } = item;
-    const user = users.find(user => user.userId === Sender);
-    const navigate = useNavigate()
-    const { type } = useParams()
+     const navigate = useNavigate()
+     const { type } = useParams()
+     const user = users.find(user => user.userId === (Sender ? Sender : Receiver ? Receiver : Cc[0] ? Cc[0] : Bcc[0] ? Bcc[0] : ""));
 
     let readType = CcRead !== undefined ? "CcRead" : BccRead !== undefined ? "BccRead" : ReceiverRead !== undefined ? "ReceiverRead" : "";
 
@@ -136,7 +139,7 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
                 />
                 <div className="emailInfo">
                     {/* <h4 className="emailSender">{Sender}</h4> */}
-                    <p className={`emailSubject ${!item[readType] ? 'isReadActive' : ""}`}>{Subject}</p>
+                    <p className={`emailSubject ${(type !== "sent" && !item[readType]) ? 'isReadActive' : ""}`}>{Subject}</p>
                 </div>
             </div>
             <div className="emailDate">

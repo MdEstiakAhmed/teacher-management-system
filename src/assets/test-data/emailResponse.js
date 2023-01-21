@@ -91,7 +91,7 @@ export const sentEmailListResponse = {
             "Draft": false,
             "SenderLabel": "Personal",
             "SenderImportant": false,
-            "SenderTrash": true,
+            "SenderTrash": false,
             "SenderDelete": false
         },
         {
@@ -107,7 +107,7 @@ export const sentEmailListResponse = {
             "Draft": false,
             "SenderLabel": "None",
             "SenderImportant": true,
-            "SenderTrash": true,
+            "SenderTrash": false,
             "SenderDelete": false
         },
         {
@@ -122,7 +122,7 @@ export const sentEmailListResponse = {
             "Subject": "Test 33",
             "Body": "This is test message",
             "Date": "2023-01-06T15:14:34.300244Z",
-            "Draft": true,
+            "Draft": false,
             "SenderLabel": "Private",
             "SenderImportant": false,
             "SenderTrash": false,

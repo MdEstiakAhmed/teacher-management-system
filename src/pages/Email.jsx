@@ -178,6 +178,7 @@ const Email = () => {
                                         {
                                             isLabelMenuShow ? (
                                                 <ul className="labelList">
+                                                    <li onClick={() => handleLabelUpdate("None")}>None</li>
                                                     <li onClick={() => handleLabelUpdate("Personal")}>Personal</li>
                                                     <li onClick={() => handleLabelUpdate("Important")}>Important</li>
                                                     <li onClick={() => handleLabelUpdate("Private")}>Private</li>
