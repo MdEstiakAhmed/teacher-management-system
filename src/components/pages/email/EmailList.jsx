@@ -96,14 +96,19 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
             handleModalOpen("addForm")
         }
         else {
-            navigate(`/emails/${type}/${id}`)
+            if(SenderImportant !== undefined) {
+                navigate(`/emails/${type}/${id}?type=sent`)
+            }
+            else {
+                navigate(`/emails/${type}/${id}?type=inbox`)
+            }
         }
     }
 
     const updateStar = async () => {
         let importantType;
         item.CcImportant !== undefined ? (importantType = "CcImportant") : item.BccImportant !== undefined ? (importantType = "BccImportant") : item.SenderImportant !== undefined ? (importantType = "SenderImportant") : importantType = "ReceiverImportant";
-        let response = await updateEmailStarred({ emailId: item.id, type: importantType, starred: !item[importantType], state: type });
+        let response = await updateEmailStarred({ emailId: item.id, type: importantType, starred: !item[importantType], state: importantType === "SenderImportant" ? "sent" : "inbox" });
         if (response.status) {
             setIsRefetch(true);
         }

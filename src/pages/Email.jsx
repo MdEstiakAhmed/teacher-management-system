@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { fetchEmail, fetchSentEmail, updateEmailDelete, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
 import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
@@ -9,8 +9,15 @@ import placeholder from "../assets/images/placeholder.jpg";
 const Email = () => {
     const { emailId, type } = useParams();
     const navigate = useNavigate()
+    const [searchParams] = useSearchParams();
 
-    const { data, isFetched, error, fetchData } = useFetch(type === 'sent' ? fetchSentEmail : fetchEmail, { emailId });
+    
+    let fetchEmailData;
+    fetchEmailData = searchParams.get('type') !== 'sent' ? fetchSentEmail : fetchEmail;
+    
+    
+
+    const { data, isFetched, error, fetchData } = useFetch(fetchEmailData, { emailId });
     const { data: userList } = useFetch(fetchUsers);
 
     const [senderData, setSenderData] = useState(null);
@@ -26,11 +33,11 @@ const Email = () => {
     }, [userList]);
 
     useEffect(() => {
-        if (data.data) {
-            setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
+        // if (data.data) {
+        //     setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
 
-            updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
-        }
+        //     updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
+        // }
     }, [data]);
 
     useEffect(() => {

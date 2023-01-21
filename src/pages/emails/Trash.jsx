@@ -17,7 +17,6 @@ const Trash = ({ labelFilter, isRefetch, setIsRefetch }) => {
         if (isSentFetched && sentData.status) {
             tempMails = tempMails.concat(sentData.data);
         }
-        console.log(tempMails);
         setAllMails(tempMails);
     }, [inboxData, sentData]);
 
