@@ -97,8 +97,8 @@ const Email = () => {
         navigate(-1)
     }
 
-    const handleTrash = async () => {
-        let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: true, state: type })
+    const handleTrash = async ({trashUndo}) => {
+        let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: trashUndo ? false : true, state: type })
         if (response.status) {
             handleBack()
         }
@@ -181,6 +181,13 @@ const Email = () => {
                                     <button className="button" onClick={handleReadType}>
                                         <svg xmlns="http://www.w3.org/2000/svg" id="readIcon" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                     </button>
+                                    {
+                                        type === 'trash' ? (
+                                            <button className="button" onClick={() => handleTrash({trashUndo: true})}>
+                                                <svg xmlns="http://www.w3.org/2000/svg" className="success" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                            </button>
+                                        ) : ""
+                                    }
                                     <button className="button" onClick={() => { type === 'trash' ? handleDelete() : handleTrash() }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className={type === 'trash' ? "delete" : ""} width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                     </button>
