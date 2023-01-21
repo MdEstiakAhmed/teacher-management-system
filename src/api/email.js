@@ -43,6 +43,18 @@ export const fetchEmail = async ({emailId}) => {
         return { status: false, message: error.message };
     }
 }
+export const fetchSentEmail = async ({emailId}) => {
+    try {
+        if(process.env.REACT_APP_DATA_TYPE === "json") {
+            return emailResponse;
+        }
+        const url = `${baseUrl}/sent/${emailId}/`;
+        const response = await getData(url, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
 
 export const addEmail = async (ref, isDraft) => {
     try {

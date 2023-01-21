@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEmail, updateEmailDelete, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
+import { fetchEmail, fetchSentEmail, updateEmailDelete, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
 import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { formattedDate } from "../utils/dateTime";
@@ -10,7 +10,7 @@ const Email = () => {
     const { emailId, type } = useParams();
     const navigate = useNavigate()
 
-    const { data, isFetched, error, fetchData } = useFetch(fetchEmail, { emailId });
+    const { data, isFetched, error, fetchData } = useFetch(type === 'sent' ? fetchSentEmail : fetchEmail, { emailId });
     const { data: userList } = useFetch(fetchUsers);
 
     const [senderData, setSenderData] = useState(null);
