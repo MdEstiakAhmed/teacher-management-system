@@ -33,11 +33,11 @@ const Email = () => {
     }, [userList]);
 
     useEffect(() => {
-        // if (data.data) {
-        //     setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
+        if (data.data) {
+            setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
 
-        //     updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
-        // }
+            updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
+        }
     }, [data]);
 
     useEffect(() => {
@@ -105,7 +105,7 @@ const Email = () => {
     }
 
     const handleTrash = async ({trashUndo}) => {
-        let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: trashUndo ? false : true, state: type })
+        let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: trashUndo ? false : true, state: searchParams.get('type') })
         if (response.status) {
             handleBack()
         }
