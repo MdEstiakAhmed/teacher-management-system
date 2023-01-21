@@ -1085,6 +1085,11 @@ input[type="submit"]:hover,
     margin: 0;
 }
 
+.emailArea .emailActions .button svg.active {
+    stroke: var(--warningColor);
+    fill: var(--warningColor);
+}
+
 
 /* Email Compose Area */
 .composeArea {

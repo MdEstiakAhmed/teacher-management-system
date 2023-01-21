@@ -72,6 +72,10 @@ export const addEmail = async (ref, isDraft) => {
     }
 }
 
+// emailId: email id
+// type: ReceiverImportant, CcImportant, BccImportant, SenderImportant
+// starred: true, false
+// state: sent, inbox || ...
 export const updateEmailStarred = async ({emailId, type, starred, state}) => {
     try {
         let url;

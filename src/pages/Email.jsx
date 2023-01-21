@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEmail, updateEmailLabel } from "../api/email";
+import { fetchEmail, updateEmailLabel, updateEmailStarred } from "../api/email";
 import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { formattedDate } from "../utils/dateTime";
@@ -14,6 +14,8 @@ const Email = () => {
     const { data: userList } = useFetch(fetchUsers);
 
     const [senderData, setSenderData] = useState(null);
+
+    const [isStarred, setIsStarred] = useState(false);
 
     useEffect(() => {
         if (userList.data) {
@@ -49,6 +51,31 @@ const Email = () => {
             fetchData({ emailId })
         }
     }
+
+    useEffect(() => {
+        data?.data && setIsStarred(data.data[getType()])
+    }, [data]);
+
+    const getType = () => {
+        let {ReceiverImportant, CcImportant, BccImportant, SenderImportant} = data.data;
+
+        let tempType;
+
+        (ReceiverImportant !== undefined) && (tempType = "ReceiverImportant");
+        (CcImportant !== undefined) && (tempType = "CcImportant");
+        (BccImportant !== undefined) && (tempType = "BccImportant");
+        (SenderImportant !== undefined) && (tempType = "SenderImportant");
+
+        return tempType;
+    }
+
+    const handleImportant = async () => {
+        let tempType = getType();
+        const response = await updateEmailStarred({emailId, type: tempType, starred: !isStarred, state: type})
+        if(response.status){
+            setIsStarred(prev => !prev)
+        }
+    }
     return (
         <>
             {
@@ -67,8 +94,8 @@ const Email = () => {
                             </div>
                             <div className="detailHeaderRight">
                                 <div className="emailActions">
-                                    <button className="button">
-                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                                    <button className="button" onClick={handleImportant}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className={isStarred ? "active" : ""} id="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                                     </button>
                                     {/* <div className="dropdown">
                                     <button className="button">
