@@ -5,17 +5,19 @@ import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { formattedDate } from "../utils/dateTime";
 import placeholder from "../assets/images/placeholder.jpg";
+import useGetContext from "../hooks/useGetContext";
 
 const Email = () => {
     const { emailId, type } = useParams();
     const navigate = useNavigate()
     const [searchParams] = useSearchParams();
+    const { userState } = useGetContext()
 
-    
+
     let fetchEmailData;
     fetchEmailData = searchParams.get('type') === 'sent' ? fetchSentEmail : fetchEmail;
-    
-    
+
+
 
     const { data, isFetched, error, fetchData } = useFetch(fetchEmailData, { emailId });
     const { data: userList } = useFetch(fetchUsers);
@@ -43,6 +45,32 @@ const Email = () => {
     useEffect(() => {
         data?.data && setIsStarred(data.data[getImportantType()])
     }, [data]);
+
+    const getEmail = (id) => {
+        let user = userList.data.find(user => user.id === id)
+        console.log(user?.email);
+        return user?.email || false;
+    }
+
+
+    const generateToCcBccListString = () => {
+        return (
+            <div>
+                {
+                    ((data.data.Receiver !== undefined) && (data.data.Receiver.length)) ?
+                        <p className="email">To: {data.data.Receiver.map(item => getEmail(item)).filter(item => !!item).join(', ')}</p> : ''
+                }
+                {
+                    ((data.data.Cc !== undefined) && (data.data.Cc.length)) ?
+                        <p className="email">Cc: {data.data.Cc.map(item => getEmail(item)).filter(item => !!item).join(', ')}</p> : ''
+                }
+                {
+                    ((data.data.Bcc !== undefined) && (data.data.Bcc.length) && (searchParams.get('type') === 'sent')) ?
+                        <p className="email">Bcc: {data.data.Bcc.map(item => getEmail(item)).filter(item => !!item).join(', ')}</p> : ''
+                }
+            </div>
+        )
+    }
 
 
     const getReadType = () => {
@@ -104,7 +132,7 @@ const Email = () => {
         navigate(-1)
     }
 
-    const handleTrash = async ({trashUndo}) => {
+    const handleTrash = async ({ trashUndo }) => {
         let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: trashUndo ? false : true, state: searchParams.get('type') })
         if (response.status) {
             handleBack()
@@ -196,12 +224,12 @@ const Email = () => {
                                     }
                                     {
                                         type === 'trash' ? (
-                                            <button className="button" onClick={() => handleTrash({trashUndo: true})}>
+                                            <button className="button" onClick={() => handleTrash({ trashUndo: true })}>
                                                 <svg xmlns="http://www.w3.org/2000/svg" className="success" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                             </button>
                                         ) : ""
                                     }
-                                    <button className="button" onClick={() => { (type === 'trash') ? handleDelete() : handleTrash({trashUndo: false}) }}>
+                                    <button className="button" onClick={() => { (type === 'trash') ? handleDelete() : handleTrash({ trashUndo: false }) }}>
                                         <svg xmlns="http://www.w3.org/2000/svg" className={type === 'trash' ? "delete" : ""} width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                     </button>
                                     {/* <div className="controls">
@@ -233,13 +261,35 @@ const Email = () => {
                         </div>
                         <div className="emailDetail">
                             <div className="header">
-                                <div className="senderInfo">
-                                    <img src={senderData?.personal_info?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` : placeholder} alt={senderData?.email} className="thumb" />
-                                    <div className="details">
-                                        <h3 className="name">{senderData?.first_name}&nbsp;{senderData?.last_name}</h3>
-                                        <p className="email">{senderData?.email}</p>
-                                    </div>
-                                </div>
+                                {
+                                    searchParams.get('type') === 'sent' ? (
+                                        <div className="senderInfo">
+                                            <img src={userState?.data?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${userState?.data?.ProfilePic}` : placeholder} alt={userState?.data?.email} className="thumb" />
+                                            <div className="details">
+                                                <h3 className="name">{userState?.data?.first_name}&nbsp;{userState?.data?.last_name}</h3>
+                                                <p className="email">{userState?.data?.email}</p>
+                                                <p className="email">
+                                                    {
+                                                        generateToCcBccListString()
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                    ) : (
+                                        <div className="senderInfo">
+                                            <img src={senderData?.personal_info?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` : placeholder} alt={senderData?.email} className="thumb" />
+                                            <div className="details">
+                                                <h3 className="name">{senderData?.first_name}&nbsp;{senderData?.last_name}</h3>
+                                                <p className="email">{senderData?.email}</p>
+                                                <p className="email">
+                                                    {
+                                                        generateToCcBccListString()
+                                                    }
+                                                </p>
+                                            </div>
+                                        </div>
+                                    )
+                                }
                                 <div className="emailDate">
                                     <p>{formattedDate(data.data.Date)}</p>
                                 </div>

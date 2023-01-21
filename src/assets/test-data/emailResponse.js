@@ -205,9 +205,9 @@ export const sentEmailListResponse = {
 //         "id": 33,
 //         "Sender": 2,
 //         "Receiver": [
-//             6
+//             6, 7
 //         ],
-//         "Cc": [],
+//         "Cc": [4,5],
 //         "Subject": "dsfkjdsal;kf;lasldf';",
 //         "Body": "fdshfkasjdhf",
 //         "Date": "2023-01-21T01:57:55.301051+06:00",
@@ -225,10 +225,10 @@ export const emailResponse = {
     "data": {
         "id": 22,
         "Receiver": [
-            5
+            5,6
         ],
-        "Cc": [],
-        "Bcc": [],
+        "Cc": [2,1],
+        "Bcc": [2.3],
         "Subject": "Test email with faysal",
         "Body": "This is also an test email",
         "Date": "2023-01-20T22:48:53.576125+06:00",
