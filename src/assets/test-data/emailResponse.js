@@ -198,22 +198,44 @@ export const sentEmailListResponse = {
     ]
 }
 
+// export const emailResponse = {
+//     "status": true,
+//     "message": "Bcc email detail",
+//     "data": {
+//         "id": 33,
+//         "Sender": 2,
+//         "Receiver": [
+//             6
+//         ],
+//         "Cc": [],
+//         "Subject": "dsfkjdsal;kf;lasldf';",
+//         "Body": "fdshfkasjdhf",
+//         "Date": "2023-01-21T01:57:55.301051+06:00",
+//         "Draft": false,
+//         "BccLabel": "Private",
+//         "BccImportant": true,
+//         "BccRead": true,
+//         "BccTrash": false,
+//         "BccDelete": false
+//     }
+// }
 export const emailResponse = {
     "status": true,
-    "message": "Receiver email detail",
+    "message": "Sent email detail",
     "data": {
-        "id": 1,
-        "Sender": 1,
-        "Receiver": 2,
-        "Cc": [
-            3
+        "id": 22,
+        "Receiver": [
+            5
         ],
-        "Subject": "Test",
-        "Body": "This is test message",
-        "Date": "2023-01-06T10:19:01.844525Z",
-        "ReceiverLabel": "None",
-        "ReceiverImportant": true,
-        "ReceiverTrash": false,
-        "ReceiverDelete": false
+        "Cc": [],
+        "Bcc": [],
+        "Subject": "Test email with faysal",
+        "Body": "This is also an test email",
+        "Date": "2023-01-20T22:48:53.576125+06:00",
+        "Draft": false,
+        "SenderLabel": "None",
+        "SenderImportant": true,
+        "SenderTrash": false,
+        "SenderDelete": false
     }
 }
