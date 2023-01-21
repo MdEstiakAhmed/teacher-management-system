@@ -15,7 +15,7 @@ export const inboxEmailListResponse = {
             "Draft": false,
             "ReceiverLabel": "Personal",
             "ReceiverImportant": true,
-            "ReceiverTrash": false,
+            "ReceiverTrash": true,
             "ReceiverDelete": false,
             "ReceiverRead": true
         }

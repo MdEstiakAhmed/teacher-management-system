@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEmail, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
+import { fetchEmail, updateEmailDelete, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
 import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { formattedDate } from "../utils/dateTime";
@@ -29,7 +29,7 @@ const Email = () => {
         if (data.data) {
             setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
 
-            updateEmailRead({emailId, readType: getReadType(), readStatus: true})
+            updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
         }
     }, [data]);
 
@@ -39,7 +39,7 @@ const Email = () => {
 
 
     const getReadType = () => {
-        let {ReceiverRead, CcRead, BccRead} = data.data;
+        let { ReceiverRead, CcRead, BccRead } = data.data;
 
         let tempType;
 
@@ -51,7 +51,7 @@ const Email = () => {
     }
 
     const getImportantType = () => {
-        let {ReceiverImportant, CcImportant, BccImportant, SenderImportant} = data.data;
+        let { ReceiverImportant, CcImportant, BccImportant, SenderImportant } = data.data;
 
         let tempType;
 
@@ -64,7 +64,7 @@ const Email = () => {
     }
 
     const getTrashType = () => {
-        let {ReceiverTrash, CcTrash, BccTrash, SenderTrash} = data.data;
+        let { ReceiverTrash, CcTrash, BccTrash, SenderTrash } = data.data;
 
         let tempType;
 
@@ -72,6 +72,19 @@ const Email = () => {
         (CcTrash !== undefined) && (tempType = "CcTrash");
         (BccTrash !== undefined) && (tempType = "BccTrash");
         (SenderTrash !== undefined) && (tempType = "SenderTrash");
+
+        return tempType;
+    }
+
+    const getDeleteType = () => {
+        let { ReceiverDelete, CcDelete, BccDelete, SenderDelete } = data.data;
+
+        let tempType;
+
+        (ReceiverDelete !== undefined) && (tempType = "ReceiverDelete");
+        (CcDelete !== undefined) && (tempType = "CcDelete");
+        (BccDelete !== undefined) && (tempType = "BccDelete");
+        (SenderDelete !== undefined) && (tempType = "SenderDelete");
 
         return tempType;
     }
@@ -85,14 +98,21 @@ const Email = () => {
     }
 
     const handleTrash = async () => {
-        let response = await updateEmailTrash({emailId, type: getTrashType(), isTrash: true, state: type})
-        if(response.status){
+        let response = await updateEmailTrash({ emailId, type: getTrashType(), isTrash: true, state: type })
+        if (response.status) {
+            handleBack()
+        }
+    }
+
+    const handleDelete = async () => {
+        let response = updateEmailDelete({ emailId, type: getDeleteType(), isDelete: true, state: type })
+        if (response.status) {
             handleBack()
         }
     }
 
     const handleReadType = () => {
-        updateEmailRead({emailId, readType: getReadType(), readStatus: false})
+        updateEmailRead({ emailId, readType: getReadType(), readStatus: false })
         handleBack()
     }
 
@@ -107,8 +127,8 @@ const Email = () => {
 
     const handleImportant = async () => {
         let tempType = getImportantType();
-        const response = await updateEmailStarred({emailId, type: tempType, starred: !isStarred, state: type})
-        if(response.status){
+        const response = await updateEmailStarred({ emailId, type: tempType, starred: !isStarred, state: type })
+        if (response.status) {
             setIsStarred(prev => !prev)
         }
     }
@@ -161,8 +181,8 @@ const Email = () => {
                                     <button className="button" onClick={handleReadType}>
                                         <svg xmlns="http://www.w3.org/2000/svg" id="readIcon" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                     </button>
-                                    <button className="button" onClick={handleTrash}>
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+                                    <button className="button" onClick={() => { type === 'trash' ? handleDelete() : handleTrash() }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" className={type === 'trash' ? "delete" : ""} width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                     </button>
                                     <div className="controls">
                                         <button className="button"><svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg></button>

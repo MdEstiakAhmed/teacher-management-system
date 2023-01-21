@@ -22,6 +22,11 @@ const Inbox = ({ labelFilter, isRefetch, setIsRefetch }) => {
         if (!item.Draft) return true;
     }
 
+    const removeTrashMail = (item) => {
+        if(item.CcTrash === true || item.ReceiverTrash === true || item.BccTrash === true || item.SenderTrash === true) return false;
+        else return true;
+    }
+
     return (
         <>
             {
@@ -30,6 +35,7 @@ const Inbox = ({ labelFilter, isRefetch, setIsRefetch }) => {
                         setIsRefetch={setIsRefetch}
                         data={
                             data.Receiver.concat(data.Cc, data.Bcc)
+                                .filter(removeTrashMail)
                                 .filter(removeDraft)
                                 .sort((a, b) => b.id - a.id)
                                 .filter(handleLabelFilter)

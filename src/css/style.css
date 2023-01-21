@@ -1093,6 +1093,9 @@ input[type="submit"]:hover,
     stroke: var(--warningColor);
     fill: var(--warningColor);
 }
+.emailArea .emailActions .button svg.delete {
+    stroke: var(--dangerColor);
+}
 
 
 /* Email Compose Area */
