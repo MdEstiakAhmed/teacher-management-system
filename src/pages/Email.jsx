@@ -13,7 +13,7 @@ const Email = () => {
 
     
     let fetchEmailData;
-    fetchEmailData = searchParams.get('type') !== 'sent' ? fetchSentEmail : fetchEmail;
+    fetchEmailData = searchParams.get('type') === 'sent' ? fetchSentEmail : fetchEmail;
     
     
 
