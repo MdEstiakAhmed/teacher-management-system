@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { fetchEmail, updateEmailLabel, updateEmailRead, updateEmailStarred } from "../api/email";
+import { fetchEmail, updateEmailLabel, updateEmailRead, updateEmailStarred, updateEmailTrash } from "../api/email";
 import { fetchUsers } from "../api/users";
 import useFetch from "../hooks/useFetch";
 import { formattedDate } from "../utils/dateTime";
@@ -14,9 +14,9 @@ const Email = () => {
     const { data: userList } = useFetch(fetchUsers);
 
     const [senderData, setSenderData] = useState(null);
-
     const [isStarred, setIsStarred] = useState(false);
-
+    const [labelType, setLabelType] = useState(null);
+    const [isLabelMenuShow, setIsLabelMenuShow] = useState(false);
 
     useEffect(() => {
         if (userList.data) {
@@ -25,7 +25,18 @@ const Email = () => {
         }
     }, [userList]);
 
-    const [labelType, setLabelType] = useState(null);
+    useEffect(() => {
+        if (data.data) {
+            setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
+
+            updateEmailRead({emailId, readType: getReadType(), readStatus: true})
+        }
+    }, [data]);
+
+    useEffect(() => {
+        data?.data && setIsStarred(data.data[getImportantType()])
+    }, [data]);
+
 
     const getReadType = () => {
         let {ReceiverRead, CcRead, BccRead} = data.data;
@@ -39,43 +50,7 @@ const Email = () => {
         return tempType;
     }
 
-    useEffect(() => {
-        if (data.data) {
-            setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
-
-            updateEmailRead({emailId, readType: getReadType(), readStatus: true})
-        }
-    }, [data]);
-
-    const handleReadType = () => {
-        updateEmailRead({emailId, readType: getReadType(), readStatus: false})
-        handleBack()
-    }
-
-    const [isLabelMenuShow, setIsLabelMenuShow] = useState(false);
-
-    const handleLabelMenuShow = () => {
-        setIsLabelMenuShow(prev => !prev)
-    }
-
-    const handleBack = () => {
-        navigate(-1)
-    }
-
-    const handleLabelUpdate = async (label) => {
-        let labelType = data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : "";  //ReceiverLabel, CcLabel, BccLabel
-        const response = await updateEmailLabel({ emailId, type: labelType, label, state: type })
-
-        if (response.status) {
-            fetchData({ emailId })
-        }
-    }
-
-    useEffect(() => {
-        data?.data && setIsStarred(data.data[getType()])
-    }, [data]);
-
-    const getType = () => {
+    const getImportantType = () => {
         let {ReceiverImportant, CcImportant, BccImportant, SenderImportant} = data.data;
 
         let tempType;
@@ -88,13 +63,56 @@ const Email = () => {
         return tempType;
     }
 
+    const getTrashType = () => {
+        let {ReceiverTrash, CcTrash, BccTrash, SenderTrash} = data.data;
+
+        let tempType;
+
+        (ReceiverTrash !== undefined) && (tempType = "ReceiverTrash");
+        (CcTrash !== undefined) && (tempType = "CcTrash");
+        (BccTrash !== undefined) && (tempType = "BccTrash");
+        (SenderTrash !== undefined) && (tempType = "SenderTrash");
+
+        return tempType;
+    }
+
+    const handleLabelMenuShow = () => {
+        setIsLabelMenuShow(prev => !prev)
+    }
+
+    const handleBack = () => {
+        navigate(-1)
+    }
+
+    const handleTrash = async () => {
+        let response = await updateEmailTrash({emailId, type: getTrashType(), isTrash: true, state: type})
+        if(response.status){
+            handleBack()
+        }
+    }
+
+    const handleReadType = () => {
+        updateEmailRead({emailId, readType: getReadType(), readStatus: false})
+        handleBack()
+    }
+
+    const handleLabelUpdate = async (label) => {
+        let labelType = data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : "";  //ReceiverLabel, CcLabel, BccLabel
+        const response = await updateEmailLabel({ emailId, type: labelType, label, state: type })
+
+        if (response.status) {
+            fetchData({ emailId })
+        }
+    }
+
     const handleImportant = async () => {
-        let tempType = getType();
+        let tempType = getImportantType();
         const response = await updateEmailStarred({emailId, type: tempType, starred: !isStarred, state: type})
         if(response.status){
             setIsStarred(prev => !prev)
         }
     }
+
     return (
         <>
             {
@@ -143,7 +161,7 @@ const Email = () => {
                                     <button className="button" onClick={handleReadType}>
                                         <svg xmlns="http://www.w3.org/2000/svg" id="readIcon" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                     </button>
-                                    <button className="button">
+                                    <button className="button" onClick={handleTrash}>
                                         <svg xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
                                     </button>
                                     <div className="controls">

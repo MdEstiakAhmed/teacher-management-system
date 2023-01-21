@@ -121,6 +121,29 @@ export const updateEmailLabel = async ({emailId, type, label, state}) => {
     }
 }
 
+// type: ReceiverTrash, CcTrash, BccTrash, SenderTrash
+// isTrash: true, false
+// state: inbox, sent
+export const updateEmailTrash = async ({emailId, type, isTrash, state}) => {
+    try {
+        let url;
+        let labelType = type;
+        if(state === "sent"){
+            url = `${baseUrl}/sent/${emailId}/`;
+            labelType = "SenderTrash"
+        }
+        else {
+            url = `${baseUrl}/${emailId}/`;
+        }
+        const formData = new FormData();
+        formData.append(labelType, isTrash ? 1 : 0);
+        const response = await putData(url, formData, {});
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
+
 export const updateEmailRead = async ({emailId, readType, readStatus}) => {
     try {
         let url = `${baseUrl}/${emailId}/`;
