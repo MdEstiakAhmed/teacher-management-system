@@ -937,6 +937,10 @@ input[type="submit"]:hover,
     font-weight: var(--fontMedium);
     margin: 0;
 }
+.emailDetail .emailInfo .emailSubject.isReadActive {
+    color: var(--titleColor);
+    font-weight: var(--fontSemiBold);
+}
 .emailDetailArea .detailHeader .detailHeaderRight {
     display: flex;
     align-items: center;

@@ -9,14 +9,15 @@ export const inboxEmailListResponse = {
             "Cc": [
                 4
             ],
-            "Subject": "Test 2",
+            "Subject": "Test 2444",
             "Body": "This is test message",
             "Date": "2023-01-04T10:19:22.400953Z",
-            "Draft": true,
+            "Draft": false,
             "ReceiverLabel": "Personal",
             "ReceiverImportant": true,
             "ReceiverTrash": false,
-            "ReceiverDelete": false
+            "ReceiverDelete": false,
+            "ReceiverRead": true
         }
     ],
     "Cc": [
@@ -27,13 +28,14 @@ export const inboxEmailListResponse = {
             "Cc": [
                 3
             ],
-            "Subject": "Test 1",
+            "Subject": "Test 14444",
             "Body": "This is test message",
             "Date": "2023-01-03T10:19:01.844525Z",
             "CcLabel": "None",
             "CcImportant": true,
             "CcTrash": false,
-            "CcDelete": false
+            "CcDelete": false,
+            "CcRead": true
         },
         {
             "id": 4,

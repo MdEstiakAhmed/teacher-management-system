@@ -75,10 +75,20 @@ export default EmailList;
 
 const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
     // company, private, personal, important
-    const { Subject, Label, Date: date, Sender, id, BccImportant, CcImportant, ReceiverImportant, SenderImportant } = item;
+    const { 
+        Subject, 
+        Label, 
+        Date: date, 
+        Sender, 
+        id, 
+        BccImportant, CcImportant, ReceiverImportant, SenderImportant,
+        BccRead, CcRead, ReceiverRead
+     } = item;
     const user = users.find(user => user.userId === Sender);
     const navigate = useNavigate()
     const { type } = useParams()
+
+    let readType = CcRead !== undefined ? "CcRead" : BccRead !== undefined ? "BccRead" : ReceiverRead !== undefined ? "ReceiverRead" : "";
 
     const handleMailClick = () => {
         if (type === "draft") {
@@ -121,7 +131,7 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
                 />
                 <div className="emailInfo">
                     {/* <h4 className="emailSender">{Sender}</h4> */}
-                    <p className="emailSubject">{Subject}</p>
+                    <p className={`emailSubject ${!item[readType] ? 'isReadActive' : ""}`}>{Subject}</p>
                 </div>
             </div>
             <div className="emailDate">
