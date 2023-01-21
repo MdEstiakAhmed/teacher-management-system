@@ -139,7 +139,7 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
                 />
                 <div className="emailInfo">
                     {/* <h4 className="emailSender">{Sender}</h4> */}
-                    <p className={`emailSubject ${(type !== "sent" && type !== "draft" && !item[readType]) ? 'isReadActive' : ""}`}>{Subject}</p>
+                    <p className={`emailSubject ${(type !== "sent" && type !== "draft" && Sender !== undefined && !item[readType]) ? 'isReadActive' : ""}`}>{Subject}</p>
                 </div>
             </div>
             <div className="emailDate">

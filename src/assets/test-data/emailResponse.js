@@ -3,70 +3,59 @@ export const inboxEmailListResponse = {
     "message": "Email list",
     "Receiver": [
         {
-            "id": 2,
-            "Sender": 1,
-            "Receiver": 3,
-            "Cc": [
-                4
+            "id": 31,
+            "Sender": 6,
+            "Receiver": [
+                1
             ],
-            "Subject": "Test 2444",
-            "Body": "This is test message",
-            "Date": "2023-01-04T10:19:22.400953Z",
+            "Cc": [],
+            "Subject": "asasda",
+            "Body": "fsadfas",
+            "Date": "2023-01-21T01:57:05.458151+06:00",
             "Draft": false,
             "ReceiverLabel": "Personal",
             "ReceiverImportant": true,
-            "ReceiverTrash": true,
-            "ReceiverDelete": false,
-            "ReceiverRead": true
-        }
-    ],
-    "Cc": [
-        {
-            "id": 1,
-            "Sender": 1,
-            "Receiver": 2,
-            "Cc": [
-                3
-            ],
-            "Subject": "Test 14444",
-            "Body": "This is test message",
-            "Date": "2023-01-03T10:19:01.844525Z",
-            "CcLabel": "None",
-            "CcImportant": true,
-            "CcTrash": false,
-            "CcDelete": false,
-            "CcRead": true
+            "ReceiverRead": false,
+            "ReceiverTrash": false,
+            "ReceiverDelete": false
         },
         {
-            "id": 4,
-            "Sender": 1,
-            "Receiver": 2,
-            "Cc": [
-                3
+            "id": 32,
+            "Sender": 2,
+            "Receiver": [
+                1
             ],
-            "Subject": "Test 3",
-            "Body": "This is test message",
-            "Date": "2023-01-06T17:11:49.253726Z",
-            "CcLabel": "Important",
-            "CcImportant": false,
-            "CcTrash": false,
-            "CcDelete": false
+            "Cc": [
+                5
+            ],
+            "Subject": "dfsafadlsjflkasjfdlkajsdlkfjaslkdjf",
+            "Body": "ffsadfasfasdfasdhjkfjkasdhflkasdjflasdj",
+            "Date": "2023-01-21T01:57:42.936293+06:00",
+            "Draft": false,
+            "ReceiverLabel": "Important",
+            "ReceiverImportant": false,
+            "ReceiverRead": true,
+            "ReceiverTrash": false,
+            "ReceiverDelete": false
         }
     ],
+    "Cc": [],
     "Bcc": [
         {
-            "id": 3,
-            "Sender": 1,
-            "Receiver": 2,
-            "Cc": [
-                4
+            "id": 33,
+            "Sender": 2,
+            "Receiver": [
+                6
             ],
-            "Subject": "Test 3",
-            "Body": "This is test message",
-            "Date": "2023-01-05T15:14:34.300244Z",
-            "BccLabel": "Company",
+            "Cc": [],
+            "Subject": "dsfkjdsal;kf;lasldf';",
+            "Body": "fdshfkasjdhf",
+            "Date": "2023-01-21T01:57:55.301051+06:00",
+            "Draft": false,
+            "BccLabel": "Private",
             "BccImportant": true,
-            "BccTrash": true,
+            "BccRead": true,
+            "BccTrash": false,
             "BccDelete": false
         }
     ]
@@ -77,33 +66,31 @@ export const sentEmailListResponse = {
     "message": "Sent email list",
     "data": [
         {
-            "id": 7,
-            "Receiver": 2,
-            "Cc": [
-                3
+            "id": 21,
+            "Receiver": [
+                2
             ],
-            "Bcc": [
-                4
-            ],
-            "Subject": "Test 11",
-            "Body": "This is test message",
-            "Date": "2023-01-06T10:19:01.844525Z",
+            "Cc": [],
+            "Bcc": [],
+            "Subject": "Test email",
+            "Body": "This is an test email",
+            "Date": "2023-01-20T22:47:14.293310+06:00",
             "Draft": false,
-            "SenderLabel": "Personal",
+            "SenderLabel": "None",
             "SenderImportant": false,
             "SenderTrash": false,
             "SenderDelete": false
         },
         {
-            "id": 8,
-            "Receiver": 3,
-            "Cc": [
-                4
+            "id": 22,
+            "Receiver": [
+                5
             ],
+            "Cc": [],
             "Bcc": [],
-            "Subject": "Test 22",
-            "Body": "This is test message",
-            "Date": "2023-01-06T10:19:22.400953Z",
+            "Subject": "Test email with faysal",
+            "Body": "This is also an test email",
+            "Date": "2023-01-20T22:48:53.576125+06:00",
             "Draft": false,
             "SenderLabel": "None",
             "SenderImportant": true,
@@ -111,38 +98,100 @@ export const sentEmailListResponse = {
             "SenderDelete": false
         },
         {
-            "id": 9,
-            "Receiver": 2,
-            "Cc": [
-                4
-            ],
-            "Bcc": [
+            "id": 23,
+            "Receiver": [
                 3
             ],
-            "Subject": "Test 33",
+            "Cc": [
+                2
+            ],
+            "Bcc": [
+                4
+            ],
+            "Subject": "Test",
             "Body": "This is test message",
-            "Date": "2023-01-06T15:14:34.300244Z",
+            "Date": "2023-01-20T22:51:51.199060+06:00",
             "Draft": false,
-            "SenderLabel": "Private",
+            "SenderLabel": "Personal",
             "SenderImportant": false,
             "SenderTrash": false,
             "SenderDelete": false
         },
         {
-            "id": 10,
-            "Receiver": 2,
-            "Cc": [
+            "id": 24,
+            "Receiver": [
                 3
+            ],
+            "Cc": [
+                2
             ],
             "Bcc": [
                 4
             ],
-            "Subject": "Test 10",
-            "Body": "This is test message",
-            "Date": "2023-01-06T17:11:49.253726Z",
+            "Subject": "teste",
+            "Body": "fasdfasf",
+            "Date": "2023-01-20T22:51:58.389342+06:00",
             "Draft": true,
-            "SenderLabel": "Personal",
+            "SenderLabel": "None",
+            "SenderImportant": false,
+            "SenderTrash": false,
+            "SenderDelete": false
+        },
+        {
+            "id": 25,
+            "Receiver": [
+                5
+            ],
+            "Cc": [
+                2
+            ],
+            "Bcc": [
+                2
+            ],
+            "Subject": "Test again",
+            "Body": "Test message",
+            "Date": "2023-01-20T23:19:55.779560+06:00",
+            "Draft": false,
+            "SenderLabel": "None",
             "SenderImportant": true,
+            "SenderTrash": true,
+            "SenderDelete": false
+        },
+        {
+            "id": 26,
+            "Receiver": [
+                2
+            ],
+            "Cc": [
+                2,
+                4
+            ],
+            "Bcc": [
+                3,
+                5
+            ],
+            "Subject": "test",
+            "Body": "tests",
+            "Date": "2023-01-20T23:24:13.574068+06:00",
+            "Draft": false,
+            "SenderLabel": "None",
+            "SenderImportant": true,
+            "SenderTrash": false,
+            "SenderDelete": false
+        },
+        {
+            "id": 29,
+            "Receiver": [
+                2
+            ],
+            "Cc": [],
+            "Bcc": [],
+            "Subject": "",
+            "Body": "",
+            "Date": "2023-01-21T01:08:48.113259+06:00",
+            "Draft": false,
+            "SenderLabel": "None",
+            "SenderImportant": false,
             "SenderTrash": false,
             "SenderDelete": false
         }
