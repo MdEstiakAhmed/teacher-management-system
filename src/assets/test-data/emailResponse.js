@@ -106,8 +106,8 @@ export const sentEmailListResponse = {
             "Date": "2023-01-06T10:19:22.400953Z",
             "Draft": false,
             "SenderLabel": "None",
-            "SenderImportant": false,
-            "SenderTrash": false,
+            "SenderImportant": true,
+            "SenderTrash": true,
             "SenderDelete": false
         },
         {

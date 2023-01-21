@@ -38,6 +38,11 @@ const Important = ({ labelFilter, isRefetch, setIsRefetch }) => {
         return (item.ReceiverLabel === labelFilter || item.CcLabel === labelFilter || item.BccLabel === labelFilter || item.SenderLabel === labelFilter);
     }
 
+    const removeTrashMail = (item) => {
+        if(item.CcTrash === true || item.ReceiverTrash === true || item.BccTrash === true || item.SenderTrash === true) return false;
+        else return true;
+    }
+
     return (
         <>
             {
@@ -46,6 +51,7 @@ const Important = ({ labelFilter, isRefetch, setIsRefetch }) => {
                         setIsRefetch={setIsRefetch}
                         data={
                             allMails
+                                .filter(removeTrashMail)
                                 .filter(handleImportantFilter)
                                 .filter(handleLabelFilter)
                                 .sort((a, b) => b.id - a.id)
