@@ -21,6 +21,11 @@ const Sent = ({ labelFilter, isRefetch, setIsRefetch }) => {
     const handleNotInDraftFilter = (item) => {
         return (item.Draft !== true);
     }
+
+    const removeTrashMail = (item) => {
+        if(item.CcTrash === true || item.ReceiverTrash === true || item.BccTrash === true || item.SenderTrash === true) return false;
+        else return true;
+    }
     return (
         <>
             {
@@ -31,6 +36,7 @@ const Sent = ({ labelFilter, isRefetch, setIsRefetch }) => {
                         data={
                             data.data
                                 .sort((a, b) => b.id - a.id)
+                                .filter(removeTrashMail)
                                 .filter(handleNotInDraftFilter)
                                 .filter(handleLabelFilter)
                         }
