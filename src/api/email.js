@@ -1,7 +1,7 @@
 import { inboxEmailListResponse, emailResponse, sentEmailListResponse } from "../assets/test-data/emailResponse";
 import { showAlertPopup } from "../utils/alert";
 import { domRefToFormData } from "../utils/formFieldConverter";
-import { postData, getData, putData } from "../utils/request";
+import { postData, getData, putData, deleteData } from "../utils/request";
 
 export const baseUrl = '/email';
 
@@ -156,7 +156,7 @@ export const updateEmailTrash = async ({emailId, type, isTrash, state}) => {
     }
 }
 
-// type: ReceiverDelete, CcTrash, BccDelete, SenderDelete
+// type: ReceiverDelete, CcDelete, BccDelete, SenderDelete
 // isDelete: true, false
 // state: inbox, sent
 export const updateEmailDelete = async ({emailId, type, isDelete, state}) => {
@@ -165,14 +165,14 @@ export const updateEmailDelete = async ({emailId, type, isDelete, state}) => {
         let labelType = type;
         if(state === "sent"){
             url = `${baseUrl}/sent/${emailId}/`;
-            labelType = "SenderTrash"
+            labelType = "SenderDelete"
         }
         else {
             url = `${baseUrl}/${emailId}/`;
         }
         const formData = new FormData();
         formData.append(labelType, isDelete ? 1 : 0);
-        const response = await putData(url, formData, {});
+        const response = await deleteData(url, formData, {});
         return response;
     } catch (error) {
         return { status: false, message: error.message };

@@ -113,7 +113,7 @@ const Email = () => {
 
     const handleDelete = async () => {
         console.log(1);
-        let response = await updateEmailDelete({ emailId, type: getDeleteType(), isDelete: true, state: type })
+        let response = await updateEmailDelete({ emailId, type: getDeleteType(), isDelete: true, state: searchParams.get('type') })
         if (response.status) {
             handleBack()
         }
