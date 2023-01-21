@@ -270,7 +270,7 @@ const Email = () => {
                                                 <p className="email">{userState?.data?.email}</p>
                                                 <p className="email">
                                                     {
-                                                        generateToCcBccListString()
+                                                        userList?.data?.length ? generateToCcBccListString() : ""
                                                     }
                                                 </p>
                                             </div>
@@ -283,7 +283,7 @@ const Email = () => {
                                                 <p className="email">{senderData?.email}</p>
                                                 <p className="email">
                                                     {
-                                                        generateToCcBccListString()
+                                                        userList?.data?.length ? generateToCcBccListString() : ""
                                                     }
                                                 </p>
                                             </div>
