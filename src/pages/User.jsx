@@ -84,7 +84,6 @@ const User = () => {
     });
 
     const handleModalOpen = (type, value) => {
-        console.log(value);
         setIsModalShow(prev => ({ ...prev, [type]: value ? value : true }));
     }
     const handleModalClose = (type) => {

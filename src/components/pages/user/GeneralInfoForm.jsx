@@ -17,7 +17,13 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
             if (input.type === "date") {
                 // console.log(data.personal[input.name]);
             }
-            input.value = data.personal[input.name];
+            else if(input.type === "file"){
+                console.log(data.personal[input.name]);
+            }
+            else {
+                input.value = data.personal[input.name];
+
+            }
         });
     }, [data])
 
