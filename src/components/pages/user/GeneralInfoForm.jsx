@@ -1,13 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
 import useGetContext from "../../../hooks/useGetContext";
-
+import placeholderImage from "../../../assets/images/placeholder.jpg";
+import { imageObjectToBase64 } from "../../../utils/fileConverter";
 const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
     const generalInfoForm = useRef(null);
     const personalInfoInfoForm = useRef(null);
 
-    const {userState} = useGetContext()
+    const { userState } = useGetContext()
+
+    const [profilePic, setProfilePic] = useState(placeholderImage);
 
     useEffect(() => {
         ;[...generalInfoForm.current].forEach((input) => {
@@ -15,10 +18,10 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
         });
         ;[...personalInfoInfoForm.current].forEach((input) => {
             if (input.type === "date") {
-                // console.log(data.personal[input.name]);
+                input.value = data.personal[input.name];
             }
-            else if(input.type === "file"){
-                console.log(data.personal[input.name]);
+            else if (input.type === "file") {
+                data.personal[input.name] && setProfilePic(`${process.env.REACT_APP_SERVER_BASE_URL}${data.personal[input.name]}`);
             }
             else {
                 input.value = data.personal[input.name];
@@ -36,6 +39,15 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
             };
         }
     }, [sectionRef.current]);
+
+    const handleImageChange = (e) => {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            setProfilePic(reader.result)
+        }
+        reader.readAsDataURL(file);
+    }
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -57,6 +69,7 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
         e.preventDefault();
         onClose("generalInfo")
     }
+
     return (
         <>
             <section className="addFormArea" ref={sectionRef}>
@@ -79,7 +92,8 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
                     <form ref={personalInfoInfoForm}>
                         <div className="inputBox">
                             <label>Profile picture</label>
-                            <input type="file" name="ProfilePic" placeholder="Profile picture" />
+                            <img src={profilePic} alt="user" width="50px" height="50px" />
+                            <input type="file" name="ProfilePic" placeholder="Profile picture" onChange={handleImageChange} />
                         </div>
                         <div className="inputBox">
                             <label>Phone</label>
