@@ -33,11 +33,19 @@ export const UserForm = ({ onClose, type }) => {
     return (
         <section className="addFormArea">
             <div className="popUp contentArea">
-                <h3 className="title">Add Information</h3>
+                <h3 className="title">Add User</h3>
                 <form onSubmit={handleAddUser} ref={formRef}>
                     <div className="inputBox">
                         <label>Username</label>
                         <input type="text" name="username" placeholder="Username" />
+                    </div>
+                    <div className="inputBox">
+                        <label>First name</label>
+                        <input type="text" name="first_name" placeholder="First name" />
+                    </div>
+                    <div className="inputBox">
+                        <label>Last name</label>
+                        <input type="text" name="last_name" placeholder="Last name" />
                     </div>
                     <div className="inputBox">
                         <label>Email</label>

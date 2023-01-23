@@ -72,6 +72,10 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
                     </form>
                     <form ref={personalInfoInfoForm}>
                         <div className="inputBox">
+                            <label>Profile picture</label>
+                            <input type="file" name="ProfilePic" placeholder="Profile picture" />
+                        </div>
+                        <div className="inputBox">
                             <label>Phone</label>
                             <input type="text" name="Phone" placeholder="Phone" />
                         </div>
