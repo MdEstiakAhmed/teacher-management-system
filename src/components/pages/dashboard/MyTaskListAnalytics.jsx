@@ -21,15 +21,18 @@ const MyTaskListAnalytics = ({width}) => {
         )
     }
     else if(!isLoading && !error && data?.data?.length){
-        let total = data.data.length, complete=0;
+        let incomplete=0, complete=0;
         data.data.forEach(item => {
             if(item.TaskCompleted) complete++;
+            else incomplete++;
         })
         return (
             <div>
                 <DoughnutChart
-                    label={["Total", "Completed by me"]}
-                    data={[total, complete]}
+                    label={["Completed", "Incomplete"]}
+                    data={[complete, incomplete]}
+                    colorSet={["#28c76f", "#d2dae2"]}
+                    title="Task"
                 />
             </div>
         )

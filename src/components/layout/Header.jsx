@@ -19,6 +19,9 @@ const Header = () => {
         if(location.pathname.includes("/users/")) {
             title = "User Details";
         }
+        else if(location.pathname.includes("/emails/")) {
+            title = "Email";
+        }
         setTitle(title);
     }, [location.pathname])
 

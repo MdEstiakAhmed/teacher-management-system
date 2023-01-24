@@ -372,6 +372,22 @@ input[type="submit"]:hover,
     width: 100%;
 }
 
+.analyticsArea-group {
+    display: flex;
+    gap: 20px;
+}
+
+.analyticsArea .contentArea {
+    width: 33.33%;
+}
+.analyticsArea .contentArea.large {
+    width: 66.67%;
+}
+.analyticsArea .contentArea .chart {
+    max-width: 250px;
+    margin: 0 auto;
+}
+
 
 /* For Sidebar */
 .sidebarArea .logo {
@@ -529,7 +545,7 @@ input[type="submit"]:hover,
 
 
 /* ============= For analytics ============= */
-.analyticsArea {}
+/* .analyticsArea {}
 
 .analyticsArea .loader-wrapper {
     display: flex;
@@ -540,7 +556,6 @@ input[type="submit"]:hover,
 .analyticsArea .analyticsArea-wrapper {
     display: flex;
     flex-direction: column;
-    /* gap: 15px 0; */
 }
 
 .analyticsArea .analyticsArea-wrapper .analyticsArea-group1,
@@ -553,7 +568,7 @@ input[type="submit"]:hover,
 .analyticsArea .analyticsArea-wrapper .analyticsArea-group2 {
     justify-content: center;
     margin-top: 50px;
-}
+} */
 
 
 

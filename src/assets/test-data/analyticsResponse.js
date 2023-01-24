@@ -146,20 +146,20 @@ export const eventListResponse = {
         },
         {
             "id": 32,
-            "EndDateTime": "2023-01-20T21:45:00+06:00"
+            "EndDateTime": "2023-01-31T21:45:00+06:00"
         },
-        {
-            "id": 33,
-            "EndDateTime": "2023-01-28T21:48:00+06:00"
-        },
-        {
-            "id": 34,
-            "EndDateTime": "2023-01-19T09:53:00+06:00"
-        },
-        {
-            "id": 35,
-            "EndDateTime": "2023-01-31T10:44:00+06:00"
-        }
+        // {
+        //     "id": 33,
+        //     "EndDateTime": "2023-01-28T21:48:00+06:00"
+        // },
+        // {
+        //     "id": 34,
+        //     "EndDateTime": "2023-01-19T09:53:00+06:00"
+        // },
+        // {
+        //     "id": 35,
+        //     "EndDateTime": "2023-01-31T10:44:00+06:00"
+        // }
     ]
 };
 
@@ -184,7 +184,7 @@ export const allTeacherListResponse = {
         },
         {
             "id": 24,
-            "TaskCompleted": false,
+            "TaskCompleted": true,
             "Assignee": 3
         },
         {

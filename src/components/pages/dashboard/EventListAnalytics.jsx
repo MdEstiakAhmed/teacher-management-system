@@ -21,17 +21,22 @@ const EventListAnalytics = ({width}) => {
         )
     }
     else if (!isLoading && !error && data?.data?.length) {
-        let total = data.data.length, complete = 0;
+        let incomplete = 0, complete = 0;
         data.data.forEach(item => {
-            if (new Date(item.EndDateTime).getTime() > new Date().getTime()) {
+            if (new Date(item.EndDateTime).getTime() < new Date().getTime()) {
                 complete++;
+            }
+            else {
+                incomplete++
             }
         })
         return (
             <div>
                 <DoughnutChart
-                    label={["Total event", "Completed event"]}
-                    data={[total, complete]}
+                    label={["Complete", "Incomplete"]}
+                    data={[complete, incomplete]}
+                    colorSet={["#ffa21a", "#d2dae2"]}
+                    title="Event"
                 />
             </div>
         )

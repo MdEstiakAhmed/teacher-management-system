@@ -60,7 +60,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 						<Route path="/users" element={<Users />} />
 						<Route path="/event" element={<Event />} />
 						<Route path="/todo" element={<Todo />} />
-						<Route path="/chat" element={<Chat />} />
+						{/* <Route path="/chat" element={<Chat />} /> */}
 						<Route path="/emails" element={<EmailLayout />}>
 							<Route path=":type">
 								<Route index element={<Emails />} />

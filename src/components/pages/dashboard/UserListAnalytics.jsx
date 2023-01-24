@@ -29,8 +29,10 @@ const UserListAnalytics = ({width}) => {
         return (
             <div>
                 <DoughnutChart
-                    label={["active", "inactive"]}
+                    label={["Active", "Inactive"]}
                     data={[active, inactive]}
+                    colorSet={["#7367f0", "#d2dae2"]}
+                    title="Users"
                 />
             </div>
         )
