@@ -3,7 +3,7 @@ import { fetchInboxEmails } from "../../api/email";
 import EmailList from "../../components/pages/email/EmailList";
 import useFetch from "../../hooks/useFetch";
 
-const Inbox = ({ labelFilter, isRefetch, setIsRefetch }) => {
+const Inbox = ({ labelFilter, isRefetch, setIsRefetch, emailAreaRef }) => {
     const { data, isFetched, fetchData } = useFetch(fetchInboxEmails, {});
 
     useEffect(() => {
@@ -33,6 +33,7 @@ const Inbox = ({ labelFilter, isRefetch, setIsRefetch }) => {
                 isFetched && data.status && (
                     <EmailList
                         setIsRefetch={setIsRefetch}
+                        emailAreaRef={emailAreaRef}
                         data={
                             data.Receiver.concat(data.Cc, data.Bcc)
                                 .filter(removeTrashMail)

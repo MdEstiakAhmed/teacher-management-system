@@ -1,13 +1,18 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { fetchTodo, updateTodoWithObj } from "../api/todo";
 import { CheckboxIcon } from "../assets/icons/icons";
 import TodoAddForm from "../components/pages/todo/TodoAddForm";
 import TodoEditForm from "../components/pages/todo/TodoEditForm";
 import useFetch from "../hooks/useFetch";
 import useGetContext from "../hooks/useGetContext";
+import usePseudoElementClick from "../hooks/usePseudoElementClick";
 import { formattedDate } from "../utils/dateTime";
 
 const Todo = () => {
+    const todoAreaRef = useRef(null);
+    usePseudoElementClick(todoAreaRef, () => { todoAreaRef.current.classList.toggle("active") });
+
+
     const { data, isFetched, error, fetchData } = useFetch(fetchTodo, {});
     const { userState: { data: { id, is_superuser } = {} } = {} } = useGetContext();
     const [isModalShow, setIsModalShow] = useState({
@@ -24,6 +29,7 @@ const Todo = () => {
         important: false,
         completed: false,
     });
+
 
     const updateSection = (type) => {
         if (type === "all") {
@@ -84,8 +90,8 @@ const Todo = () => {
                     />
                 )
             }
-            <div className="todoArea contentArea">
-                <div className="leftSide">
+            <div className="todoArea contentArea" ref={todoAreaRef}>
+                <div className="leftSide" >
                     <button className="button primaryButton" onClick={() => handleModalOpen("addForm")}>Add Task</button>
                     <ul className="tabs">
                         {
@@ -123,7 +129,7 @@ const Todo = () => {
                 </div>
                 <div className="rightSide">
                     <div className="header">
-                        <button className="menuButton">
+                        <button className="menuButton" onClick={() => { todoAreaRef.current.classList.toggle("active") }}>
                             <span></span>
                             <span></span>
                             <span></span>
@@ -202,13 +208,13 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
                         Completed ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.416" height="18.002" viewBox="0 0 18.416 18.002">
                                 <g id="Checked" transform="translate(-2 -2)">
-                                    <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                    <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                    <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" strokeLinecap="round" stroke-linejoin="round" strokeWidth="2" />
+                                    <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" strokeLinecap="round" stroke-linejoin="round" strokeWidth="2" />
                                 </g>
                             </svg>
                         ) : (
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.003" height="18.003" viewBox="0 0 18.003 18.003">
-                                <path id="Uncheck" d="M-805.222-552A1.778,1.778,0,0,1-807-553.775v-12.447A1.778,1.778,0,0,1-805.222-568h12.446A1.778,1.778,0,0,1-791-566.222v12.447A1.778,1.778,0,0,1-792.776-552Z" transform="translate(808 569)" fill="none" stroke="#485460" stroke-linecap="round" stroke-width="2" />
+                                <path id="Uncheck" d="M-805.222-552A1.778,1.778,0,0,1-807-553.775v-12.447A1.778,1.778,0,0,1-805.222-568h12.446A1.778,1.778,0,0,1-791-566.222v12.447A1.778,1.778,0,0,1-792.776-552Z" transform="translate(808 569)" fill="none" stroke="#485460" strokeLinecap="round" strokeWidth="2" />
                             </svg>
                         )
                     }

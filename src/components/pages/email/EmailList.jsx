@@ -6,7 +6,7 @@ import { formattedDate } from "../../../utils/dateTime";
 import placeholder from "../../../assets/images/placeholder.jpg";
 import { updateEmailStarred } from "../../../api/email";
 
-const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
+const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft, emailAreaRef }) => {
     const [search, setSearch] = useState("");
 
     const { data: userData } = useFetch(fetchUsers, {});
@@ -31,7 +31,7 @@ const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft }) =>
             <div className="emailList">
                 <div className="header">
                     <div className="headerTop">
-                        <button className="menuButton">
+                        <button className="menuButton" onClick={() => { emailAreaRef.current.classList.toggle("active") }}>
                             <span></span>
                             <span></span>
                             <span></span>

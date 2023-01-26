@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useOutletContext, useParams } from "react-router-dom";
 import EmailForm from "../components/pages/email/EmailForm";
+import usePseudoElementClick from "../hooks/usePseudoElementClick";
 import Draft from "./emails/Draft";
 import Important from "./emails/Important";
 import Inbox from "./emails/Inbox";
@@ -9,7 +10,10 @@ import Trash from "./emails/Trash";
 
 const Emails = () => {
     const { type } = useParams();
-    const [isModalShow, setIsModalShow, labelFilter, handleModalOpen] = useOutletContext();
+    const [isModalShow, setIsModalShow, labelFilter, handleModalOpen, emailAreaRef] = useOutletContext();
+
+    const todoAreaRef = useRef(null);
+    usePseudoElementClick(todoAreaRef, () => { todoAreaRef.current.classList.toggle("active") });
 
     const [selectedDraft, setSelectedDraft] = useState(null);
     const [isRefetch, setIsRefetch] = useState()
@@ -28,6 +32,7 @@ const Emails = () => {
                         labelFilter={labelFilter}
                         isRefetch={isRefetch}
                         setIsRefetch={setIsRefetch}
+                        emailAreaRef={emailAreaRef}
                     />
                 ) :
                     type === "sent" ? (
@@ -35,6 +40,7 @@ const Emails = () => {
                             labelFilter={labelFilter}
                             isRefetch={isRefetch}
                             setIsRefetch={setIsRefetch}
+                            emailAreaRef={emailAreaRef}
                         />
                     ) :
                         type === "draft" ? (
@@ -44,6 +50,7 @@ const Emails = () => {
                                 setIsRefetch={setIsRefetch}
                                 handleModalOpen={handleModalOpen}
                                 setSelectedDraft={setSelectedDraft}
+                                emailAreaRef={emailAreaRef}
                             />
                         ) :
                             type === "starred" ? (
@@ -51,6 +58,7 @@ const Emails = () => {
                                     labelFilter={labelFilter}
                                     isRefetch={isRefetch}
                                     setIsRefetch={setIsRefetch}
+                                    emailAreaRef={emailAreaRef}
                                 />
                             ) :
                                 type === "trash" ? (
@@ -58,6 +66,7 @@ const Emails = () => {
                                         labelFilter={labelFilter}
                                         isRefetch={isRefetch}
                                         setIsRefetch={setIsRefetch}
+                                        emailAreaRef={emailAreaRef}
                                     />
                                 ) : ""
             }

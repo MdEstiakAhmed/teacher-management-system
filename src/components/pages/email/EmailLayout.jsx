@@ -1,11 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { fetchInboxEmails, fetchSentEmails } from "../../../api/email";
 import useFetch from "../../../hooks/useFetch";
+import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 import EmailFilter from "./EmailFilter";
 
 const EmailLayout = () => {
     const navigate = useNavigate();
+
+    const emailAreaRef = useRef(null);
+    usePseudoElementClick(emailAreaRef, () => { emailAreaRef.current.classList.toggle("active") });
 
     useEffect(() => {
         navigate("inbox")
@@ -27,7 +31,7 @@ const EmailLayout = () => {
 
     return (
         <>
-            <div className="emailArea todoArea contentArea">
+            <div className="emailArea todoArea contentArea" ref={emailAreaRef}>
                 <div className="leftSide">
                     <button className="button primaryButton" onClick={() => handleModalOpen("addForm")}>Compose</button>
                     <EmailFilter
@@ -36,7 +40,7 @@ const EmailLayout = () => {
                     />
                 </div>
                 <div className="rightSide">
-                    <Outlet context={[isModalShow, setIsModalShow, labelFilter, handleModalOpen]} />
+                    <Outlet context={[isModalShow, setIsModalShow, labelFilter, handleModalOpen, emailAreaRef]} />
                 </div>
             </div>
         </>

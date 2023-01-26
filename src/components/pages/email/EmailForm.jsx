@@ -100,8 +100,8 @@ const EmailForm = ({ onClose, type, draftMailId }) => {
                 <div className="headerArea">
                     <h3 className="title">Compose Email</h3>
                     <div className="iconArea">
-                        {/* <button className="button"><svg data-v-4ab93e20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line data-v-4ab93e20="" x1="5" y1="12" x2="19" y2="12"></line></svg></button> */}
-                        <button className="button" onClick={closeForm}><svg data-v-4ab93e20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line data-v-4ab93e20="" x1="18" y1="6" x2="6" y2="18"></line><line data-v-4ab93e20="" x1="6" y1="6" x2="18" y2="18"></line></svg></button>
+                        {/* <button className="button"><svg data-v-4ab93e20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round"><line data-v-4ab93e20="" x1="5" y1="12" x2="19" y2="12"></line></svg></button> */}
+                        <button className="button" onClick={closeForm}><svg data-v-4ab93e20="" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" stroke-linejoin="round"><line data-v-4ab93e20="" x1="18" y1="6" x2="6" y2="18"></line><line data-v-4ab93e20="" x1="6" y1="6" x2="18" y2="18"></line></svg></button>
                     </div>
                 </div>
                 <div className="composeBody">
