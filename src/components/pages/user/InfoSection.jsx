@@ -128,9 +128,12 @@ const Timeline = ({ type, data }) => {
                         ) :
                             type === 'publication' ? (
                                 <div>
+                                    {console.log(data)}
                                     <p className="dateTime">{data.Year}</p>
                                     <p className="infoTitle">{data.Title}</p>
-                                    <p>{data.Journal}</p>
+                                    <p>Journal: {data.Journal}</p>
+                                    <p>Volume: {data.Volume}</p>
+                                    <p>{data.page == 1 ? "Page" : "Pages"}: {data.Page}</p>
                                 </div>
                             ) :
                                 type === 'awardAndScholarship' ? (
@@ -145,6 +148,7 @@ const Timeline = ({ type, data }) => {
                                             <p className="dateTime">{data.Year}</p>
                                             <p className="infoTitle">{data.Designation}</p>
                                             <p>{data.Organization}</p>
+                                            <p>{data.Duration}</p>
                                         </div>
                                     ) : ""
             }
