@@ -64,8 +64,6 @@ const AllTeacherListAnalytics = () => {
             }
         })
 
-        console.log(usersData);
-
         return (
             <div>
                 <StackBarChart
@@ -80,13 +78,16 @@ const AllTeacherListAnalytics = () => {
                             label: 'Completed',
                             data: usersData.map(item => item.completedTask),
                             backgroundColor: '#54A0FF',
-                            barThickness: 15,      
+                            barThickness: 15,
+                            borderRadius: 8
+
                         },
                         {
                             label: 'Incomplete',
                             data: usersData.map(item => item.incompleteTask),
                             backgroundColor: '#d2dae2',
-                            barThickness: 15,      
+                            barThickness: 15, 
+                            borderRadius: 8
                         },
                     ]}
                 />

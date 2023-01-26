@@ -19,15 +19,30 @@ ChartJS.register(
 );
 
 const StackBarChart = ({ label, datasets }) => {
-
+    
     const options = {
         plugins: {
+            legend: {
+                position: 'bottom',
+                labels: {
+                    boxWidth: 10,
+                    boxHeight: 10,
+                    useBorderRadius: true,
+                    borderRadius: 5,
+                    font: {
+                        size: 12,
+                        family: 'Ubuntu',
+                    }
+                }
+            },
             title: {
                 display: false,
             },
         },
         responsive: true,
         indexAxis: 'y',
+        // maintainAspectRatio: false,
+        aspectRatio: 4,
         scales: {
             x: {
                 stacked: true,

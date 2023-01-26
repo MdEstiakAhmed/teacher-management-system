@@ -29,7 +29,7 @@ const MeAsSupervisorListAnalytics = () => {
         return (
             <div>
                 <DoughnutChart
-                    label={["Complete", "Incomplete"]}
+                    label={["Completed", "Incomplete"]}
                     data={[complete, incomplete]}
                     colorSet={["#ff5b5b", "#d2dae2"]}
                     title="Task"

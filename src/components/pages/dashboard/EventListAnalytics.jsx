@@ -33,7 +33,7 @@ const EventListAnalytics = () => {
         return (
             <div>
                 <DoughnutChart
-                    label={["Complete", "Incomplete"]}
+                    label={["Completed", "Incomplete"]}
                     data={[complete, incomplete]}
                     colorSet={["#ffa21a", "#d2dae2"]}
                     title="Event"
