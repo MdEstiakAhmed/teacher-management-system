@@ -119,7 +119,7 @@ export const updatePersonalInfo = async (id, ref) => {
     }
 }
 
-export const addOtherInfo = async (type, id, ref) => {
+export const addOtherInfo = async (type, ref) => {
     try {
         const url = `${baseUrl}/${type}/`;
         const formData = domRefToFormData(ref);

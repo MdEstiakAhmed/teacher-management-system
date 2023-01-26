@@ -53,15 +53,15 @@ export const academicInfo = {
     "Status": true,
     "message": "Academic info list",
     "data": [
-        {
-            "id": 1,
-            "Degree": "BSc",
-            "Major": "CSE",
-            "Institute": "DIU",
-            "PassingYear": "2022",
-            "CGPA": "3.80",
-            "user": 1
-        },
+        // {
+        //     "id": 1,
+        //     "Degree": "BSc",
+        //     "Major": "CSE",
+        //     "Institute": "DIU",
+        //     "PassingYear": "2022",
+        //     "CGPA": "3.92",
+        //     "user": 1
+        // },
         {
             "id": 2,
             "Degree": "MSc",

@@ -33,7 +33,7 @@ export const domRefToFormData = (domRef) => {
                     formData.append(input.name, input.checked);
                 }
                 else if(input.type === "file") {
-                    formData.append(input.name, input.files[0]);
+                    input.files[0] !== undefined && formData.append(input.name, input.files[0]);
                 }
                 else {
                     // console.log(input.name, input.value);

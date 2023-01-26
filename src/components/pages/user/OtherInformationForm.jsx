@@ -6,14 +6,14 @@ const form = {
         { name: "Degree", label: "Degree", placeholder: "Degree" },
         { name: "Major", label: "Major", placeholder: "Major" },
         { name: "Institute", label: "Institute", placeholder: "Institute" },
-        { name: "PassingYear", label: "Passing Year", placeholder: "Passing Year" },
-        { name: "CGPA", label: "CGPA", placeholder: "CGPA" },
+        { name: "PassingYear", label: "Passing Year", placeholder: "Passing Year", type: "number" },
+        { name: "CGPA", label: "CGPA", placeholder: "CGPA", type: "number" },
     ],
     training: [
         { name: "Title", label: "Title", placeholder: "Title" },
         { name: "Institute", label: "Institute", placeholder: "Institute" },
         { name: "Duration", label: "Duration", placeholder: "Duration" },
-        { name: "Year", label: "Year", placeholder: "Year" },
+        { name: "Year", label: "Year", placeholder: "Year", type: "number" },
     ],
     teaching: [
         { name: "CourseCode", label: "Course Code", placeholder: "Course Code" },
@@ -22,14 +22,14 @@ const form = {
     publication: [
         { name: "Title", label: "Title", placeholder: "Title" },
         { name: "Journal", label: "Journal", placeholder: "Journal" },
-        { name: "Year", label: "Year", placeholder: "Year" },
+        { name: "Year", label: "Year", placeholder: "Year", type: "number" },
         { name: "Volume", label: "Volume", placeholder: "Volume" },
-        { name: "Page", label: "Page", placeholder: "Page" },
+        { name: "Page", label: "Page", placeholder: "Page", type: "number" },
     ],
     awardAndScholarship: [
         { name: "Title", label: "Title", placeholder: "Title" },
         { name: "Organization", label: "Organization", placeholder: "Organization" },
-        { name: "Year", label: "Year", placeholder: "Year" },
+        { name: "Year", label: "Year", placeholder: "Year", type: "number" },
     ],
     experience: [
         { name: "Designation", label: "Designation", placeholder: "Designation" },
@@ -84,7 +84,7 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
         e.preventDefault();
         let response = {};
         if (action === "add") {
-            response = await addOtherInfo(formType[type], data.id, formRef);
+            response = await addOtherInfo(formType[type], formRef);
         }
         else if (action === "edit") {
             response = await updateOtherInfo(formType[type], data.id, formRef);
@@ -118,7 +118,7 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">{`Update ${type} info`}</h3>
+                    <h3 className="title">{`${action === "add" ? "Add" : "Update"} ${type} info`}</h3>
                     <form ref={formRef} onSubmit={handleFormSubmit}>
                         {
                             type && form[type].map((item, index) => (
@@ -152,7 +152,7 @@ const InputBox = ({ data }) => {
     return (
         <div className="inputBox">
             <label>{data.label}</label>
-            <input type="text" name={data.name} placeholder={data.placeholder} />
+            <input type={data.type || "text"} name={data.name} placeholder={data.placeholder} />
         </div>
     )
 }
