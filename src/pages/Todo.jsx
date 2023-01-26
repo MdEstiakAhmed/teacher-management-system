@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { fetchTodo, updateTodoWithObj } from "../api/todo";
+import { CheckboxIcon } from "../assets/icons/icons";
 import TodoAddForm from "../components/pages/todo/TodoAddForm";
 import TodoEditForm from "../components/pages/todo/TodoEditForm";
 import useFetch from "../hooks/useFetch";
@@ -8,7 +9,7 @@ import { formattedDate } from "../utils/dateTime";
 
 const Todo = () => {
     const { data, isFetched, error, fetchData } = useFetch(fetchTodo, {});
-    const { userState: { data: { id } = {} } = {} } = useGetContext();
+    const { userState: { data: { id, is_superuser } = {} } = {} } = useGetContext();
     const [isModalShow, setIsModalShow] = useState({
         addForm: false,
         editForm: false,
@@ -18,8 +19,8 @@ const Todo = () => {
     const [priorityFilter, setPriorityFilter] = useState('');
     const [search, setSearch] = useState('');
     const [taskSection, setTaskSection] = useState({
-        all: true,
-        supervisor: false,
+        all: is_superuser ? false : true,
+        supervisor: is_superuser ? true : false,
         important: false,
         completed: false,
     });
@@ -87,12 +88,16 @@ const Todo = () => {
                 <div className="leftSide">
                     <button className="button primaryButton" onClick={() => handleModalOpen("addForm")}>Add Task</button>
                     <ul className="tabs">
-                        <li onClick={() => updateSection("all")} className={taskSection.all && "active"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-                            My Task
-                        </li>
+                        {
+                            !is_superuser ? (
+                                <li onClick={() => updateSection("all")} className={taskSection.all && "active"}>
+                                    <CheckboxIcon />
+                                    My Task
+                                </li>
+                            ) : ""
+                        }
                         <li onClick={() => updateSection("supervisor")} className={taskSection.supervisor && "active"}>
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            <CheckboxIcon />
                             Me as supervisor
                         </li>
                         <li onClick={() => updateSection("important")} className={taskSection.important && "active"}>
@@ -192,12 +197,21 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
     return (
         <li>
             <div className="titleArea">
-                {/* <input type="checkbox" name="" id="" onChange={} /> */}
                 <button className="button" onClick={clickOnCompleted}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill={Completed ? "var(--warningColor)" : "none"} stroke={Completed ? "var(--warningColor) !important" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    {
+                        Completed ? (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
+                                <path id="Checked" d="M-942-455a3,3,0,0,1-3-3v-14a3,3,0,0,1,3-3h11a1,1,0,0,1,1,1,1,1,0,0,1-1,1h-11a1,1,0,0,0-1,1v14a1,1,0,0,0,1,1h14a1,1,0,0,0,1-1v-7a1,1,0,0,1,1-1,1,1,0,0,1,1,1v7a3,3,0,0,1-3,3Zm5.293-7.293-3-3a1,1,0,0,1,0-1.414,1,1,0,0,1,1.414,0l2.293,2.292,9.292-9.293a1,1,0,0,1,1.415,0,1,1,0,0,1,0,1.414l-10,10A1,1,0,0,1-936-462,1,1,0,0,1-936.707-462.293Z" transform="translate(945 475)" />
+                            </svg>
+                        ) : (
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20.001" viewBox="0 0 20 20.001">
+                                <path id="Unchecked" d="M-977-454a3,3,0,0,1-3-3v-14a3,3,0,0,1,3-3h14a3,3,0,0,1,3,3v14a3,3,0,0,1-3,3Zm0-2h14a1,1,0,0,0,1-1v-14a1,1,0,0,0-1-1h-14a1,1,0,0,0-1,1v14A1,1,0,0,0-977-456Z" transform="translate(980 474)" />
+                            </svg>
+                        )
+                    }
                 </button>
-                <button className="button" onClick={clickOnImportant}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill={Important ? "var(--warningColor)" : "none"} stroke={Important ? "var(--warningColor)" : "currentColor"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                <button className={`button ${Important ? 'active' : ""}`} onClick={clickOnImportant}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill={"none"} strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
                 </button>
                 <div className="taskTitle" onClick={clickOnTask}>{Title}</div>
             </div>

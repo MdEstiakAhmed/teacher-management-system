@@ -380,9 +380,11 @@ input[type="submit"]:hover,
 .analyticsArea .contentArea {
     width: 33.33%;
 }
+
 .analyticsArea .contentArea.large {
     width: 66.67%;
 }
+
 .analyticsArea .contentArea .chart {
     max-width: 250px;
     margin: 0 auto;
@@ -593,6 +595,8 @@ input[type="submit"]:hover,
 
 .todoArea .leftSide .tabs li {
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .todoArea .leftSide .tabs li.active::before {
@@ -1021,7 +1025,8 @@ input[type="submit"]:hover,
     transition: all 0.3s;
 }
 
-.emailArea .emailList ul .buttonArea .button svg.active {
+.emailArea .emailList ul .buttonArea .button svg.active,
+.todoArea .rightSide .titleArea .button.active svg {
     stroke: var(--warningColor);
     fill: var(--warningColor);
 }
