@@ -3,7 +3,7 @@ import useFetch from "../../../hooks/useFetch";
 import StackBarChart from "../../chart/StackBarChart";
 import LoaderPulse from "../../loader/LoaderPulse";
 
-const AllTeacherListAnalytics = ({ width }) => {
+const AllTeacherListAnalytics = () => {
     const { data, isLoading, error, fetchData } = useFetch(fetchAllTeacherList);
     const { data: teachers } = useFetch(fetchUserList);
 

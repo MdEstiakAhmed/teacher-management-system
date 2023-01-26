@@ -378,16 +378,20 @@ input[type="submit"]:hover,
 }
 
 .analyticsArea .contentArea {
+    width: 25%;
+}
+.analyticsArea .super_user .contentArea {
     width: 33.33%;
 }
 
 .analyticsArea .contentArea.large {
-    width: 66.67%;
+    width: 100%;
 }
 
 .analyticsArea .contentArea .chart {
     max-width: 250px;
     margin: 0 auto;
+    /* text-align: center; */
 }
 
 

@@ -3,12 +3,12 @@ import useFetch from "../../../hooks/useFetch";
 import DoughnutChart from "../../chart/DoughnutChart";
 import LoaderPulse from "../../loader/LoaderPulse";
 
-const MyTaskListAnalytics = ({width}) => {
+const MyTaskListAnalytics = () => {
     const { data, isLoading, error, fetchData } = useFetch(fetchMyTaskList);
 
     if(isLoading) {
         return (
-            <div className="loader-wrapper" style={{width: width}}>
+            <div className="loader-wrapper">
                 <LoaderPulse />
             </div>
         )

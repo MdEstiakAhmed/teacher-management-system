@@ -200,12 +200,15 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
                 <button className="button" onClick={clickOnCompleted}>
                     {
                         Completed ? (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
-                                <path id="Checked" d="M-942-455a3,3,0,0,1-3-3v-14a3,3,0,0,1,3-3h11a1,1,0,0,1,1,1,1,1,0,0,1-1,1h-11a1,1,0,0,0-1,1v14a1,1,0,0,0,1,1h14a1,1,0,0,0,1-1v-7a1,1,0,0,1,1-1,1,1,0,0,1,1,1v7a3,3,0,0,1-3,3Zm5.293-7.293-3-3a1,1,0,0,1,0-1.414,1,1,0,0,1,1.414,0l2.293,2.292,9.292-9.293a1,1,0,0,1,1.415,0,1,1,0,0,1,0,1.414l-10,10A1,1,0,0,1-936-462,1,1,0,0,1-936.707-462.293Z" transform="translate(945 475)" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18.416" height="18.002" viewBox="0 0 18.416 18.002">
+                                <g id="Checked" transform="translate(-2 -2)">
+                                    <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                    <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                </g>
                             </svg>
                         ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20.001" viewBox="0 0 20 20.001">
-                                <path id="Unchecked" d="M-977-454a3,3,0,0,1-3-3v-14a3,3,0,0,1,3-3h14a3,3,0,0,1,3,3v14a3,3,0,0,1-3,3Zm0-2h14a1,1,0,0,0,1-1v-14a1,1,0,0,0-1-1h-14a1,1,0,0,0-1,1v14A1,1,0,0,0-977-456Z" transform="translate(980 474)" />
+                            <svg xmlns="http://www.w3.org/2000/svg" width="18.003" height="18.003" viewBox="0 0 18.003 18.003">
+                                <path id="Uncheck" d="M-805.222-552A1.778,1.778,0,0,1-807-553.775v-12.447A1.778,1.778,0,0,1-805.222-568h12.446A1.778,1.778,0,0,1-791-566.222v12.447A1.778,1.778,0,0,1-792.776-552Z" transform="translate(808 569)" fill="none" stroke="#485460" stroke-linecap="round" stroke-width="2" />
                             </svg>
                         )
                     }

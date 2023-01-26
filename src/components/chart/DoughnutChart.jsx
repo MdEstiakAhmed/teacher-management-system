@@ -13,7 +13,7 @@ const DoughnutChart = ({ label, data, colorSet, title }) => {
 				data: data,
 				backgroundColor: colorSet,
 				borderWidth: 1,
-				cutout: 80
+				cutout: 50
 			},
 		],
 	};

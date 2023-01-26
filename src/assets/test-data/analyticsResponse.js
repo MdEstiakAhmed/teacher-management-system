@@ -64,7 +64,7 @@ export const userListResponse = {
             "last_name": "Mim",
             "email": "anonna@gmail.com",
             "is_active": true
-        }
+        },
     ]
 };
 
