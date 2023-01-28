@@ -28,7 +28,7 @@ export const domRefToFormData = (domRef) => {
     try {
         const formData = new FormData();
         ;[...domRef.current].forEach(input => {
-            if (input.type !== 'submit') {
+            if (input.type !== 'submit' && input.name && input.value) {
                 if (input.type === "checkbox") {
                     formData.append(input.name, input.checked);
                 }
@@ -36,7 +36,6 @@ export const domRefToFormData = (domRef) => {
                     input.files[0] !== undefined && formData.append(input.name, input.files[0]);
                 }
                 else {
-                    // console.log(input.name, input.value);
                     let value = input.value;
                     if(value === 'true') { value = 1; }
                     else if (value === 'false') { value = 0; }

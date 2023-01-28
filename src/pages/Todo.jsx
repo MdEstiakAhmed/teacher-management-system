@@ -208,8 +208,8 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
                         Completed ? (
                             <svg xmlns="http://www.w3.org/2000/svg" width="18.416" height="18.002" viewBox="0 0 18.416 18.002">
                                 <g id="Checked" transform="translate(-2 -2)">
-                                    <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" strokeLinecap="round" stroke-linejoin="round" strokeWidth="2" />
-                                    <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" strokeLinecap="round" stroke-linejoin="round" strokeWidth="2" />
+                                    <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
+                                    <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
                                 </g>
                             </svg>
                         ) : (

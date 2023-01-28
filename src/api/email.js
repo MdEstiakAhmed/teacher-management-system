@@ -60,6 +60,10 @@ export const addEmail = async (ref, isDraft) => {
     try {
         const url = `${baseUrl}/sent/`;
         const formData = domRefToFormData(ref);
+        // loop on fromData
+        // for (var pair of formData.entries()) {
+        //     console.log(pair[0]+ ', ' + pair[1]);
+        // }
         isDraft && formData.append("Draft", 1);
         !isDraft && formData.append("Draft", 0);
         formData.delete('Receiver');
@@ -76,6 +80,7 @@ export const addEmail = async (ref, isDraft) => {
                 input.value && formData.append("Bcc[]", input.value);
             }
         });
+
         const response = await postData(url, formData, {});
         showAlertPopup(response.status, response.message);
         return response;
