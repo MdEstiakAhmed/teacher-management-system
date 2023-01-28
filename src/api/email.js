@@ -66,20 +66,20 @@ export const addEmail = async (ref, isDraft) => {
         // }
         isDraft && formData.append("Draft", 1);
         !isDraft && formData.append("Draft", 0);
-        formData.delete('Receiver');
-        formData.delete('Cc');
-        formData.delete('Bcc');
-        ;[...ref.current].forEach(input => {
-            if (input.name === "Receiver") {
-                input.value && formData.append("Receiver[]", input.value);
-            }
-            if (input.name === "Cc") {
-                input.value && formData.append("Cc[]", input.value);
-            }
-            if (input.name === "Bcc") {
-                input.value && formData.append("Bcc[]", input.value);
-            }
-        });
+        // formData.delete('Receiver');
+        // formData.delete('Cc');
+        // formData.delete('Bcc');
+        // ;[...ref.current].forEach(input => {
+        //     if (input.name === "Receiver") {
+        //         input.value && formData.append("Receiver[]", input.value);
+        //     }
+        //     if (input.name === "Cc") {
+        //         input.value && formData.append("Cc[]", input.value);
+        //     }
+        //     if (input.name === "Bcc") {
+        //         input.value && formData.append("Bcc[]", input.value);
+        //     }
+        // });
 
         const response = await postData(url, formData, {});
         showAlertPopup(response.status, response.message);
