@@ -1866,6 +1866,15 @@ input[type="submit"]:hover,
     .sidebarArea {
         width: 80px;
     }
+    .sidebarArea .logo {
+        margin: 10px 0 25px;
+        text-align: center;
+    }
+    .sidebarArea .logo img {
+        width: 32px;
+        object-fit: cover;
+        object-position: left;
+    }
     .sidebarArea li a {
         font-size: 0;
         padding: 0;
@@ -2063,7 +2072,7 @@ input[type="submit"]:hover,
     .todoArea {
         height: calc(100vh - 210px);
         flex-direction: column;
-        position: relative;
+        /* position: relative; */
         overflow: hidden;
     }
     .todoArea::after {
@@ -2080,13 +2089,13 @@ input[type="submit"]:hover,
     }
     .todoArea .leftSide {
         width: 230px;
-        height: 100%;
+        height: 100vh;
         position: absolute;
         top: 0;
         padding: 20px;
         background: var(--bgColor);
         border: none;
-        z-index: 2;
+        z-index: 10;
         left: -230px;
         transition: all 0.3s ease;
     }
@@ -2095,7 +2104,7 @@ input[type="submit"]:hover,
     }
     .todoArea.active::after {
         opacity: 0.7;
-        z-index: 1;
+        z-index: 9;
     }
     .todoArea .rightSide {
         width: 100%;
@@ -2113,7 +2122,7 @@ input[type="submit"]:hover,
     .emailArea {
         height: calc(100vh - 210px);
         flex-direction: column;
-        position: relative;
+        /* position: relative; */
         overflow: hidden;
     }
     .emailArea::after {
@@ -2129,14 +2138,14 @@ input[type="submit"]:hover,
     }
     .emailArea .leftSide {
         width: 230px;
-        height: 100%;
+        height: 100vh;
         position: absolute;
         top: 0;
         left: 0;
         padding: 20px;
         background: var(--bgColor);
         border: none;
-        z-index: 2;
+        z-index: 10;
         left: -230px;
     }
     .emailArea .rightSide {

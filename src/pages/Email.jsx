@@ -13,11 +13,8 @@ const Email = () => {
     const [searchParams] = useSearchParams();
     const { userState } = useGetContext()
 
-
     let fetchEmailData;
     fetchEmailData = searchParams.get('type') === 'sent' ? fetchSentEmail : fetchEmail;
-
-
 
     const { data, isFetched, error, fetchData } = useFetch(fetchEmailData, { emailId });
     const { data: userList } = useFetch(fetchUsers);
@@ -26,6 +23,10 @@ const Email = () => {
     const [isStarred, setIsStarred] = useState(false);
     const [labelType, setLabelType] = useState(null);
     const [isLabelMenuShow, setIsLabelMenuShow] = useState(false);
+
+    useEffect(() => {
+        console.log(data);
+    }, []);
 
     useEffect(() => {
         if (userList.data) {
@@ -48,7 +49,6 @@ const Email = () => {
 
     const getEmail = (id) => {
         let user = userList.data.find(user => user.id === id)
-        console.log(user?.email);
         return user?.email || false;
     }
 
@@ -206,11 +206,11 @@ const Email = () => {
                                         {
                                             isLabelMenuShow ? (
                                                 <ul className="labelList">
-                                                    <li onClick={() => handleLabelUpdate("None")}>None</li>
-                                                    <li onClick={() => handleLabelUpdate("Personal")}>Personal</li>
-                                                    <li onClick={() => handleLabelUpdate("Important")}>Important</li>
-                                                    <li onClick={() => handleLabelUpdate("Private")}>Private</li>
-                                                    <li onClick={() => handleLabelUpdate("Company")}>Company</li>
+                                                    <li className="all" onClick={() => handleLabelUpdate("None")}>None</li>
+                                                    <li className="personal" onClick={() => handleLabelUpdate("Personal")}>Personal</li>
+                                                    <li className="important" onClick={() => handleLabelUpdate("Important")}>Important</li>
+                                                    <li className="private" onClick={() => handleLabelUpdate("Private")}>Private</li>
+                                                    <li className="company" onClick={() => handleLabelUpdate("Company")}>Company</li>
                                                 </ul>
                                             ) : ""
                                         }
@@ -264,7 +264,15 @@ const Email = () => {
                                 {
                                     searchParams.get('type') === 'sent' ? (
                                         <div className="senderInfo">
-                                            <img src={userState?.data?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${userState?.data?.ProfilePic}` : placeholder} alt={userState?.data?.email} className="thumb" />
+                                            <img
+                                                src={
+                                                    userState?.data?.ProfilePic ?
+                                                        `${userState?.data?.ProfilePic}` :
+                                                        placeholder
+                                                }
+                                                alt={userState?.data?.email}
+                                                className="thumb"
+                                            />
                                             <div className="details">
                                                 <h3 className="name">{userState?.data?.first_name}&nbsp;{userState?.data?.last_name}</h3>
                                                 <p className="email">{userState?.data?.email}</p>
@@ -277,7 +285,15 @@ const Email = () => {
                                         </div>
                                     ) : (
                                         <div className="senderInfo">
-                                            <img src={senderData?.personal_info?.ProfilePic ? `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` : placeholder} alt={senderData?.email} className="thumb" />
+                                            <img
+                                                src={
+                                                    senderData?.personal_info?.ProfilePic ?
+                                                        `${process.env.REACT_APP_SERVER_BASE_URL}${senderData.personal_info.ProfilePic}` :
+                                                        placeholder
+                                                }
+                                                alt={senderData?.email}
+                                                className="thumb"
+                                            />
                                             <div className="details">
                                                 <h3 className="name">{senderData?.first_name}&nbsp;{senderData?.last_name}</h3>
                                                 <p className="email">{senderData?.email}</p>

@@ -13,7 +13,7 @@ export const inboxEmailListResponse = {
             "Body": "fsadfas",
             "Date": "2023-01-21T01:57:05.458151+06:00",
             "Draft": false,
-            "ReceiverLabel": "Personal",
+            "ReceiverLabel": "None",
             "ReceiverImportant": true,
             "ReceiverRead": false,
             "ReceiverTrash": false,

@@ -74,10 +74,9 @@ const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft, emai
 export default EmailList;
 
 const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraft }) => {
-    // company, private, personal, important
     const { 
         Subject, 
-        Label, 
+        Label="private", 
         Date: date, 
         Sender,
         Receiver, 
@@ -85,13 +84,20 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
         Bcc,
         id, 
         BccImportant, CcImportant, ReceiverImportant, SenderImportant,
-        BccRead, CcRead, ReceiverRead
-     } = item;
-     const navigate = useNavigate()
-     const { type } = useParams()
-     const user = users.find(user => user.userId === (Sender ? Sender : Receiver ? Receiver : Cc[0] ? Cc[0] : Bcc[0] ? Bcc[0] : ""));
-
+        BccLabel, CcLabel, ReceiverLabel, SenderLabel,
+        BccRead, CcRead, ReceiverRead,
+    } = item;
+    
+    const navigate = useNavigate()
+    const { type } = useParams()
+    const user = users.find(user => user.userId === (Sender ? Sender : Receiver[0] ? Receiver[0] : Cc[0] ? Cc[0] : Bcc[0] ? Bcc[0] : ""));
+    
     let readType = CcRead !== undefined ? "CcRead" : BccRead !== undefined ? "BccRead" : ReceiverRead !== undefined ? "ReceiverRead" : "";
+    
+    // company, private, personal, important, none
+    let labelType = BccLabel !== undefined ? "BccLabel" : CcLabel !== undefined ? "CcLabel" : ReceiverLabel !== undefined ? "ReceiverLabel" : SenderLabel !== undefined ? "SenderLabel" : "";
+    let labelStatus = item[labelType].toLowerCase();
+
 
     const handleMailClick = () => {
         if (type === "draft") {
@@ -143,9 +149,13 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
                 </div>
             </div>
             <div className="emailDate">
-                <div className="labels">
-                    <span className={Label}></span>
-                </div>
+                {
+                    labelStatus !== "none" ? (
+                        <div className="labels">
+                            <span className={labelStatus}></span>
+                        </div>
+                    ) : ""
+                }
                 <p className="date">{formattedDate(date)}</p>
             </div>
         </li>
