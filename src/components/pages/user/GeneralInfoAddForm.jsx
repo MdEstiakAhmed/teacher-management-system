@@ -1,13 +1,16 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { addGeneralInfo, addPersonalInfo, updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
 import useGetContext from "../../../hooks/useGetContext";
+import placeholderImage from "../../../assets/images/placeholder.jpg";
 
 const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
     const generalInfoForm = useRef(null);
     const personalInfoInfoForm = useRef(null);
 
-    const {userState} = useGetContext()
+    const { userState } = useGetContext()
+
+    const [profilePic, setProfilePic] = useState(placeholderImage);
 
     // useEffect(() => {
     //     ;[...generalInfoForm.current].forEach((input) => {
@@ -22,7 +25,7 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     // }, [data])
 
     useEffect(() => {
-        if(sectionRef.current){
+        if (sectionRef.current) {
             let element = sectionRef.current
             element.addEventListener('click', checkClickEvent);
             return () => {
@@ -31,19 +34,28 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
         }
     }, [sectionRef.current]);
 
+    const handleImageChange = (e) => {
+        var file = e.target.files[0];
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            setProfilePic(reader.result)
+        }
+        reader.readAsDataURL(file);
+    }
+
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         let generalInfoResponse = await addGeneralInfo(userState.data?.id, generalInfoForm);
         let personalInfoResponse = await addPersonalInfo(personalInfoInfoForm);
         // response.status && onClose("generalInfo");
-        if(generalInfoResponse.status && personalInfoResponse.status){
+        if (generalInfoResponse.status && personalInfoResponse.status) {
             setRefetchData(prev => !prev);
             onClose("generalInfoAdd");
         }
     }
 
     const checkClickEvent = (e) => {
-        if(e.target === sectionRef.current){
+        if (e.target === sectionRef.current) {
             onClose("generalInfoAdd")
         }
     }
@@ -75,6 +87,11 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                         </div> */}
                     </form>
                     <form ref={personalInfoInfoForm}>
+                        <div className="inputBox">
+                            <label>Profile picture</label>
+                            <img src={profilePic} alt="user" width="50px" height="50px" />
+                            <input type="file" name="ProfilePic" placeholder="Profile picture" onChange={handleImageChange} />
+                        </div>
                         <div className="inputBox">
                             <label>EmployeeID</label>
                             <input type="text" name="EmployeeID" placeholder="Employee ID" />
