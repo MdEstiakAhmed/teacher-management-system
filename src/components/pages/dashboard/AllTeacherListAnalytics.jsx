@@ -1,4 +1,5 @@
 import { fetchAllTeacherList, fetchUserList } from "../../../api/home";
+import useDeviceSize from "../../../hooks/useDeviceSize";
 import useFetch from "../../../hooks/useFetch";
 import StackBarChart from "../../chart/StackBarChart";
 import LoaderPulse from "../../loader/LoaderPulse";
@@ -6,6 +7,8 @@ import LoaderPulse from "../../loader/LoaderPulse";
 const AllTeacherListAnalytics = () => {
     const { data, isLoading, error, fetchData } = useFetch(fetchAllTeacherList);
     const { data: teachers } = useFetch(fetchUserList);
+
+    const {width} = useDeviceSize()
 
     if (isLoading) {
         return (
@@ -21,73 +24,33 @@ const AllTeacherListAnalytics = () => {
             </div>
         )
     }
-    else if (!isLoading && !error && data?.data?.length && teachers?.data?.length) {
-        let usersData = [];
-
-        let userList = [];
-        data.data.forEach(item => {
-            if (!userList.includes(item.Assignee)) userList.push(item.Assignee);
-        })
-
-        userList.forEach(item => {
-            let completed = 0, incomplete = 0;
-            data.data.forEach(task => {
-                if (task.Assignee === item) {
-                    if (task.TaskCompleted) completed++;
-                    else incomplete++;
-                }
-            })
-            usersData.push(
-                {
-                    id: item,
-                    completedTask: completed,
-                    incompleteTask: incomplete,
-                    completePercentage: (completed / (completed + incomplete)) * 100,
-                    incompletePercentage: (incomplete / (completed + incomplete)) * 100
-                }
-            )
-        })
-
-        // sort usersData by completePercentage
-        usersData.sort((a, b) => {
-            if(b.completePercentage > a.completePercentage) {
-                return b.completePercentage - a.completePercentage;
-            }
-            else if(b.completePercentage === a.completePercentage && b.incompletePercentage > a.incompletePercentage) {
-                return b.incompletePercentage - a.incompletePercentage;
-            }
-            else if (b.completePercentage === a.completePercentage && b.incompletePercentage === a.incompletePercentage) {
-                return (b.completedTask + b.incompleteTask) - (a.completedTask + a.incompleteTask);
-            }
-            else {
-                return b.id - a.id;
-            }
-        })
+    else if (!isLoading && !error && data?.data?.length) {
 
         return (
-            <div>
+            <div style={{height: width < 768 ? "100%" : "300px"}}>
                 <StackBarChart
                     label={
-                        usersData.map(item => {
-                            let data = teachers.data.find(teacher => teacher.id === item.id);
-                            return data.first_name + " " + data.last_name;
+                        data.data.map(item => {
+                            return item.Name;
                         })
                     }
                     datasets={[
                         {
                             label: 'Completed',
-                            data: usersData.map(item => item.completedTask),
+                            data: data.data.map(item => item.complete_task),
                             backgroundColor: '#54A0FF',
-                            barThickness: 15,
-                            borderRadius: 8
+                            // barThickness: 15,
+                            borderRadius: 8,
+                            barPercentage: width < 768 ? 0.5 : 0.3,
 
                         },
                         {
                             label: 'Incomplete',
-                            data: usersData.map(item => item.incompleteTask),
+                            data: data.data.map(item => item.incomplete_task),
                             backgroundColor: '#d2dae2',
-                            barThickness: 15, 
-                            borderRadius: 8
+                            // barThickness: 15, 
+                            borderRadius: 8,
+                            barPercentage: width < 768 ? 0.5 : 0.3,
                         },
                     ]}
                 />

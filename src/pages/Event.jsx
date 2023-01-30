@@ -102,6 +102,18 @@ const Event = () => {
                             endAccessor="end"
                             popup
                             onSelectEvent={handleSelectEvent}
+                            eventPropGetter={
+                                (event, start, end, isSelected) => {
+                                    let { Label } = event;
+                                    let backgroundColor = Label === "Personal" ? "var(--successColor)" :
+                                        Label === "Work" ? "var(--warningColor)" :
+                                            Label === "Family" ? "var(--dangerColor)" :
+                                                Label === "Holiday" ? "var(--primaryColor)" :
+                                                Label === "Other" ? "var(--blueColor)" : "var(--titleColor)";
+                                    console.log(event);
+                                    return {style: {backgroundColor}}
+                                }
+                            }
                         />
                     </div>
                 </div>

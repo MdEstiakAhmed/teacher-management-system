@@ -60,7 +60,7 @@ const Users = () => {
                     <table className="userListTable">
                         <thead>
                             <tr>
-                                <th className="User">User</th>
+                                <th className="User">Teacher</th>
                                 <th className="Designation">Designation</th>
                                 <th className="Status">Status</th>
                                 <th className="Actions">Actions</th>
@@ -96,7 +96,7 @@ const UserRow = ({ id, name, email, designation, status, image }) => {
             <td className="User">
                 <img src={image} alt="user" />
                 <div className="userDetails">
-                    <Link to={`/users/${id}`}>
+                    <Link to={`/teachers/${id}`}>
                         <h4 className="userName">{name}</h4>
                     </Link>
                     <p className="userEmail">{email}</p>
@@ -114,7 +114,7 @@ const UserRow = ({ id, name, email, designation, status, image }) => {
                     <DeleteIcon />
                 </button> */}
                 <button className="Button secondaryButton">
-                    <Link to={`/users/${id}`}>
+                    <Link to={`/teachers/${id}`}>
                         <ViewIcon />
                     </Link>
                 </button>

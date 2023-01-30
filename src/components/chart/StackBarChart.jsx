@@ -8,6 +8,7 @@ import {
     Legend,
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
+import useDeviceSize from '../../hooks/useDeviceSize';
 
 ChartJS.register(
     CategoryScale,
@@ -19,6 +20,8 @@ ChartJS.register(
 );
 
 const StackBarChart = ({ label, datasets }) => {
+
+    const {width} = useDeviceSize()
     
     const options = {
         plugins: {
@@ -39,10 +42,11 @@ const StackBarChart = ({ label, datasets }) => {
                 display: false,
             },
         },
-        responsive: true,
+        responsive: width < 768 ? false : true,
+        maintainAspectRatio: false,
         indexAxis: 'y',
-        // maintainAspectRatio: false,
-        aspectRatio: 4,
+        // maintainAspectRatio: width < 768 ? false : true,
+        // aspectRatio: width > 768 && 4,
         scales: {
             x: {
                 stacked: true,

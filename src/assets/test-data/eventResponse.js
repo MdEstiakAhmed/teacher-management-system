@@ -2,102 +2,102 @@ export const eventListResponse = {
 	"status": true,
 	"message": "Event list",
 	"data": [
-		// {
-		// 	"id": 20,
-		// 	"Title": "event for test Personal",
-		// 	"Label": "Personal",
-		// 	"StartDateTime": "2023-01-17T16:44:21Z",
-		// 	"EndDateTime": "2023-01-17T16:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
-		// {
-		// 	"id": 21,
-		// 	"Title": "event for test Work",
-		// 	"Label": "Work",
-		// 	"StartDateTime": "2023-01-02T16:44:21Z",
-		// 	"EndDateTime": "2023-01-02T16:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
-		// {
-		// 	"id": 22,
-		// 	"Title": "event for test Family",
-		// 	"Label": "Family",
-		// 	"StartDateTime": "2023-01-04T16:44:21Z",
-		// 	"EndDateTime": "2023-01-04T16:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
-		// {
-		// 	"id": 23,
-		// 	"Title": "event for test Holiday",
-		// 	"Label": "Holiday",
-		// 	"StartDateTime": "2023-01-03T16:44:21Z",
-		// 	"EndDateTime": "2023-01-04T16:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
-		// {
-		// 	"id": 24,
-		// 	"Title": "event for test Other",
-		// 	"Label": "Other",
-		// 	"StartDateTime": "2023-01-01T16:44:21Z",
-		// 	"EndDateTime": "2023-01-01T18:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
-		// {
-		// 	"id": 25,
-		// 	"Title": "event for test 2",
-		// 	"Label": "None",
-		// 	"StartDateTime": "2023-01-22T16:44:21Z",
-		// 	"EndDateTime": "2023-01-22T18:44:24Z",
-		// 	"WholeDay": true,
-		// 	"EventURL": "",
-		// 	"Location": "",
-		// 	"Description": "",
-		// 	"user": 1,
-		// 	"Guests": [
-		// 		2,
-		// 		3
-		// 	]
-		// },
+		{
+			"id": 20,
+			"Title": "event for test Personal",
+			"Label": "Personal",
+			"StartDateTime": "2023-01-17T16:44:21Z",
+			"EndDateTime": "2023-01-17T16:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
+		{
+			"id": 21,
+			"Title": "event for test Work",
+			"Label": "Work",
+			"StartDateTime": "2023-01-02T16:44:21Z",
+			"EndDateTime": "2023-01-02T16:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
+		{
+			"id": 22,
+			"Title": "event for test Family",
+			"Label": "Family",
+			"StartDateTime": "2023-01-04T16:44:21Z",
+			"EndDateTime": "2023-01-04T16:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
+		{
+			"id": 23,
+			"Title": "event for test Holiday",
+			"Label": "Holiday",
+			"StartDateTime": "2023-01-03T16:44:21Z",
+			"EndDateTime": "2023-01-04T16:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
+		{
+			"id": 24,
+			"Title": "event for test Other",
+			"Label": "Other",
+			"StartDateTime": "2023-01-01T16:44:21Z",
+			"EndDateTime": "2023-01-01T18:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
+		{
+			"id": 25,
+			"Title": "event for test 2",
+			"Label": "None",
+			"StartDateTime": "2023-01-22T16:44:21Z",
+			"EndDateTime": "2023-01-22T18:44:24Z",
+			"WholeDay": true,
+			"EventURL": "",
+			"Location": "",
+			"Description": "",
+			"user": 1,
+			"Guests": [
+				2,
+				3
+			]
+		},
 		{
 			"id": 34,
 			"Title": "siyam",

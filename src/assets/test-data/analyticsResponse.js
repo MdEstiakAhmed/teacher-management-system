@@ -168,59 +168,46 @@ export const allTeacherListResponse = {
     "message": "Teacher rank list",
     "data": [
         {
-            "id": 21,
-            "TaskCompleted": true,
-            "Assignee": 2
+            "id": 2,
+            "Name": "Md. Tahzib Ul Islam",
+            "complete_task": 2,
+            "incomplete_task": 1
         },
         {
-            "id": 22,
-            "TaskCompleted": false,
-            "Assignee": 3
+            "id": 3,
+            "Name": "Md. Abdul Based",
+            "complete_task": 2,
+            "incomplete_task": 1
         },
         {
-            "id": 23,
-            "TaskCompleted": false,
-            "Assignee": 3
+            "id": 6,
+            "Name": "Md. Nur-A-Alam",
+            "complete_task": 1,
+            "incomplete_task": 1
         },
         {
-            "id": 24,
-            "TaskCompleted": true,
-            "Assignee": 3
+            "id": 4,
+            "Name": "Khandaker Mohammad Mohi Uddin",
+            "complete_task": 0,
+            "incomplete_task": 4
         },
         {
-            "id": 25,
-            "TaskCompleted": false,
-            "Assignee": 4
+            "id": 5,
+            "Name": "Md. Mahbubur Rahman",
+            "complete_task": 0,
+            "incomplete_task": 3
         },
         {
-            "id": 26,
-            "TaskCompleted": false,
-            "Assignee": 3
+            "id": 7,
+            "Name": "Md. Shariful Islam",
+            "complete_task": 0,
+            "incomplete_task": 1
         },
         {
-            "id": 27,
-            "TaskCompleted": false,
-            "Assignee": 3
-        },
-        {
-            "id": 28,
-            "TaskCompleted": false,
-            "Assignee": 5
-        },
-        {
-            "id": 29,
-            "TaskCompleted": false,
-            "Assignee": 2
-        },
-        {
-            "id": 30,
-            "TaskCompleted": false,
-            "Assignee": 3
-        },
-        {
-            "id": 31,
-            "TaskCompleted": true,
-            "Assignee": 5
+            "id": 8,
+            "Name": "Md.Zahidul Islam",
+            "complete_task": 0,
+            "incomplete_task": 1
         }
     ]
-};
+}

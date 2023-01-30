@@ -58,7 +58,7 @@ export const fetchAllTeacherList = async () => {
         if(process.env.REACT_APP_DATA_TYPE === "json") {
             return allTeacherListResponse;
         }
-        const url = `${baseUrl}/todoList/`;
+        const url = `${baseUrl}/teacherRankList/`;
         const response = await getData(url, {});
         return response;
     } catch (error) {

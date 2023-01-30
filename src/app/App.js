@@ -56,8 +56,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 			<section className="dashboardArea">
 				<Routes>
 					<Route element={<Sidebar />}>
-						<Route path="/users/:id" element={<User />} />
-						<Route path="/users" element={<Users />} />
+						<Route path="/teachers/:id" element={<User />} />
+						<Route path="/teachers" element={<Users />} />
 						<Route path="/event" element={<Event />} />
 						<Route path="/todo" element={<Todo />} />
 						{/* <Route path="/chat" element={<Chat />} /> */}

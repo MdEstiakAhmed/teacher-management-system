@@ -26,7 +26,7 @@ const Dashboard = () => {
                         <div className="analyticsArea-wrapper">
                             <div className={`analyticsArea-group ${is_superuser ? 'super_user' : ""}`}>
                                 <div className="contentArea">
-                                    <h3 className="title">Users</h3>
+                                    <h3 className="title">Teachers</h3>
                                     <div className="chart">
                                         <UserListAnalytics />
                                     </div>
