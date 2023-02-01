@@ -42,7 +42,7 @@ const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft, emai
                         </div>
                     </div>
                     <div className="headerBottom">
-                        <div className="buttonArea">
+                        {/* <div className="buttonArea">
                             <input type="checkbox" name="" id="" />
                             <button className="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
@@ -50,7 +50,7 @@ const EmailList = ({ data, handleModalOpen, setIsRefetch, setSelectedDraft, emai
                             <button className="button">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                             </button>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
                 <ul>
@@ -125,7 +125,7 @@ const EmailItem = ({ item, users, handleModalOpen, setIsRefetch, setSelectedDraf
     return (
         <li>
             <div className="buttonArea">
-                <input type="checkbox" name="" id="" />
+                {/* <input type="checkbox" name="" id="" /> */}
                 {
                     type !== "draft" ? (
                         <button className="button" onClick={updateStar}>
