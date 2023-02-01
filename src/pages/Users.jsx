@@ -49,7 +49,7 @@ const Users = () => {
                         <input type="text" placeholder="Search" value={search} onChange={(e) => setSearch(e.target.value)} />
                     </div>
                     {
-                        userState.data.is_superuser && (
+                        (userState.data.is_superuser || userState.data.is_staff) && (
                             <div className="userListActions">
                                 <button className="Button primaryButton" onClick={handleModalOpen}>Add User</button>
                             </div>
