@@ -49,8 +49,8 @@ const Header = () => {
                         <p className="userDesignation">
                             {
                                 userState.data?.is_superuser ? "Chairman" :
-                                userState.data?.is_staff ? "Program Officer" :
-                                        "Teacher"
+                                    userState.data?.is_staff ? "Program Officer" :
+                                        userState.data?.Designation
                             }
                         </p>
                     </div>

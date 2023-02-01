@@ -118,7 +118,7 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">{`${action === "add" ? "Add" : "Update"} ${type} info`}</h3>
+                    <h3 className="title">{`${action === "add" ? "Add" : "Update"} ${type === "awardAndScholarship" ? "Award & Scholarship" : type} info`}</h3>
                     <form ref={formRef} onSubmit={handleFormSubmit}>
                         {
                             type && form[type].map((item, index) => (
