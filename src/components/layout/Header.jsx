@@ -16,10 +16,10 @@ const Header = () => {
 
     useEffect(() => {
         let title = headerTitle[location.pathname];
-        if(location.pathname.includes("/users/")) {
+        if (location.pathname.includes("/users/")) {
             title = "User Details";
         }
-        else if(location.pathname.includes("/emails/")) {
+        else if (location.pathname.includes("/emails/")) {
             title = "Email";
         }
         setTitle(title);
@@ -47,7 +47,11 @@ const Header = () => {
                     <div className="userDetails" >
                         <h4 className="userName">{`${userState.data?.first_name} ${userState.data?.last_name}`}</h4>
                         <p className="userDesignation">
-                            {userState.data?.is_superuser ? "Admin" : useState.data?.is_staff ? "Employee" : ""}
+                            {
+                                userState.data?.is_superuser ? "Chairman" :
+                                    useState.data?.is_staff ? "Program Officer" :
+                                        "Teacher"
+                            }
                         </p>
                     </div>
                     <div className="userImage" ref={headerRef}>
@@ -59,7 +63,7 @@ const Header = () => {
                                         <img src={`${userState.data?.ProfilePic || placeholder}`} alt="user" />
                                         <div className="userDetails">
                                             <h4 className="userName">{`${userState.data?.first_name} ${userState.data?.last_name}`}</h4>
-                                            <p className="userDesignation">{userState.data?.is_superuser ? "Admin" : useState.data?.is_staff ? "Employee" : ""}</p>
+                                            <p className="userDesignation">{userState.data?.is_superuser ? "Chairman" : useState.data?.is_staff ? "Program Officer" : "Teacher"}</p>
                                         </div>
                                     </li>
                                     <li>
