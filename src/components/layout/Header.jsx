@@ -49,7 +49,7 @@ const Header = () => {
                         <p className="userDesignation">
                             {
                                 userState.data?.is_superuser ? "Chairman" :
-                                    useState.data?.is_staff ? "Program Officer" :
+                                userState.data?.is_staff ? "Program Officer" :
                                         "Teacher"
                             }
                         </p>
@@ -63,7 +63,7 @@ const Header = () => {
                                         <img src={`${userState.data?.ProfilePic || placeholder}`} alt="user" />
                                         <div className="userDetails">
                                             <h4 className="userName">{`${userState.data?.first_name} ${userState.data?.last_name}`}</h4>
-                                            <p className="userDesignation">{userState.data?.is_superuser ? "Chairman" : useState.data?.is_staff ? "Program Officer" : "Teacher"}</p>
+                                            <p className="userDesignation">{userState.data?.is_superuser ? "Chairman" : userState.data?.is_staff ? "Program Officer" : "Teacher"}</p>
                                         </div>
                                     </li>
                                     <li>
