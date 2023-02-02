@@ -98,20 +98,28 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
                     <p>{formattedDate(taskData.DueDate)}</p>
                     <hr />
                     <form ref={formRef} onSubmit={handleSubmit}>
-                        {
-                            (taskSection.all || taskSection.Assignee === id) ? (
+                        <div className="inputBox">
+                            <label>Comment</label>
+                            <textarea
+                                name="Comment"
+                                placeholder="Comment"
+                                // disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                            />
+                        </div>
+                        {/* {
+                            (taskSection.all || taskData.Assignee === id) ? (
                                 <div className="inputBox">
-                                    <label>Description</label>
+                                    <label>Comment</label>
                                     <textarea
                                         name="Description"
-                                        placeholder="Description"
+                                        placeholder="Comment"
                                         disabled={(taskData.TaskCompleted) ? "disabled" : ""}
                                     />
                                 </div>
                             ) : ""
                         }
                         {
-                            (taskSection.supervisor || taskSection.user === id) ? (
+                            (taskSection.supervisor || taskData.user === id) ? (
                                 <div className="inputBox">
                                     <label>Comment</label>
                                     <textarea
@@ -121,16 +129,16 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
                                     />
                                 </div>
                             ) : ""
-                        }
+                        } */}
 
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             {
-                                taskSection.all ? (
+                                (taskSection.all || taskData.Assignee === id) ? (
                                     <button className="Button primaryButton" onClick={closeForm}>Submit</button>
                                 ) : ""
                             }
                             {
-                                taskSection.supervisor ? (
+                                (taskSection.supervisor || taskData.user === id) ? (
                                     <>
                                         <button className="Button primaryButton" onClick={closeForm}>Accept</button>
                                         <button className="Button primaryButton warning" onClick={closeForm}>Return</button>
