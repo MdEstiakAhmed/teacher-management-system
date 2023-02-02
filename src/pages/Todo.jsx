@@ -281,12 +281,9 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
 
     const { userState: { data: { id: loggedInId } = {} } = {} } = useGetContext();
 
-    const taskPriority = {
-        Urgent: 'urgent',
-        High: 'high',
-        Medium: 'medium',
-        Low: 'low'
-    };
+    const priorityClass = Priority === "Low" ? "low" : Priority === "Medium" ? "medium" : Priority === "High" ? "high" : "urgent";
+
+    const statusClass = TaskCompleted ? "completed" : Completed ? "submitted" : "incomplete"
 
     const clickOnTask = () => {
         setSelectedTodo(item)
@@ -310,17 +307,6 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
             fetchData()
         }
     }
-
-    const clickOnCompleted = async () => {
-        if (TaskCompleted) return;
-        let req = {
-            Completed: !Completed
-        }
-        let res = await updateTodoWithObj(req, id)
-        if (res.status) {
-            fetchData()
-        }
-    }
     return (
         <tr>
             <td className="bookmark">
@@ -331,64 +317,24 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
             <td className="taskTitle" onClick={clickOnTask}>
                 {Title}
             </td>
-            <td>
+            <td className={`status ${statusClass}`}>
                 {
-                    Completed ? "Submitted" : "Incomplete"
+                    TaskCompleted ? "Completed" : Completed ? "Submitted" : "Incomplete"
                 }
             </td>
-            <td className={`Status ${"status" ? 'active' : 'deactive'}`}>
+            <td className={`priority ${priorityClass}`}>
                 {Priority}
             </td>
-            <td>
+            <td className="date">
                 {formattedDate(DueDate)}
             </td>
             <td className="Actions">
-                {/* {
-                    (taskSection.all || taskSection.important) ? (
-                        <button className="button" onClick={clickOnTask}>
-                            {
-                                Completed ? (
-                                    <CheckedIcon />
-                                ) : (
-                                    <UncheckedIcon />
-                                )
-                            }
-                        </button>
-                    ) : ""
-                } */}
                 {
-                    // (Assignee !== loggedInId && (taskSection.supervisor || taskSection.completed)) 
                     <button className="Button secondaryButton" onClick={clickOnButton}>
                         <EditIcon />
                     </button>
                 }
-                {/* {
-                    (taskSection.all || taskSection.important || taskSection.completed) ? (
-                        <button className="Button secondaryButton" onClick={clickOnTask}>
-                            <ViewIcon />
-                        </button>
-                    ) : ""
-                } */}
             </td>
         </tr >
-    )
-}
-
-const CheckedIcon = () => {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="18.416" height="18.002" viewBox="0 0 18.416 18.002">
-            <g id="Checked" transform="translate(-2 -2)">
-                <path id="check" d="M9,10.223l2.667,2.667L20.557,4" transform="translate(-1.555 -0.111)" fill="none" stroke="#485460" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-                <path id="box" d="M19,11v6.223A1.778,1.778,0,0,1,17.224,19H4.778A1.778,1.778,0,0,1,3,17.224V4.778A1.778,1.778,0,0,1,4.778,3h9.779" fill="none" stroke="#485460" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" />
-            </g>
-        </svg>
-    )
-}
-
-const UncheckedIcon = () => {
-    return (
-        <svg xmlns="http://www.w3.org/2000/svg" width="18.003" height="18.003" viewBox="0 0 18.003 18.003">
-            <path id="Uncheck" d="M-805.222-552A1.778,1.778,0,0,1-807-553.775v-12.447A1.778,1.778,0,0,1-805.222-568h12.446A1.778,1.778,0,0,1-791-566.222v12.447A1.778,1.778,0,0,1-792.776-552Z" transform="translate(808 569)" fill="none" stroke="#485460" strokeLinecap="round" strokeWidth="2" />
-        </svg>
     )
 }
