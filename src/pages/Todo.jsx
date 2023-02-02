@@ -76,14 +76,14 @@ const Todo = () => {
     }
 
     const sortArray = (a, b) => {
-        if (a === "Urgent") return -1;
-        if (b === "Urgent") return 1;
-        if (a === "High") return -1;
-        if (b === "High") return 1;
-        if (a === "Medium") return 1;
-        if (b === "Medium") return -1;
-        if (a === "Low") return -1;
-        if (b === "Low") return 1;
+        if (a.Priority === "Urgent") return -1;
+        if (b.Priority === "Urgent") return 1;
+        if (a.Priority === "High") return -1;
+        if (b.Priority === "High") return 1;
+        if (a.Priority === "Medium") return -1;
+        if (b.Priority === "Medium") return 1;
+        if (a.Priority === "Low") return -1;
+        if (b.Priority === "Low") return 1;
         return 0;
     }
 
