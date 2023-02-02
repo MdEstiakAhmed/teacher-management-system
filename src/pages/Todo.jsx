@@ -71,7 +71,7 @@ const Todo = () => {
     const handleSectionFilter = (item) => {
         if (taskSection.all) return item.Assignee === id;
         if (taskSection.supervisor) return (item.user === id && !item.TaskCompleted);
-        if (taskSection.important) return ((item.Important || item.SupervisorImportant) && !item.TaskCompleted);
+        if (taskSection.important) return ((item.Important) && !item.TaskCompleted);
         if (taskSection.completed) return item.TaskCompleted;
     }
 
@@ -277,7 +277,7 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
 }
 
 const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSection }) => {
-    let { Title, Priority, DueDate, TaskCompleted, Important, SupervisorImportant, Assignee, id, Completed, user } = item;
+    let { Title, Priority, DueDate, TaskCompleted, Important,  Assignee, id, Completed, user } = item;
 
     const { userState: { data: { id: loggedInId } = {} } = {} } = useGetContext();
 
@@ -301,17 +301,9 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
     const clickOnImportant = async () => {
         if (TaskCompleted) return;
         let req;
-        if(Assignee === loggedInId) { 
-            req = {
-                ...item,
-                Important: !Important
-            }
-        }
-        else if(user === loggedInId) {
-            req = {
-                ...item,
-                SupervisorImportant: !SupervisorImportant
-            }
+        req = {
+            ...item,
+            Important: !Important
         }
         let res = await updateTodoWithObj(req, id)
         if (res.status) {
