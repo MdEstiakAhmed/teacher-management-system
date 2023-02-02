@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { updateTodo } from "../../../api/todo";
+import { updateTodo, updateTodoWithObj } from "../../../api/todo";
 import { fetchUsers } from "../../../api/users";
 import useFetch from "../../../hooks/useFetch";
 import useGetContext from "../../../hooks/useGetContext";
@@ -16,6 +16,7 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
     const { data } = useFetch(fetchUsers, {});
 
     const [access, setAccess] = useState(""); // Access: "all" or "limited"
+    const [comment, setComment] = useState("");
 
     useEffect(() => {
         if (is_superuser || id === taskData.user) {
@@ -50,42 +51,55 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
         }
     }, [data]);
 
-    useEffect(() => {
-        if (users.length && formRef.current["Assignee"]?.value) {
-            formRef.current["Assignee"].value = taskData["Assignee"]
-        }
-    }, [users]);
+    // useEffect(() => {
+    //     if (users.length && formRef.current["Assignee"]?.value) {
+    //         formRef.current["Assignee"].value = taskData["Assignee"]
+    //     }
+    // }, [users]);
 
     usePseudoElementClick(sectionRef, () => onClose("actionForm"));
 
-    useEffect(() => {
-        if (taskData && access) {
-            ;[...formRef.current].forEach((input) => {
-                if (input.name !== "submit" && taskData[input.name]) {
-                    if (input.type === "checkbox") {
-                        input.checked = taskData[input.name];
-                    }
-                    else if (input.type === "select-one") {
-                        input.defaultValue = taskData[input.name];
-                        input.value = taskData[input.name];
-                    }
-                    else {
-                        input.value = taskData[input.name];
-                    }
-                }
-            });
-        }
-    }, [taskData, access])
+    // useEffect(() => {
+    //     if (taskData && access) {
+    //         ;[...formRef.current].forEach((input) => {
+    //             if (input.name !== "submit" && taskData[input.name]) {
+    //                 if (input.type === "checkbox") {
+    //                     input.checked = taskData[input.name];
+    //                 }
+    //                 else if (input.type === "select-one") {
+    //                     input.defaultValue = taskData[input.name];
+    //                     input.value = taskData[input.name];
+    //                 }
+    //                 else {
+    //                     input.value = taskData[input.name];
+    //                 }
+    //             }
+    //         });
+    //     }
+    // }, [taskData, access])
 
     const closeForm = (e) => {
         e.preventDefault();
         onClose("actionForm", true);
     }
 
+    const handleAccept = async (e) => {
+        e.preventDefault();
+        let tempData = {...taskData, TaskCompleted: 1, Comment: comment}
+        const response = await updateTodoWithObj(tempData, taskData.id);
+        response.status && onClose("actionForm", true);
+    }
+    const handleReturn = async (e) => {
+        e.preventDefault();
+        let tempData = {...taskData, Completed: 0, Comment: comment}
+        const response = await updateTodoWithObj(tempData, taskData.id);
+        response.status && onClose("actionForm", true);
+    }
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        let response = {};
-        response = await updateTodo(formRef, taskData.id);
+        let tempData = {...taskData, Completed: 1, Comment: comment}
+        const response = await updateTodoWithObj(tempData, taskData.id);
         response.status && onClose("actionForm", true);
     }
     return (
@@ -97,12 +111,14 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
                     <p>{taskData.Priority}</p>
                     <p>{formattedDate(taskData.DueDate)}</p>
                     <hr />
-                    <form ref={formRef} onSubmit={handleSubmit}>
+                    <form>
                         <div className="inputBox">
                             <label>Comment</label>
                             <textarea
                                 name="Comment"
                                 placeholder="Comment"
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
                                 // disabled={(taskData.TaskCompleted) ? "disabled" : ""}
                             />
                         </div>
@@ -134,14 +150,14 @@ const ActionForm = ({ taskData, onClose, taskSection }) => {
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             {
                                 (taskSection.all || taskData.Assignee === id) ? (
-                                    <button className="Button primaryButton" onClick={closeForm}>Submit</button>
+                                    <button className="Button primaryButton" onClick={handleSubmit}>Submit</button>
                                 ) : ""
                             }
                             {
                                 (taskSection.supervisor || taskData.user === id) ? (
                                     <>
-                                        <button className="Button primaryButton" onClick={closeForm}>Accept</button>
-                                        <button className="Button primaryButton warning" onClick={closeForm}>Return</button>
+                                        <button className="Button primaryButton" onClick={handleAccept}>Accept</button>
+                                        <button className="Button primaryButton warning" onClick={handleReturn}>Return</button>
                                     </>
                                 ) : ""
                             }
