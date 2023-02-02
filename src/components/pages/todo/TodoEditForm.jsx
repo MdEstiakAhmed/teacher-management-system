@@ -91,7 +91,11 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
         <>
             <section className="addFormArea" ref={sectionRef}>
                 <div className="popUp contentArea">
-                    <h3 className="title">Edit task</h3>
+                    <h3 className="title">
+                        {
+                            taskSection.supervisor ? "Edit task" : "Task Detail"
+                        }
+                    </h3>
                     <form ref={formRef} onSubmit={handleSubmit}>
                         <div className="inputBox">
                             <label>Title</label>
@@ -146,7 +150,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                                 id="Important"
                                 disabled={(taskData.TaskCompleted) ? "disabled" : ""}
                             />
-                            <label htmlFor="Important">Important</label>
+                            <label htmlFor="Important">Bookmark</label>
                         </div>
                         <div className="inputBox" style={{ display: "flex" }}>
                             <input
@@ -155,7 +159,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                                 id="Completed"
                                 disabled={(taskData.TaskCompleted) ? "disabled" : ""}
                             />
-                            <label htmlFor="Completed">Completed</label>
+                            <label htmlFor="Completed">Submitted</label>
                         </div>
                         <div className="inputBox">
                             <label>Description</label>
