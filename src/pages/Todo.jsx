@@ -75,6 +75,18 @@ const Todo = () => {
         if (taskSection.completed) return item.TaskCompleted;
     }
 
+    const sortArray = (a, b) => {
+        if (a === "Urgent") return -1;
+        if (b === "Urgent") return 1;
+        if (a === "High") return -1;
+        if (b === "High") return 1;
+        if (a === "Medium") return 1;
+        if (b === "Medium") return -1;
+        if (a === "Low") return -1;
+        if (b === "Low") return 1;
+        return 0;
+    }
+
     return (
         <>
             {
@@ -179,7 +191,7 @@ const Todo = () => {
                             </thead>
                             <tbody>
                                 {
-                                    (isFetched && data.data?.length) ? data.data.filter(handleSectionFilter).filter(handleSearchFilter).filter(handlePriorityFilter).map((item, index) => (
+                                    (isFetched && data.data?.length) ? data.data.sort(sortArray).filter(handleSectionFilter).filter(handleSearchFilter).filter(handlePriorityFilter).map((item, index) => (
                                         <TodoList
                                             key={item.id}
                                             item={item}
@@ -277,7 +289,7 @@ const TodoItem = ({ item, setSelectedTodo, handleModalOpen, fetchData }) => {
 }
 
 const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSection }) => {
-    let { Title, Priority, DueDate, TaskCompleted, Important,  Assignee, id, Completed, user } = item;
+    let { Title, Priority, DueDate, TaskCompleted, Important, Assignee, id, Completed, user } = item;
 
     const { userState: { data: { id: loggedInId } = {} } = {} } = useGetContext();
 
