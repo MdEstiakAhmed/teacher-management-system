@@ -104,7 +104,7 @@ const User = () => {
 
     const handleActivation = async () => {
         const response = await updateStatus(id, !userInfo.general?.is_active)
-        if(response.status) {
+        if (response.status) {
             fetchParallelUserInfo();
         }
     }
@@ -214,17 +214,21 @@ const User = () => {
                                         )
                                     }
                                     <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
-                                    {
-                                        (userState.data.is_superuser && id !== userState.data.user) ? (
-                                            userInfo.general?.is_active ? (
-                                                <button className="button primaryButton danger" onClick={handleActivation}>Deactivate</button>
-                                            ) : (
-                                                <button className="button primaryButton" onClick={handleActivation}>Activate</button>
-                                            )
-                                        ) : ""
-                                    }
                                 </div>
                             )
+                        }
+                        {
+                            (userState.data.is_superuser && id != userState.data.id) ? (
+                                userInfo.general?.is_active ? (
+                                    <div className="buttonArea">
+                                        <button className="button primaryButton danger" onClick={handleActivation}>Deactivate</button>
+                                    </div>
+                                ) : (
+                                    <div className="buttonArea">
+                                        <button className="button primaryButton" onClick={handleActivation}>Activate</button>
+                                    </div>
+                                )
+                            ) : ""
                         }
                     </div>
                 </div>
