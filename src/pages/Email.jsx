@@ -39,7 +39,7 @@ const Email = () => {
         if (data.data) {
             setLabelType(data.data.ReceiverLabel !== undefined ? "ReceiverLabel" : data.data.CcLabel !== undefined ? "CcLabel" : data.data.BccLabel !== undefined ? "BccLabel" : data.data.SenderLabel !== undefined ? "SenderLabel" : "");  //ReceiverLabel, CcLabel, BccLabel
 
-            updateEmailRead({ emailId, readType: getReadType(), readStatus: true })
+            updateEmailRead({ emailId, readType: getReadType(), readStatus: true, rest: {...data.data} })
         }
     }, [data]);
 
@@ -148,7 +148,7 @@ const Email = () => {
     }
 
     const handleReadType = () => {
-        updateEmailRead({ emailId, readType: getReadType(), readStatus: false })
+        updateEmailRead({ emailId, readType: getReadType(), readStatus: false, rest: {...data.data} })
         handleBack()
     }
 
@@ -163,7 +163,7 @@ const Email = () => {
 
     const handleImportant = async () => {
         let tempType = getImportantType();
-        const response = await updateEmailStarred({ emailId, type: tempType, starred: !isStarred, state: type })
+        const response = await updateEmailStarred({ emailId, type: tempType, starred: !isStarred, state: type, rest: {...data.data} })
         if (response.status) {
             setIsStarred(prev => !prev)
         }

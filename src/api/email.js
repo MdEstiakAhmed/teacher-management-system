@@ -7,7 +7,7 @@ export const baseUrl = '/email';
 
 export const fetchInboxEmails = async () => {
     try {
-        if(process.env.REACT_APP_DATA_TYPE === "json") {
+        if (process.env.REACT_APP_DATA_TYPE === "json") {
             return inboxEmailListResponse;
         }
         const url = `${baseUrl}/`;
@@ -20,7 +20,7 @@ export const fetchInboxEmails = async () => {
 
 export const fetchSentEmails = async () => {
     try {
-        if(process.env.REACT_APP_DATA_TYPE === "json") {
+        if (process.env.REACT_APP_DATA_TYPE === "json") {
             return sentEmailListResponse;
         }
         const url = `${baseUrl}/sent/`;
@@ -31,9 +31,9 @@ export const fetchSentEmails = async () => {
     }
 }
 
-export const fetchEmail = async ({emailId}) => {
+export const fetchEmail = async ({ emailId }) => {
     try {
-        if(process.env.REACT_APP_DATA_TYPE === "json") {
+        if (process.env.REACT_APP_DATA_TYPE === "json") {
             return emailResponse;
         }
         const url = `${baseUrl}/${emailId}/`;
@@ -43,9 +43,9 @@ export const fetchEmail = async ({emailId}) => {
         return { status: false, message: error.message };
     }
 }
-export const fetchSentEmail = async ({emailId}) => {
+export const fetchSentEmail = async ({ emailId }) => {
     try {
-        if(process.env.REACT_APP_DATA_TYPE === "json") {
+        if (process.env.REACT_APP_DATA_TYPE === "json") {
             return emailResponse;
         }
         const url = `${baseUrl}/sent/${emailId}/`;
@@ -93,11 +93,11 @@ export const addEmail = async (ref, isDraft) => {
 // type: ReceiverImportant, CcImportant, BccImportant, SenderImportant
 // starred: true, false
 // state: sent, inbox || ...
-export const updateEmailStarred = async ({emailId, type, starred, state, rest}) => {
+export const updateEmailStarred = async ({ emailId, type, starred, state, rest }) => {
     try {
         let url;
         let importantType = type;
-        if(state === "sent"){
+        if (state === "sent") {
             url = `${baseUrl}/sent/${emailId}/`;
             importantType = "SenderImportant"
         }
@@ -109,6 +109,7 @@ export const updateEmailStarred = async ({emailId, type, starred, state, rest}) 
         delete restData[importantType];
         delete restData["Body"];
         delete restData["Cc"];
+        delete restData["Bcc"];
         delete restData["Date"];
         delete restData["Draft"];
         delete restData["Receiver"];
@@ -130,11 +131,11 @@ export const updateEmailStarred = async ({emailId, type, starred, state, rest}) 
 // type: ReceiverLabel, CcLabel, BccLabel, SenderLabel
 // label: None, Personal, Important, Private, Company
 // state: inbox, sent
-export const updateEmailLabel = async ({emailId, type, label, state}) => {
+export const updateEmailLabel = async ({ emailId, type, label, state }) => {
     try {
         let url;
         let labelType = type;
-        if(state === "sent"){
+        if (state === "sent") {
             url = `${baseUrl}/sent/${emailId}/`;
             labelType = "SenderLabel"
         }
@@ -153,11 +154,11 @@ export const updateEmailLabel = async ({emailId, type, label, state}) => {
 // type: ReceiverTrash, CcTrash, BccTrash, SenderTrash
 // isTrash: true, false
 // state: inbox, sent
-export const updateEmailTrash = async ({emailId, type, isTrash, state}) => {
+export const updateEmailTrash = async ({ emailId, type, isTrash, state }) => {
     try {
         let url;
         let labelType = type;
-        if(state === "sent"){
+        if (state === "sent") {
             url = `${baseUrl}/sent/${emailId}/`;
             labelType = "SenderTrash"
         }
@@ -176,11 +177,11 @@ export const updateEmailTrash = async ({emailId, type, isTrash, state}) => {
 // type: ReceiverDelete, CcDelete, BccDelete, SenderDelete
 // isDelete: true, false
 // state: inbox, sent
-export const updateEmailDelete = async ({emailId, type, isDelete, state}) => {
+export const updateEmailDelete = async ({ emailId, type, isDelete, state }) => {
     try {
         let url;
         let labelType = type;
-        if(state === "sent"){
+        if (state === "sent") {
             url = `${baseUrl}/sent/${emailId}/`;
             labelType = "SenderDelete"
         }
@@ -196,10 +197,23 @@ export const updateEmailDelete = async ({emailId, type, isDelete, state}) => {
     }
 }
 
-export const updateEmailRead = async ({emailId, readType, readStatus}) => {
+export const updateEmailRead = async ({ emailId, readType, readStatus, rest }) => {
     try {
         let url = `${baseUrl}/${emailId}/`;
         const formData = new FormData();
+        let restData = rest;
+        delete restData[readType];
+        delete restData["Body"];
+        delete restData["Cc"];
+        delete restData["Bcc"];
+        delete restData["Date"];
+        delete restData["Draft"];
+        delete restData["Receiver"];
+        delete restData["Sender"];
+        delete restData["Subject"];
+        for (let item in restData) {
+            formData.append(item, restData[item]);
+        }
         formData.append(readType, readStatus ? 1 : 0);
         const response = await putData(url, formData, {});
         return response;
@@ -208,7 +222,7 @@ export const updateEmailRead = async ({emailId, readType, readStatus}) => {
     }
 }
 
-export const fetchDraftEmail = ({emailId}) => {
+export const fetchDraftEmail = ({ emailId }) => {
     try {
         const url = `${baseUrl}/draft/${emailId}/`;
         const response = getData(url, {});
@@ -218,7 +232,7 @@ export const fetchDraftEmail = ({emailId}) => {
     }
 }
 
-export const updateDraftEmail = async ({ref, isDraft, emailId}) => {
+export const updateDraftEmail = async ({ ref, isDraft, emailId }) => {
     try {
         const url = `${baseUrl}/draft/${emailId}/`;
         const formData = domRefToFormData(ref);
