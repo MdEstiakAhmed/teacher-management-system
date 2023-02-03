@@ -708,8 +708,8 @@ input[type="submit"]:hover,
     gap: 15px;
 }
 .todoArea .rightSide .taskDetails .taskTag,
-.todoArea .userListBody .priority,
-.todoArea .userListBody .status {
+.todoArea .userListBody td.priority,
+.todoArea .userListBody td.status {
     position: relative;
     padding: 3px 8px;
     font-size: var(--textFontSm);
@@ -755,7 +755,7 @@ input[type="submit"]:hover,
     background: var(--dangerColor);
 }
 .todoArea .rightSide .taskDetails .taskDate,
-.todoArea .userListBody .date {
+.todoArea .userListBody td.date {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
     font-weight: var(--fontRegular);
@@ -771,7 +771,7 @@ input[type="submit"]:hover,
 
 
 /* New style for todo page */
-.todoArea tr .bookmark {
+.todoArea tr th.bookmark {
     opacity: 0;
 }
 .todoArea tr th:not(.taskTitle) {

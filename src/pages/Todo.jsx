@@ -338,7 +338,7 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
                 {formattedDate(DueDate)}
             </td>
             <td className={`priority`}>
-                <div className={`${priorityClass}`}>
+                <div className={`label ${priorityClass}`}>
                     {Priority}
                 </div>
             </td>
