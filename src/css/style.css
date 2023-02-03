@@ -718,7 +718,7 @@ input[type="submit"]:hover,
     color: var(--primaryColor);
 }
 .todoArea .rightSide .taskDetails .taskTag::before,
-.todoArea .userListBody .priority::before {
+.todoArea .userListBody .priority .label::before {
     content: '';
     background: var(--primaryColor);
     position: absolute;
@@ -735,7 +735,7 @@ input[type="submit"]:hover,
     color: var(--successColor);
 }
 .todoArea .rightSide .taskDetails .taskTag.low::before,
-.todoArea .userListBody .priority.low::before {
+.todoArea .userListBody .priority .label.low::before {
     background: var(--successColor);
 }
 .todoArea .rightSide .taskDetails .taskTag.medium,
@@ -743,7 +743,7 @@ input[type="submit"]:hover,
     color: var(--warningColor);
 }
 .todoArea .rightSide .taskDetails .taskTag.medium::before,
-.todoArea .userListBody .priority .medium::before {
+.todoArea .userListBody .priority .label.medium::before {
     background: var(--warningColor);
 }
 .todoArea .rightSide .taskDetails .taskTag.high,
@@ -751,7 +751,7 @@ input[type="submit"]:hover,
     color: var(--dangerColor);
 }
 .todoArea .rightSide .taskDetails .taskTag.high::before,
-.todoArea .userListBody .priority .high::before {
+.todoArea .userListBody .priority .label.high::before {
     background: var(--dangerColor);
 }
 .todoArea .rightSide .taskDetails .taskDate,
@@ -771,6 +771,12 @@ input[type="submit"]:hover,
 
 
 /* New style for todo page */
+.todoArea tr .bookmark {
+    opacity: 0;
+}
+.todoArea tr th:not(.taskTitle) {
+    text-align: center;
+}
 .todoArea .bookmark .button svg {
     fill: none;
     stroke: var(--textColor);
@@ -785,18 +791,27 @@ input[type="submit"]:hover,
 .todoArea .userListBody .status.incomplete {
     color: var(--textColorLight);
 }
+.todoArea .userListBody .status,
+.todoArea .userListBody .date {
+    min-width: 90px;
+    text-align: center;
+}
 .todoArea .userListBody .priority {
     min-width: 60px;
     text-align: center;
-}
-.todoArea .userListBody .date {
-    min-width: 90px;
 }
 .todoArea .userListBody .Actions {
     min-width: 60px;
     display: flex;
     gap: 10px;
     justify-content: center;
+}
+.todoArea .userListBody .Actions svg {
+    stroke: var(--textColorLight);
+    transition: all 0.3s;
+}
+.todoArea .userListBody .Actions .Button:hover svg {
+    stroke: var(--primaryColor);
 }
 .todoArea .userListBody svg {
     margin: 0;

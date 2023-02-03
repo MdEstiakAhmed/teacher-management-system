@@ -157,7 +157,7 @@ export const deleteOtherInfo = async (type, id) => {
     }
 }
 
-export const taskAndEmailCount = async (id) => {
+export const taskAndEmailCount = async ({id}) => {
     try {
         const taskUrl = `${baseUrl}/taskCount/${id}/`;
         const emailUrl = `${baseUrl}/emailCount/${id}/`;

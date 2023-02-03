@@ -181,11 +181,11 @@ const Todo = () => {
                         <table className="userListTable">
                             <thead>
                                 <tr>
-                                    <th className="User">BK</th>
-                                    <th className="Designation">Title</th>
-                                    <th className="Status">Status</th>
-                                    <th className="Status">Date</th>
-                                    <th className="Status">Priority</th>
+                                    <th className="bookmark">BK</th>
+                                    <th className="taskTitle">Title</th>
+                                    <th className="status">Status</th>
+                                    <th className="date">Date</th>
+                                    <th className="priority">Priority</th>
                                     <th className="Actions">Actions</th>
                                 </tr>
                             </thead>

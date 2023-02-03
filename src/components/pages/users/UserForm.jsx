@@ -22,15 +22,28 @@ export const UserForm = ({ onClose, type }) => {
     }
 
     usePseudoElementClick(sectionRef, () => onClose(true));
-    
-    const handleAddUser = async(e) => {
+
+    const handleAddUser = async (e) => {
         e.preventDefault();
         const formData = {}
-        ;[...formRef.current].forEach(input => {
-            if(input.type !== 'submit') {
-                formData[input.name] = input.value;
-            }
-        })
+            ;[...formRef.current].forEach(input => {
+                if (input.type !== 'submit') {
+                    formData[input.name] = input.value;
+                }
+            })
+        const fullName = formData.name ? formData.name.split(' ') : [];
+        let firstName = '';
+        let lastName = '';
+        try {
+            lastName = fullName[fullName.length - 1];
+            firstName = fullName.slice(0, fullName.length - 1).join(' ');
+        }
+        catch (e) {
+            firstName = '';
+            lastName = '';
+        }
+        formData.first_name = firstName;
+        formData.last_name = lastName;
         const response = await signup(formData);
         response.status && onClose(true);
     }
@@ -44,13 +57,17 @@ export const UserForm = ({ onClose, type }) => {
                         <input type="text" name="username" placeholder="Username" />
                     </div>
                     <div className="inputBox">
+                        <label>Full name</label>
+                        <input type="text" name="name" placeholder="Full name" />
+                    </div>
+                    {/* <div className="inputBox">
                         <label>First name</label>
                         <input type="text" name="first_name" placeholder="First name" />
                     </div>
                     <div className="inputBox">
                         <label>Last name</label>
                         <input type="text" name="last_name" placeholder="Last name" />
-                    </div>
+                    </div> */}
                     <div className="inputBox">
                         <label>Email</label>
                         <input type="text" name="email" placeholder="Email" />

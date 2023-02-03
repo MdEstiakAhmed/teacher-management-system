@@ -19,7 +19,7 @@ const User = () => {
     const { id } = useParams();
     const { userState } = useGetContext();
 
-    const { data: count } = useFetch(taskAndEmailCount);
+    const { data: count } = useFetch(taskAndEmailCount, {id});
     const [countData, setCountData] = useState({task: 0, email: 0});
 
     const [refetchData, setRefetchData] = useState(false);

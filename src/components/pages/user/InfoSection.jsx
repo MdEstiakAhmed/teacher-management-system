@@ -128,7 +128,6 @@ const Timeline = ({ type, data }) => {
                         ) :
                             type === 'publication' ? (
                                 <div>
-                                    {console.log(data)}
                                     <p className="dateTime">{data.Year}</p>
                                     <p className="infoTitle">{data.Title}</p>
                                     <p>Journal: {data.Journal}</p>
