@@ -136,6 +136,16 @@ tbody {
 .rbc-day-slot .rbc-selected.rbc-background-event {
     background-color: var(--primaryColor);
 }
+.rbc-btn-group button {
+    transition: all 0.3s;
+}
+.rbc-btn-group button:hover,
+.rbc-btn-group .rbc-active {
+    box-shadow: none !important;
+    background: var(--primaryColor) !important;
+    color: var(--secondaryColor) !important;
+    border-color: var(--primaryColor) !important;
+}
 
 /* event custom css end */
 ul {
@@ -616,6 +626,7 @@ input[type="submit"]:hover,
     width: 240px;
     border-right: 1px solid var(--borderColorLight);
     padding-right: 25px;
+    overflow: auto;
 }
 
 .todoArea .leftSide .tabs {
@@ -801,7 +812,7 @@ input[type="submit"]:hover,
 }
 
 .todoArea .rightSide .taskDetails .taskTag,
-.todoArea .userListBody td.priority,
+.todoArea .userListBody td.priority .label,
 .todoArea .userListBody td.status {
     position: relative;
     padding: 3px 8px;
@@ -825,7 +836,7 @@ input[type="submit"]:hover,
 }
 
 .todoArea .rightSide .taskDetails .taskTag.low,
-.todoArea .userListBody .priority.low,
+.todoArea .userListBody .priority .label.low,
 .todoArea .userListBody .status.completed {
     color: var(--successColor);
 }
@@ -836,7 +847,7 @@ input[type="submit"]:hover,
 }
 
 .todoArea .rightSide .taskDetails .taskTag.medium,
-.todoArea .userListBody .priority .medium {
+.todoArea .userListBody .priority .label.medium {
     color: var(--warningColor);
 }
 
@@ -846,7 +857,7 @@ input[type="submit"]:hover,
 }
 
 .todoArea .rightSide .taskDetails .taskTag.high,
-.todoArea .userListBody .priority .high {
+.todoArea .userListBody .priority .label.high {
     color: var(--dangerColor);
 }
 
@@ -1930,6 +1941,7 @@ input[type="submit"]:hover,
 /* ============= For User List ============= */
 .userList {
     height: calc(100vh - 140px);
+    overflow: auto;
 }
 
 .userListHeader {

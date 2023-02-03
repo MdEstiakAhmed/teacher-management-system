@@ -93,7 +93,7 @@ export const addEmail = async (ref, isDraft) => {
 // type: ReceiverImportant, CcImportant, BccImportant, SenderImportant
 // starred: true, false
 // state: sent, inbox || ...
-export const updateEmailStarred = async ({emailId, type, starred, state}) => {
+export const updateEmailStarred = async ({emailId, type, starred, state, rest}) => {
     try {
         let url;
         let importantType = type;
@@ -105,6 +105,18 @@ export const updateEmailStarred = async ({emailId, type, starred, state}) => {
             url = `${baseUrl}/${emailId}/`;
         }
         const formData = new FormData();
+        let restData = rest;
+        delete restData[importantType];
+        delete restData["Body"];
+        delete restData["Cc"];
+        delete restData["Date"];
+        delete restData["Draft"];
+        delete restData["Receiver"];
+        delete restData["Sender"];
+        delete restData["Subject"];
+        for (let item in restData) {
+            formData.append(item, restData[item]);
+        }
         formData.append(importantType, starred ? 1 : 0);
         const response = await putData(url, formData, {});
         return response;
