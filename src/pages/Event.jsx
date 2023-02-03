@@ -105,13 +105,27 @@ const Event = () => {
                             eventPropGetter={
                                 (event, start, end, isSelected) => {
                                     let { Label } = event;
-                                    let backgroundColor = Label === "Personal" ? "var(--successColor)" :
+                                    let textColor = Label === "Personal" ? "var(--successColor)" :
                                         Label === "Work" ? "var(--warningColor)" :
                                             Label === "Family" ? "var(--dangerColor)" :
                                                 Label === "Holiday" ? "var(--primaryColor)" :
-                                                Label === "Other" ? "var(--blueColor)" : "var(--titleColor)";
-                                    console.log(event);
-                                    return {style: {backgroundColor}}
+                                                    Label === "Other" ? "var(--blueColor)" : "var(--textColor)";
+
+                                    let backgroundColor = Label === "Personal" ? "var(--personalEventBg)" :
+                                        Label === "Work" ? "var(--workEventBg)" :
+                                            Label === "Family" ? "var(--familyEventBg)" :
+                                                Label === "Holiday" ? "var(--holidayEventBg)" :
+                                                    Label === "Other" ? "var(--otherEventBg)" : "var(--noneEventBg)";
+                                    return {
+                                        style: {
+                                            backgroundColor,
+                                            color: textColor,
+                                            fontSize: "var(--textFont)",
+                                            fontWeight: "var(--fontRegular)",
+                                            lineHeight: "var(--lineHeight)",
+                                            padding: "3px 10px",
+                                        }
+                                    }
                                 }
                             }
                         />

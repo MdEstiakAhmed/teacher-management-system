@@ -15,6 +15,15 @@
     --warningColor: #ffa21a;
     --blueColor: #54A0FF;
 
+    --personalEventBg: rgba(40, 199, 111, .25);
+    --workEventBg: rgba(255, 162, 26, .25);
+    --familyEventBg: rgba(255, 91, 91, .25);
+    --holidayEventBg: rgba(115, 103, 240, .25);
+    --otherEventBg: rgba(84, 160, 255, .25);
+    --noneEventBg: rgba(72, 84, 96, .25);
+
+
+
 
     --boxShadow: 0 4px 24px 0 rgb(34 41 47 / 10%);
     --inputFocusShadow: 0 3px 10px 0 rgb(34 41 47 / 10%);
@@ -134,9 +143,11 @@ ul {
     padding: 0;
     margin: 0;
 }
+
 li {
     margin: 0;
 }
+
 li:not(:last-child) {
     margin-bottom: 10px;
 }
@@ -150,9 +161,11 @@ a {
     color: var(--textColor);
     transition: all 0.3s;
 }
+
 a:hover {
     color: var(--primaryColor);
 }
+
 button {
     padding: 0;
     border: none;
@@ -179,14 +192,17 @@ thead tr {
     background-color: var(--bodyBgColor);
     font-weight: var(--fontSemiBold);
 }
+
 thead tr th {
     padding: 10px;
 }
+
 tbody tr td {
     padding: 10px;
     font-weight: var(--fontRegular);
     color: var(--textColor);
 }
+
 tbody td p {
     margin: 0;
 }
@@ -200,6 +216,7 @@ tbody td p {
     position: relative;
     margin-bottom: 20px;
 }
+
 label {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
@@ -208,6 +225,7 @@ label {
     display: block;
     margin-bottom: 8px;
 }
+
 input,
 textarea,
 select {
@@ -222,6 +240,7 @@ select {
     border-radius: 5px;
     transition: all 0.3s;
 }
+
 input:focus,
 textarea:focus,
 select:focus {
@@ -230,25 +249,30 @@ select:focus {
     box-shadow: var(--inputFocusShadow);
     padding: 0 12px;
 }
+
 select {
     appearance: none;
     padding: 0 30px 0 10px;
 }
+
 textarea {
     height: 100px;
     line-height: var(--lineHeight);
 }
+
 input[type="checkbox"] {
     width: 14px;
     height: 14px;
     margin-right: 10px;
     vertical-align: middle;
 }
+
 input::placeholder,
 textarea::placeholder {
     color: var(--placeholderColorLight);
     font-weight: var(--fontRegular);
 }
+
 input[type="submit"],
 .primaryButton {
     display: inline-block;
@@ -266,25 +290,31 @@ input[type="submit"],
     cursor: pointer;
     transition: all 0.3s;
 }
+
 input[type="submit"]:hover,
 .primaryButton:hover {
     color: var(--secondaryColor);
     box-shadow: var(--buttonHoverShadow);
 }
+
 .primaryButton.danger {
     background-color: var(--dangerColor);
 }
+
 .primaryButton.danger:hover {
     box-shadow: 0 8px 25px -8px var(--dangerColor);
     ;
 }
+
 .primaryButton.warning {
     background-color: var(--warningColor);
 }
+
 .primaryButton.warning:hover {
     box-shadow: 0 8px 25px -8px var(--warningColor);
     ;
 }
+
 .secondaryButton:hover {
     color: var(--primaryColor);
 }
@@ -304,6 +334,7 @@ input[type="submit"]:hover,
     transition: all 0.3s;
     width: 100%;
 }
+
 .select__value-container,
 .select__placeholder,
 .select__input-container {
@@ -312,12 +343,15 @@ input[type="submit"]:hover,
     margin: 0 !important;
     padding: 0 !important;
 }
+
 .select__control svg {
     margin: 0;
 }
+
 .select__indicator-separator {
     display: none;
 }
+
 .composeBody .select__control {
     border: none !important;
 }
@@ -333,12 +367,14 @@ input[type="submit"]:hover,
     align-items: center;
     height: 100vh;
 }
+
 .signInArea .card {
     width: 400px;
     margin: 0 auto;
     padding: 30px 30px 40px;
     position: relative;
 }
+
 .signInArea .card::before {
     content: '';
     /* background-image: url(./images/authTopShape.png); */
@@ -350,6 +386,7 @@ input[type="submit"]:hover,
     left: -46px;
     z-index: -1;
 }
+
 .signInArea .card::after {
     content: '';
     /* background-image: url(./images/authBottomShape.png); */
@@ -361,6 +398,7 @@ input[type="submit"]:hover,
     right: -46px;
     z-index: -1;
 }
+
 .signInArea .card a {
     display: block;
     text-align: center;
@@ -384,19 +422,23 @@ input[type="submit"]:hover,
 .sidebarArea .logo {
     margin: 10px 15px 25px;
 }
+
 .sidebarArea .logo img {
     height: 20px;
 }
+
 .sidebarArea {
     width: 250px;
     background-color: var(--bgColor);
     padding: 20px;
     height: 100vh;
 }
+
 .sidebarArea li {
     padding-left: 0px;
     transition: all 0.3s;
 }
+
 .sidebarArea li a {
     display: flex;
     align-items: center;
@@ -407,17 +449,20 @@ input[type="submit"]:hover,
     box-shadow: none;
     transition: all 0.3s;
 }
+
 .sidebarArea li a.active,
 .sidebarArea li a:hover {
     background-color: var(--primaryColor);
     color: var(--secondaryColor) !important;
     box-shadow: 0 0px 15px var(--primaryColorLight);
 }
+
 .sidebarArea li a.active span,
 .sidebarArea li a:hover span {
     color: var(--secondaryColor) !important;
     background-color: transparent;
 }
+
 .sidebarArea li a:hover {
     padding-left: 20px;
 }
@@ -446,17 +491,21 @@ input[type="submit"]:hover,
     background-color: var(--bgColor);
     border-radius: 5px;
 }
+
 .titleArea .title {
     margin-bottom: 0;
 }
+
 .titleArea .user {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .titleArea .user .userDetails {
     text-align: right;
 }
+
 .titleArea .user .userName {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
@@ -464,6 +513,7 @@ input[type="submit"]:hover,
     color: var(--titleColor);
     margin: 0;
 }
+
 .titleArea .user .userDesignation {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
@@ -471,16 +521,19 @@ input[type="submit"]:hover,
     color: var(--textColorLight);
     margin: 0;
 }
+
 .titleArea .user .userImage {
     display: inline-flex;
     position: relative;
 }
+
 .titleArea .user img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .titleArea .userPopup {
     position: absolute;
     top: 55px;
@@ -489,17 +542,21 @@ input[type="submit"]:hover,
     padding: 20px;
     z-index: 3;
 }
+
 .titleArea .userPopup .userDetails {
     text-align: left;
 }
+
 .titleArea .userPopup .user {
     padding-bottom: 15px;
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .titleArea .userPopup .signOut {
     border-top: 1px solid var(--borderColorLight);
     padding-top: 10px;
 }
+
 .titleArea .userPopup a {
     display: flex;
     align-items: center;
@@ -515,23 +572,29 @@ input[type="submit"]:hover,
     border-radius: 5px;
     margin-top: 20px;
 }
+
 .analyticsArea {
     height: calc(100vh - 95px);
     overflow: auto;
 }
+
 .analyticsArea-group {
     display: flex;
     gap: 20px;
 }
+
 .analyticsArea .contentArea {
     width: 25%;
 }
+
 .analyticsArea .super_user .contentArea {
     width: 33.33%;
 }
+
 .analyticsArea .contentArea.large {
     width: 100%;
 }
+
 .analyticsArea .contentArea .chart {
     max-width: 200px;
     margin: 0 auto;
@@ -554,15 +617,18 @@ input[type="submit"]:hover,
     border-right: 1px solid var(--borderColorLight);
     padding-right: 25px;
 }
+
 .todoArea .leftSide .tabs {
     margin: 20px 0;
 }
+
 .todoArea .leftSide .tabs li {
     position: relative;
     display: flex;
     align-items: center;
     line-height: 30px;
 }
+
 .todoArea .leftSide .tabs li.active::before {
     content: '';
     position: absolute;
@@ -572,17 +638,21 @@ input[type="submit"]:hover,
     height: calc(100% + 4px);
     background-color: var(--primaryColor);
 }
+
 .todoArea .leftSide .tabs li.active a {
     color: var(--primaryColor);
 }
+
 .todoArea .leftSide .tabs a {
     display: flex;
     align-items: center;
     line-height: 30px;
 }
+
 .todoArea .leftSide .tags {
     margin-top: 35px;
 }
+
 .todoArea .leftSide .tags .tagTitle {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
@@ -590,10 +660,12 @@ input[type="submit"]:hover,
     color: var(--textColorLight);
     margin-bottom: 20px;
 }
+
 .todoArea .leftSide .tags li {
     position: relative;
     padding-left: 20px;
 }
+
 .todoArea .leftSide .tags li::before {
     content: '';
     position: absolute;
@@ -605,6 +677,7 @@ input[type="submit"]:hover,
     border-radius: 50%;
     background-color: var(--primaryColor);
 }
+
 .todoArea .leftSide .tags li.low.active,
 .todoArea .leftSide .tags li.medium.active,
 .todoArea .leftSide .tags li.high.active,
@@ -613,27 +686,35 @@ input[type="submit"]:hover,
 .todoArea .leftSide .tags li.other.active {
     color: var(--primaryColor);
 }
+
 .todoArea .leftSide .tags li {
     cursor: pointer;
 }
+
 .todoArea .leftSide .tags li.low::before {
     background-color: var(--successColor);
 }
+
 .todoArea .leftSide .tags li.medium::before {
     background-color: var(--warningColor);
 }
+
 .todoArea .leftSide .tags li.high::before {
     background-color: var(--dangerColor);
 }
+
 .todoArea .leftSide .tags li.urgent::before {
     background-color: var(--primaryColor);
 }
+
 .todoArea .leftSide .tags li.all::before {
     background-color: var(--titleColor);
 }
+
 .todoArea .leftSide .tags li.other::before {
     background-color: var(--blueColor);
 }
+
 .todoArea .leftSide .tags li a {
     line-height: 24px;
 }
@@ -644,6 +725,7 @@ input[type="submit"]:hover,
     width: calc(100% - 240px);
     overflow-y: scroll;
 }
+
 .todoArea .rightSide .header {
     display: flex;
     justify-content: space-between;
@@ -653,25 +735,30 @@ input[type="submit"]:hover,
     padding-bottom: 15px;
     /* margin-bottom: 10px; */
 }
+
 .todoArea .rightSide .header .menuButton {
     display: none;
     flex-direction: column;
     gap: 5px;
 }
+
 .todoArea .rightSide .header .menuButton span {
     height: 1px;
     width: 18px;
     background-color: var(--textColor);
 }
+
 .todoArea .rightSide .header .search {
     position: relative;
     width: 100%;
     z-index: 1;
 }
+
 .todoArea .rightSide .header .search input {
     padding: 0 10px 0 35px;
     background: transparent;
 }
+
 .todoArea .rightSide .header .search svg {
     position: absolute;
     top: 50%;
@@ -680,6 +767,7 @@ input[type="submit"]:hover,
     color: var(--textColorLight);
     z-index: -1;
 }
+
 .todoArea .rightSide .taskList li {
     display: flex;
     justify-content: space-between;
@@ -689,9 +777,11 @@ input[type="submit"]:hover,
     padding: 10px 0;
     margin: 0;
 }
+
 .todoArea .rightSide .taskList li:not(:last-child) {
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .todoArea .rightSide .titleArea {
     display: flex;
     justify-content: space-between;
@@ -699,14 +789,17 @@ input[type="submit"]:hover,
     padding: 0;
     gap: 10px;
 }
+
 .todoArea .rightSide .titleArea input {
     margin: 0;
 }
+
 .todoArea .rightSide .taskDetails {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .todoArea .rightSide .taskDetails .taskTag,
 .todoArea .userListBody td.priority,
 .todoArea .userListBody td.status {
@@ -717,6 +810,7 @@ input[type="submit"]:hover,
     font-weight: var(--fontMedium);
     color: var(--primaryColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag::before,
 .todoArea .userListBody .priority .label::before {
     content: '';
@@ -729,31 +823,38 @@ input[type="submit"]:hover,
     border-radius: 3px;
     opacity: 0.1;
 }
+
 .todoArea .rightSide .taskDetails .taskTag.low,
 .todoArea .userListBody .priority.low,
 .todoArea .userListBody .status.completed {
     color: var(--successColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag.low::before,
 .todoArea .userListBody .priority .label.low::before {
     background: var(--successColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag.medium,
 .todoArea .userListBody .priority .medium {
     color: var(--warningColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag.medium::before,
 .todoArea .userListBody .priority .label.medium::before {
     background: var(--warningColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag.high,
 .todoArea .userListBody .priority .high {
     color: var(--dangerColor);
 }
+
 .todoArea .rightSide .taskDetails .taskTag.high::before,
 .todoArea .userListBody .priority .label.high::before {
     background: var(--dangerColor);
 }
+
 .todoArea .rightSide .taskDetails .taskDate,
 .todoArea .userListBody td.date {
     font-size: var(--textFontSm);
@@ -761,6 +862,7 @@ input[type="submit"]:hover,
     font-weight: var(--fontRegular);
     color: var(--textColorLight);
 }
+
 .todoArea .rightSide .taskDetails .userThumb {
     width: 30px;
     height: 30px;
@@ -774,45 +876,56 @@ input[type="submit"]:hover,
 .todoArea tr th.bookmark {
     opacity: 0;
 }
+
 .todoArea tr th:not(.taskTitle) {
     text-align: center;
 }
+
 .todoArea .bookmark .button svg {
     fill: none;
     stroke: var(--textColor);
 }
+
 .todoArea .bookmark .button.active svg {
     fill: var(--warningColor);
     stroke: var(--warningColor);
 }
+
 .todoArea .userListBody .status {
     font-weight: var(--fontRegular);
 }
+
 .todoArea .userListBody .status.incomplete {
     color: var(--textColorLight);
 }
+
 .todoArea .userListBody .status,
 .todoArea .userListBody .date {
     min-width: 90px;
     text-align: center;
 }
+
 .todoArea .userListBody .priority {
     min-width: 60px;
     text-align: center;
 }
+
 .todoArea .userListBody .Actions {
     min-width: 60px;
     display: flex;
     gap: 10px;
     justify-content: center;
 }
+
 .todoArea .userListBody .Actions svg {
     stroke: var(--textColorLight);
     transition: all 0.3s;
 }
+
 .todoArea .userListBody .Actions .Button:hover svg {
     stroke: var(--primaryColor);
 }
+
 .todoArea .userListBody svg {
     margin: 0;
 }
@@ -828,9 +941,11 @@ input[type="submit"]:hover,
     color: var(--textColor);
     margin-bottom: 10px;
 }
+
 .addFormArea p span {
     color: var(--textColorLight);
 }
+
 .addFormArea hr {
     margin: 0 0 20px 0;
     border: 0;
@@ -859,6 +974,7 @@ input[type="submit"]:hover,
 .emailArea .labels {
     margin-top: 35px;
 }
+
 .emailArea .labels .labelTitle {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
@@ -866,10 +982,12 @@ input[type="submit"]:hover,
     color: var(--textColorLight);
     margin-bottom: 20px;
 }
+
 .emailArea .labelList li {
     position: relative;
     padding-left: 20px;
 }
+
 .emailArea .labelList li::before {
     content: '';
     position: absolute;
@@ -881,9 +999,11 @@ input[type="submit"]:hover,
     border-radius: 50%;
     background-color: var(--primaryColor);
 }
+
 .emailArea .labelList li {
     cursor: pointer;
 }
+
 .emailArea .labelList li.all.active,
 .emailArea .labelList li.personal.active,
 .emailArea .labelList li.important.active,
@@ -891,21 +1011,27 @@ input[type="submit"]:hover,
 .emailArea .labelList li.company.active {
     color: var(--primaryColor);
 }
+
 .emailArea .labelList li.all::before {
     background-color: var(--titleColor);
 }
+
 .emailArea .labelList li.personal::before {
     background-color: var(--successColor);
 }
+
 .emailArea .labelList li.important::before {
     background-color: var(--warningColor);
 }
+
 .emailArea .labelList li.private::before {
     background-color: var(--dangerColor);
 }
+
 .emailArea .labelList li.company::before {
     background-color: var(--primaryColor);
 }
+
 .emailArea .labelList li a {
     line-height: 24px;
 }
@@ -919,6 +1045,7 @@ input[type="submit"]:hover,
     align-items: flex-start;
     gap: 10px;
 }
+
 .emailArea .emailList .headerTop {
     display: flex;
     justify-content: space-between;
@@ -926,23 +1053,28 @@ input[type="submit"]:hover,
     gap: 20px;
     width: 100%;
 }
+
 .emailArea .emailList .headerTop .menuButton {
     display: none;
     flex-direction: column;
     gap: 5px;
 }
+
 .emailArea .emailList .headerTop .menuButton span {
     height: 1px;
     width: 18px;
     background-color: var(--textColor);
 }
+
 .emailArea .emailList .search {
     position: relative;
     width: 100%;
 }
+
 .emailArea .emailList .search input {
     padding: 0 10px 0 35px;
 }
+
 .emailArea .emailList .search svg {
     width: 14px;
     height: 14px;
@@ -952,24 +1084,29 @@ input[type="submit"]:hover,
     transform: translateY(-50%);
     stroke: var(--textColorLight);
 }
+
 .emailArea .emailList .header .buttonArea {
     display: flex;
     gap: 15px;
     align-items: center;
     padding: 10px 0;
 }
+
 .emailArea .emailList .header .button {
     display: flex;
     align-items: center;
     justify-content: center;
 }
+
 .emailArea .emailList .header .button svg {
     stroke: var(--textColor);
     margin: 0;
 }
+
 .emailArea .emailList .header .button svg:hover {
     stroke: var(--primaryColor);
 }
+
 .emailArea .emailList li {
     display: flex;
     align-items: center;
@@ -978,18 +1115,22 @@ input[type="submit"]:hover,
     padding: 15px 0;
     margin: 0;
 }
+
 .emailArea .emailList li:not(:last-child) {
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .emailArea .emailList ul .buttonArea {
     display: flex;
     gap: 10px;
     align-items: center;
     max-width: 60px;
 }
+
 .emailArea .emailList .buttonArea input {
     margin: 0;
 }
+
 .emailArea .emailList ul .buttonArea .button,
 .todoArea .rightSide .titleArea .button {
     display: flex;
@@ -1001,6 +1142,7 @@ input[type="submit"]:hover,
     background: transparent;
     position: relative;
 }
+
 .emailArea .emailList ul .buttonArea .button svg,
 .todoArea .rightSide .titleArea .button svg {
     width: 15px;
@@ -1009,11 +1151,13 @@ input[type="submit"]:hover,
     margin: 0;
     transition: all 0.3s;
 }
+
 .emailArea .emailList ul .buttonArea .button svg.active,
 .todoArea .rightSide .titleArea .button.active svg {
     stroke: var(--warningColor);
     fill: var(--warningColor);
 }
+
 .emailArea .emailList ul .buttonArea .button::after,
 .todoArea .rightSide .titleArea .button::after {
     content: '';
@@ -1028,14 +1172,17 @@ input[type="submit"]:hover,
     background: var(--warningColor);
     opacity: 0;
 }
+
 .emailArea .emailList ul .buttonArea .button:hover svg,
 .todoArea .rightSide .titleArea .button:hover svg {
     stroke: var(--warningColor);
 }
+
 .emailArea .emailList .buttonArea .button:hover::after,
 .todoArea .rightSide .titleArea .button:hover::after {
     opacity: 0.1;
 }
+
 .emailArea .emailList .emailDetail {
     display: flex;
     flex-wrap: wrap;
@@ -1044,14 +1191,17 @@ input[type="submit"]:hover,
     width: calc(100% - 170px);
     word-break: break-all;
 }
+
 .emailArea .emailList .emailDetail .userThumb {
     width: 30px;
     height: 30px;
     border-radius: 50%;
 }
+
 .emailArea .emailList .emailDetail .emailInfo {
     width: calc(100% - 40px);
 }
+
 .emailArea .emailList .emailDetail .emailSender {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
@@ -1059,9 +1209,11 @@ input[type="submit"]:hover,
     color: var(--textColor);
     margin: 0;
 }
+
 .emailArea .emailList .emailDetail .emailSubject {
     margin: 0;
 }
+
 .emailArea .emailList .emailDate {
     display: flex;
     gap: 20px;
@@ -1069,26 +1221,32 @@ input[type="submit"]:hover,
     justify-content: end;
     width: 110px;
 }
+
 .emailArea .emailList .emailDate .labels {
     display: flex;
     gap: 5px;
     margin: 0;
 }
+
 .emailArea .emailList .emailDate .labels span {
     width: 8px;
     height: 8px;
     background: var(--primaryColor);
     border-radius: 50%;
 }
+
 .emailArea .emailList .emailDate .labels span.personal {
     background: var(--successColor);
 }
+
 .emailArea .emailList .emailDate .labels span.important {
     background: var(--warningColor);
 }
+
 .emailArea .emailList .emailDate .labels span.private {
     background: var(--dangerColor);
 }
+
 .emailArea .emailList .emailDate .date {
     font-size: var(--textFontSm);
     font-weight: var(--fontRegular);
@@ -1107,41 +1265,50 @@ input[type="submit"]:hover,
     flex-wrap: wrap;
     gap: 15px;
 }
+
 .emailDetailArea .detailHeader .detailHeaderLeft {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .emailDetailArea .detailHeader .detailHeaderLeft svg {
     margin: 5px 0 0 0;
 }
+
 .emailDetailArea .detailHeader .emailSubject {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
     font-weight: var(--fontMedium);
     margin: 0;
 }
+
 .emailDetail .emailInfo .emailSubject.isReadActive {
     color: var(--titleColor);
     font-weight: var(--fontSemiBold);
 }
+
 .emailDetailArea .detailHeader .detailHeaderRight {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .emailDetailArea .detailHeader .emailActions {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .emailDetailArea .detailHeader .emailActions .button svg {
     margin: 0;
     stroke: var(--textColorLight);
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown {
     position: relative;
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown ul {
     position: absolute;
     right: -10px;
@@ -1152,18 +1319,22 @@ input[type="submit"]:hover,
     z-index: 9;
     /* display: none; */
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown li {
     padding: 0 10px 0 30px;
     margin: 0;
     border: none;
     transition: all 0.3s;
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown li:not(:last-child) {
     margin-bottom: 10px;
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown li::before {
     left: 10px;
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown li a {
     display: flex;
     align-items: center;
@@ -1173,19 +1344,23 @@ input[type="submit"]:hover,
     padding: 0 20px;
     font-weight: var(--fontRegular);
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown svg {
     margin: 0;
     width: 14px;
 }
+
 .emailDetailArea .detailHeader .emailActions .dropdown li:hover {
     background: var(--primaryColorLight);
 }
+
 .emailDetailArea .labelsArea {
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 20px 0;
 }
+
 .emailDetailArea .labelsArea span {
     position: relative;
     padding: 3px 8px;
@@ -1194,6 +1369,7 @@ input[type="submit"]:hover,
     font-weight: var(--fontMedium);
     color: var(--primaryColor);
 }
+
 .emailDetailArea .labelsArea span::before {
     content: '';
     background: var(--primaryColor);
@@ -1205,21 +1381,27 @@ input[type="submit"]:hover,
     border-radius: 3px;
     opacity: 0.1;
 }
+
 .emailDetailArea .labelsArea span.personal {
     color: var(--successColor);
 }
+
 .emailDetailArea .labelsArea span.personal::before {
     background: var(--successColor);
 }
+
 .emailDetailArea .labelsArea span.important {
     color: var(--warningColor);
 }
+
 .emailDetailArea .labelsArea span.important::before {
     background: var(--warningColor);
 }
+
 .emailDetailArea .labelsArea span.private {
     color: var(--dangerColor);
 }
+
 .emailDetailArea .labelsArea span.private::before {
     background: var(--dangerColor);
 }
@@ -1231,9 +1413,11 @@ input[type="submit"]:hover,
     padding: 20px;
     border-radius: 5px;
 }
+
 .emailDetailArea .emailDetail:not(:last-child) {
     margin: 0 0 20px;
 }
+
 .emailDetailArea .emailDetail .header {
     width: 100%;
     display: flex;
@@ -1244,47 +1428,58 @@ input[type="submit"]:hover,
     border-bottom: 1px solid var(--borderColorLight);
     margin-bottom: 10px;
 }
+
 .emailDetailArea .emailDetail .senderInfo {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .emailDetailArea .emailDetail .senderInfo .thumb {
     width: 50px;
     height: 50px;
     border-radius: 50%;
 }
+
 .emailDetailArea .emailDetail .senderInfo .details {
     display: flex;
     flex-direction: column;
 }
+
 .emailDetailArea .emailDetail .senderInfo .details .name {
     font-size: var(--textFont);
     font-weight: var(--fontSemiBold);
     margin: 0;
 }
+
 .emailDetailArea .emailDetail .senderInfo .details .email,
 .emailDetailArea .emailDetail .header .emailDate p {
     font-size: var(--textFontSm);
     color: var(--textColorLight);
     margin: 0;
 }
+
 .emailDetailArea .emailDetail .emailBody {
     width: 100%;
 }
+
 .emailDetailArea .emailDetail .emailBody p {
     margin: 0 0 15px;
 }
+
 .emailDetailArea .emailDetail .emailBody p:last-child {
     margin: 0;
 }
+
 .emailArea .emailActions .button svg.active {
     stroke: var(--warningColor);
     fill: var(--warningColor);
 }
+
 .emailArea .emailActions .button svg.delete {
     stroke: var(--dangerColor);
 }
+
 .emailArea .emailActions .button svg.success {
     stroke: var(--successColor);
 }
@@ -1301,6 +1496,7 @@ input[type="submit"]:hover,
     padding: 0;
     z-index: 9;
 }
+
 .composeArea .headerArea {
     display: flex;
     justify-content: space-between;
@@ -1308,23 +1504,28 @@ input[type="submit"]:hover,
     padding: 10px 15px;
     background: var(--bodyBgColor);
 }
+
 .composeArea .headerArea .title {
     font-size: var(--textFont);
     margin: 0;
 }
+
 .composeArea .headerArea .iconArea {
     display: flex;
     gap: 10px;
 }
+
 .composeArea .headerArea svg {
     width: 14px;
     height: 14px;
     cursor: pointer;
     margin: 0;
 }
+
 .composeArea .composeBody {
     padding: 0 0 10px;
 }
+
 .composeArea .composeBody .inputBox {
     display: flex;
     align-items: center;
@@ -1333,6 +1534,7 @@ input[type="submit"]:hover,
     margin: 0;
     padding: 0 15px;
 }
+
 .composeArea .composeBody .inputBox label,
 .composeArea .composeBody .inputBox span {
     font-size: var(--textFont);
@@ -1347,15 +1549,18 @@ input[type="submit"]:hover,
     box-shadow: none;
     padding: 0;
 }
+
 .composeArea .composeBody .inputBox textarea {
     resize: none;
     width: 100%;
     height: 200px;
     padding: 10px 0;
 }
+
 .composeArea .composeBody .inputBox textarea::placeholder {
     color: var(--textColor);
 }
+
 .composeArea .composeBody .primaryButton {
     width: auto;
     padding: 0 25px;
@@ -1372,11 +1577,13 @@ input[type="submit"]:hover,
     padding: 0;
     height: calc(100vh - 140px);
 }
+
 .chatArea .userThumb {
     position: relative;
     width: 40px;
     height: 40px;
 }
+
 .chatArea .userThumb::after {
     content: '';
     position: absolute;
@@ -1388,20 +1595,24 @@ input[type="submit"]:hover,
     background: var(--successColor);
     border: 2px solid var(--bgColor);
 }
+
 .chatArea .userThumb.offline::after {
     background: var(--dangerColor);
 }
+
 .chatArea .userThumb img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .chatArea .leftSide {
     width: 320px;
     border-right: 1px solid var(--borderColorLight);
     padding: 0 0 20px;
 }
+
 .chatArea .leftSide .header {
     display: flex;
     align-items: center;
@@ -1409,13 +1620,16 @@ input[type="submit"]:hover,
     padding: 15px;
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .chatArea .leftSide .header .search {
     width: calc(100% - 55px);
     position: relative;
 }
+
 .chatArea .leftSide .header .search input {
     padding: 0 10px 0 35px;
 }
+
 .chatArea .leftSide .header .search svg {
     width: 14px;
     height: 14px;
@@ -1425,6 +1639,7 @@ input[type="submit"]:hover,
     transform: translateY(-50%);
     stroke: var(--textColorLight);
 }
+
 .chatArea .leftSide .chatList .title,
 .chatArea .leftSide .contactList .title {
     font-size: var(--textFont);
@@ -1432,6 +1647,7 @@ input[type="submit"]:hover,
     padding: 15px 15px 5px;
     margin: 0;
 }
+
 .chatArea .leftSide .chatList li,
 .chatArea .leftSide .contactList li {
     display: flex;
@@ -1442,15 +1658,18 @@ input[type="submit"]:hover,
     cursor: pointer;
     transition: all 0.3s;
 }
+
 .chatArea .leftSide .chatList li:hover,
 .chatArea .leftSide .contactList li:hover {
     background: var(--primaryColor);
     color: var(--secondaryColor);
 }
+
 .chatArea .leftSide .chatList .chatDetails,
 .chatArea .leftSide .contactList .contactDetails {
     width: calc(100% - 120px);
 }
+
 .chatArea .leftSide .chatList .chatDetails .userName,
 .chatArea .leftSide .contactList .contactDetails .userName {
     color: var(--textColor);
@@ -1458,6 +1677,7 @@ input[type="submit"]:hover,
     margin: 0;
     transition: all 0.3s;
 }
+
 .chatArea .leftSide .chatList .chatDetails .lastMessage,
 .chatArea .leftSide .contactList .contactDetails .designation {
     font-size: var(--textFontSm);
@@ -1470,6 +1690,7 @@ input[type="submit"]:hover,
     text-overflow: ellipsis;
     transition: all 0.3s;
 }
+
 .chatArea .leftSide .chatList .chatTime * {
     opacity: 0.5;
     font-size: var(--textFontSm);
@@ -1483,9 +1704,11 @@ input[type="submit"]:hover,
     text-align: right;
     transition: all 0.3s;
 }
+
 .chatArea .leftSide .chatList .chatTime p {
     margin: 0 0 5px;
 }
+
 .chatArea .leftSide .chatList li:hover .userName,
 .chatArea .leftSide .chatList li:hover .lastMessage,
 .chatArea .leftSide .chatList li:hover .chatTime *,
@@ -1499,6 +1722,7 @@ input[type="submit"]:hover,
 .chatArea .rightSide {
     width: calc(100% - 320px);
 }
+
 .chatArea .rightSide .header {
     display: flex;
     align-items: center;
@@ -1507,11 +1731,13 @@ input[type="submit"]:hover,
     padding: 15px;
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .chatArea .rightSide .header .userDetails {
     display: flex;
     align-items: center;
     gap: 10px;
 }
+
 .chatArea .rightSide .header .userDetails .backButton {
     display: none;
     align-items: center;
@@ -1519,12 +1745,14 @@ input[type="submit"]:hover,
     cursor: pointer;
     margin-right: 10px;
 }
+
 .chatArea .rightSide .header .userDetails .backButton svg {
     width: 14px;
     height: 14px;
     stroke: var(--textColorLight);
     margin: 0;
 }
+
 .chatArea .rightSide .header .userDetails .userName {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
@@ -1532,9 +1760,11 @@ input[type="submit"]:hover,
     color: var(--textColor);
     margin: 0;
 }
+
 .chatArea .rightSide .header .Actions {
     position: relative;
 }
+
 .chatArea .rightSide .header .Actions .dropdown {
     position: absolute;
     top: 100%;
@@ -1547,6 +1777,7 @@ input[type="submit"]:hover,
     z-index: 1;
     display: none;
 }
+
 .chatArea .rightSide .header .Actions .dropdown::before {
     content: '';
     position: absolute;
@@ -1558,13 +1789,16 @@ input[type="submit"]:hover,
     border-right: 10px solid transparent;
     border-bottom: 10px solid var(--bgColor);
 }
+
 .chatArea .rightSide .header .Actions .dropdown li {
     margin: 0;
     transition: all 0.3s;
 }
+
 .chatArea .rightSide .header .Actions .dropdown li:hover {
     background: var(--primaryColorLight);
 }
+
 .chatArea .rightSide .header .Actions .dropdown a {
     display: block;
     line-height: 30px;
@@ -1580,6 +1814,7 @@ input[type="submit"]:hover,
     height: calc(100% - 140px);
     position: relative;
 }
+
 .chatArea .rightSide .body::after {
     content: '';
     position: absolute;
@@ -1593,24 +1828,29 @@ input[type="submit"]:hover,
     opacity: 0.3;
     z-index: 0;
 }
+
 .chatArea .rightSide .body .chat {
     display: flex;
     flex-direction: column;
     position: relative;
     z-index: 2;
 }
+
 .chatArea .rightSide .body .message {
     justify-content: flex-start;
     display: flex;
     gap: 10px;
 }
+
 .chatArea .rightSide .body .message.sender {
     justify-content: end;
     flex-direction: row-reverse;
 }
+
 .chatArea .rightSide .body .message:not(:last-child) {
     margin-bottom: 20px;
 }
+
 .chatArea .rightSide .body .thumb img {
     width: 40px;
     height: 40px;
@@ -1619,6 +1859,7 @@ input[type="submit"]:hover,
     box-shadow: var(--boxShadow);
     object-fit: cover;
 }
+
 .chatArea .rightSide .body .messageText {
     position: relative;
     background: var(--secondaryColor);
@@ -1627,6 +1868,7 @@ input[type="submit"]:hover,
     padding: 10px;
     margin: 0 0 10px;
 }
+
 .chatArea .rightSide .body .messageText:before {
     content: '';
     position: absolute;
@@ -1638,18 +1880,21 @@ input[type="submit"]:hover,
     border-bottom: 5px solid transparent;
     border-right: 5px solid var(--secondaryColor);
 }
+
 .chatArea .rightSide .body .message.sender .messageText:before {
     left: auto;
     right: -5px;
     border-right: none;
     border-left: 5px solid var(--secondaryColor);
 }
+
 .chatArea .rightSide .body .messageTime {
     font-size: var(--textFontSm);
     color: var(--textColorLight);
     margin: 0;
     text-align: right;
 }
+
 .chatArea .rightSide .body .message.sender .messageTime {
     text-align: left;
 }
@@ -1664,13 +1909,16 @@ input[type="submit"]:hover,
     padding: 15px;
     border-top: 1px solid var(--borderColorLight);
 }
+
 .chatArea .rightSide .footer .inputBox {
     width: calc(100% - 75px);
     margin: 0;
 }
+
 .chatArea .rightSide .footer .button {
     width: 60px;
 }
+
 .chatArea .rightSide .footer .button svg {
     margin: 11px 0 0;
 }
@@ -1683,51 +1931,61 @@ input[type="submit"]:hover,
 .userList {
     height: calc(100vh - 140px);
 }
+
 .userListHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
 }
+
 .userListHeader .userSearch {
     width: 300px;
 }
+
 .userListBody .userListTable {
     width: 100%;
     border-collapse: collapse;
     text-align: left;
 }
+
 .userListBody .User {
     display: flex;
     align-items: center;
     gap: 15px;
 }
+
 .userListBody .User img {
     width: 40px;
     height: 40px;
     border-radius: 50%;
     object-fit: cover;
 }
+
 .userListBody .User .userName {
     font-weight: var(--fontMedium);
     color: var(--titleColor);
     margin: 0;
 }
+
 .userListBody .User .userEmail {
     font-size: var(--textFontSm);
     color: var(--textColorLight);
     margin: 0;
 }
+
 .userListBody .Designation,
 .userListBody .Status,
 .userListBody .Actions {
     max-width: 200px;
 }
+
 .userListBody tbody .Status span {
     color: var(--successColor);
     padding: 2px 5px;
     position: relative;
 }
+
 .userListBody tbody .Status span:before {
     content: '';
     position: absolute;
@@ -1739,16 +1997,20 @@ input[type="submit"]:hover,
     background: var(--successColor);
     opacity: 0.1;
 }
+
 .userListBody tbody .Status.deactive span {
     color: var(--dangerColor);
 }
+
 .userListBody tbody .Status.deactive span:before {
     background: var(--dangerColor);
 }
+
 .userListBody .Actions {
     width: 110px;
     text-align: center;
 }
+
 .userListBody tbody tr:not(:last-child) {
     border-bottom: 1px solid var(--borderColorLight);
 }
@@ -1764,38 +2026,46 @@ input[type="submit"]:hover,
     align-items: flex-start;
     gap: 34px;
 }
+
 .userDetailArea .contentArea {
     margin: 0;
 }
+
 .userDetailArea .leftSide {
     height: calc(100vh - 140px);
     width: 380px;
     position: fixed;
     margin-top: 20px;
 }
+
 .userDetailArea .leftSide .contentArea {
     padding: 40px 30px 30px;
     height: 100%;
     overflow: auto;
 }
+
 .userDetailArea .userIdentity {
     text-align: center;
 }
+
 .userDetailArea .userIdentity img {
     width: 120px;
     height: 120px;
     border-radius: 5px;
     object-fit: cover;
 }
+
 .userDetailArea .userIdentity .title {
     margin: 10px 0 0;
 }
+
 .userDetailArea .userIdentity .designation {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
     color: var(--textColorLight);
     margin: 0;
 }
+
 .userDetailArea .userHeighlight {
     display: flex;
     justify-content: center;
@@ -1805,12 +2075,14 @@ input[type="submit"]:hover,
     padding-bottom: 20px;
     border-bottom: 1px solid var(--borderColorLight);
 }
+
 .userDetailArea .userHeighlight .iconCard {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 15px;
 }
+
 .userDetailArea .userHeighlight .iconCard .icon {
     width: 40px;
     height: 40px;
@@ -1820,16 +2092,19 @@ input[type="submit"]:hover,
     align-items: center;
     background-color: rgb(113, 102, 240, 0.1);
 }
+
 .userDetailArea .userHeighlight .iconCard svg {
     margin: 0;
     stroke: var(--primaryColor);
 }
+
 .userDetailArea .userHeighlight .count {
     font-size: var(--textFont);
     line-height: var(--lineHeight);
     font-weight: var(--fontMedium);
     margin: 0;
 }
+
 .userDetailArea .userHeighlight .title {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
@@ -1837,13 +2112,16 @@ input[type="submit"]:hover,
     color: var(--textColorLight);
     margin: 0;
 }
+
 .userDetailArea .userDetail li {
     font-weight: var(--fontMedium);
 }
+
 .userDetailArea .userDetail li span {
     font-weight: var(--fontRegular);
     color: var(--textColorLight);
 }
+
 .userDetailArea .buttonArea {
     display: flex;
     justify-content: center;
@@ -1854,6 +2132,7 @@ input[type="submit"]:hover,
     border-top: 1px solid var(--borderColorLight);
     margin-top: 20px;
 }
+
 .userDetailArea .primaryButton {
     width: auto;
 }
@@ -1867,9 +2146,11 @@ input[type="submit"]:hover,
     overflow-y: scroll;
     margin-top: 20px;
 }
+
 .userDetailArea .rightSide .contentArea:not(:last-child) {
     margin-bottom: 20px;
 }
+
 .userDetailArea .rightSide .title {
     font-size: var(--textFont);
     font-weight: var(--fontMedium);
@@ -1885,6 +2166,7 @@ input[type="submit"]:hover,
     margin-bottom: 20px;
     position: relative;
 }
+
 .userDetailArea .contentArea .content::before {
     content: '';
     position: absolute;
@@ -1898,6 +2180,7 @@ input[type="submit"]:hover,
     left: 0;
     z-index: 1;
 }
+
 .userDetailArea .contentArea .content::after {
     content: '';
     position: absolute;
@@ -1908,21 +2191,26 @@ input[type="submit"]:hover,
     left: 4px;
     z-index: 0;
 }
+
 .userDetailArea .contentArea .content:last-child::after {
     height: 100%;
 }
+
 .userDetailArea .contentArea .content .heading {
     display: flex;
     justify-content: space-between;
 }
+
 .userDetailArea .contentArea .content p {
     margin: 0;
 }
+
 .userDetailArea .contentArea .content .dateTime {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
     color: var(--textColorLight);
 }
+
 .userDetailArea .contentArea .content .infoTitle {
     font-weight: var(--fontSemiBold);
     color: var(--titleColor);
@@ -1941,6 +2229,7 @@ input[type="submit"]:hover,
     top: 0;
     right: 0;
 }
+
 .addFormArea::after {
     content: "";
     position: fixed;
@@ -1951,6 +2240,7 @@ input[type="submit"]:hover,
     background-color: var(--titleColor);
     opacity: 0.8;
 }
+
 .addFormArea .popUp {
     width: 340px;
     height: 100vh;
@@ -1963,6 +2253,7 @@ input[type="submit"]:hover,
     border-radius: 0;
     overflow-y: auto;
 }
+
 .addFormArea .popUp .contentArea {
     padding: 30px;
     height: 100%;
@@ -1975,33 +2266,41 @@ input[type="submit"]:hover,
 
 /* ============= Responsive Design ============= */
 @media (max-width: 1299px) {
+
     /* ========== For Dashboard Layout ========== */
     .sidebarArea {
         width: 80px;
     }
+
     .sidebarArea .logo {
         margin: 10px 0 25px;
         text-align: center;
     }
+
     .sidebarArea .logo img {
         width: 32px;
         object-fit: cover;
         object-position: left;
     }
+
     .sidebarArea li a {
         font-size: 0;
         padding: 0;
         justify-content: center;
     }
+
     .sidebarArea li a:hover {
         padding: 0;
     }
+
     .sidebarArea li a svg {
         margin: 0;
     }
+
     .sidebarArea li a span {
         display: none;
     }
+
     .mainArea {
         width: calc(100% - 80px);
         padding: 25px;
@@ -2015,6 +2314,7 @@ input[type="submit"]:hover,
     .userDetailArea .leftSide {
         width: 320px;
     }
+
     .userDetailArea .rightSide {
         width: calc(100% - 340px);
         margin-left: 340px;
@@ -2025,16 +2325,19 @@ input[type="submit"]:hover,
 
 
 
-@media (max-width: 1139px){
+@media (max-width: 1139px) {
+
     /* ========== For Dashboard Layout ========== */
     .analyticsArea-group {
         flex-flow: wrap;
         margin-top: 20px;
     }
+
     .analyticsArea .contentArea {
         width: calc(50% - 10px);
         margin: 0;
     }
+
     .analyticsArea .super_user .contentArea {
         width: calc(33.33% - 14px);
     }
@@ -2045,6 +2348,7 @@ input[type="submit"]:hover,
     .todoArea .leftSide {
         width: 180px;
     }
+
     .todoArea .rightSide {
         width: calc(100% - 180px);
     }
@@ -2062,7 +2366,8 @@ input[type="submit"]:hover,
 
 
 
-@media (max-width: 939px){
+@media (max-width: 939px) {
+
     /* ========== For Dashboard Layout ========== */
     .analyticsArea .super_user .contentArea {
         width: calc(50% - 20px);
@@ -2081,6 +2386,7 @@ input[type="submit"]:hover,
         --lineHeight: 20px;
         --lineHeightSm: 16px;
     }
+
     input,
     textarea,
     select,
@@ -2091,18 +2397,22 @@ input[type="submit"]:hover,
         padding: 0 8px;
         border-radius: 3px;
     }
+
     input[type="submit"],
     .primaryButton {
         padding: 0 20px;
     }
+
     input:focus,
     textarea:focus,
     select:focus {
         padding: 0 10px;
     }
+
     select {
         padding: 0 24px 0 8px;
     }
+
     textarea {
         height: 60px;
         padding: 8px;
@@ -2116,12 +2426,14 @@ input[type="submit"]:hover,
         max-width: 300px;
         padding: 25px 20px;
     }
+
     .signInArea .card::before {
         width: 110px;
         height: 110px;
         top: -30px;
         left: -30px;
     }
+
     .signInArea .card::after {
         width: 140px;
         height: 140px;
@@ -2135,6 +2447,7 @@ input[type="submit"]:hover,
     .dashboardArea {
         flex-direction: column-reverse;
     }
+
     .sidebarArea {
         width: 100%;
         height: auto;
@@ -2142,26 +2455,32 @@ input[type="submit"]:hover,
         bottom: 0;
         z-index: 9;
     }
+
     .sidebarArea .logo {
         display: none;
     }
+
     .sidebarArea ul {
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 0 20px;
     }
+
     .sidebarArea li {
         margin: 0;
     }
+
     .sidebarArea li a span {
         display: none;
     }
+
     .sidebarArea li a {
         width: 40px;
         height: 40px;
         align-items: center;
     }
+
     .mainArea {
         width: 100%;
     }
@@ -2172,6 +2491,7 @@ input[type="submit"]:hover,
         flex-direction: column;
         gap: 10px 0;
     }
+
     .analyticsArea .analyticsArea-wrapper .analyticsArea-group1,
     .analyticsArea .analyticsArea-wrapper .analyticsArea-group2 {
         display: flex;
@@ -2188,6 +2508,7 @@ input[type="submit"]:hover,
         /* position: relative; */
         overflow: hidden;
     }
+
     .todoArea::after {
         content: "";
         position: absolute;
@@ -2200,6 +2521,7 @@ input[type="submit"]:hover,
         z-index: -1;
         transition: all 0.3s ease;
     }
+
     .todoArea .leftSide {
         width: 230px;
         height: 100vh;
@@ -2212,17 +2534,21 @@ input[type="submit"]:hover,
         left: -230px;
         transition: all 0.3s ease;
     }
+
     .todoArea.active .leftSide {
         left: 0;
     }
+
     .todoArea.active::after {
         opacity: 0.7;
         z-index: 9;
     }
+
     .todoArea .rightSide {
         width: 100%;
         margin-left: 0;
     }
+
     .todoArea .rightSide .header .menuButton {
         display: flex;
     }
@@ -2238,6 +2564,7 @@ input[type="submit"]:hover,
         /* position: relative; */
         overflow: hidden;
     }
+
     .emailArea::after {
         content: "";
         position: absolute;
@@ -2249,6 +2576,7 @@ input[type="submit"]:hover,
         z-index: 0;
         opacity: 0;
     }
+
     .emailArea .leftSide {
         width: 230px;
         height: 100vh;
@@ -2261,10 +2589,12 @@ input[type="submit"]:hover,
         z-index: 10;
         left: -230px;
     }
+
     .emailArea .rightSide {
         width: 100%;
         margin-left: 0;
     }
+
     .emailArea .emailList .headerTop .menuButton {
         display: flex;
     }
@@ -2288,6 +2618,7 @@ input[type="submit"]:hover,
         position: relative;
         overflow: hidden;
     }
+
     .chatArea .leftSide {
         width: 100%;
         height: 100%;
@@ -2298,14 +2629,17 @@ input[type="submit"]:hover,
         z-index: 1;
         left: -100%;
     }
+
     .chatArea .rightSide {
         width: 100%;
         height: 100%;
         margin-left: 0;
     }
+
     .chatArea .rightSide .header .userDetails .backButton {
         display: flex;
     }
+
     .chatArea .rightSide .footer .button svg {
         margin: 9px 0 0;
     }
@@ -2319,9 +2653,11 @@ input[type="submit"]:hover,
         position: relative;
         overflow: hidden;
     }
+
     .userList .userListBody {
         overflow-x: scroll;
     }
+
     .userList .userListBody .userListTable {
         min-width: 520px;
         overflow-x: scroll;
@@ -2337,11 +2673,13 @@ input[type="submit"]:hover,
         gap: 0;
         padding-bottom: 80px;
     }
+
     .userDetailArea .leftSide {
         width: 100%;
         position: unset;
         height: auto;
     }
+
     .userDetailArea .rightSide {
         height: auto;
         width: 100%;
@@ -2381,10 +2719,12 @@ input[type="submit"]:hover,
 
 
 @media (max-width: 419px) {
+
     .analyticsArea .contentArea,
     .analyticsArea .super_user .contentArea {
         width: 100%;
     }
+
     .analyticsArea .contentArea .chart {
         max-width: 190px;
     }
