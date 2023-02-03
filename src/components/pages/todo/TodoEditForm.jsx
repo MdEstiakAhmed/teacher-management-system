@@ -148,7 +148,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                                 type="checkbox"
                                 name="Important"
                                 id="Important"
-                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
                             />
                             <label htmlFor="Important">Bookmark</label>
                         </div>
@@ -157,7 +157,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                                 type="checkbox"
                                 name="Completed"
                                 id="Completed"
-                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
                             />
                             <label htmlFor="Completed">Submitted</label>
                         </div>
@@ -166,7 +166,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                             <textarea
                                 name="Description"
                                 placeholder="Description"
-                                disabled={(taskData.TaskCompleted) ? "disabled" : ""}
+                                disabled={(taskData.TaskCompleted || taskData.Assignee === id) ? "disabled" : ""}
                             />
                         </div>
                         <div className="inputBox">
@@ -187,7 +187,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                             <label htmlFor="TaskCompleted">Task Completed</label>
                         </div>
                         {
-                            !taskData.TaskCompleted ? (
+                            (!taskData.TaskCompleted || taskData.Assignee != id) ? (
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                                     <input type="submit" name="submit" value="Update" />
                                     {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
