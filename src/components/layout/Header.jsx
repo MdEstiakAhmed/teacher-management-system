@@ -67,7 +67,7 @@ const Header = () => {
                                         </div>
                                     </li>
                                     <li>
-                                        <Link to={`/users/${userState.data.id}`}>
+                                        <Link to={`/teachers/${userState.data.id}`}>
                                             <ProfileIcon />
                                             Profile
                                         </Link>
