@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { addGeneralInfo, addPersonalInfo, updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
 import useGetContext from "../../../hooks/useGetContext";
 import placeholderImage from "../../../assets/images/placeholder.jpg";
+import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
 const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
@@ -11,6 +12,8 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     const { userState } = useGetContext()
 
     const [profilePic, setProfilePic] = useState(placeholderImage);
+
+    usePseudoElementClick(sectionRef, () => onClose("generalInfoAdd"));
 
     // useEffect(() => {
     //     ;[...generalInfoForm.current].forEach((input) => {
@@ -24,15 +27,15 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
     //     });
     // }, [data])
 
-    useEffect(() => {
-        if (sectionRef.current) {
-            let element = sectionRef.current
-            element.addEventListener('click', checkClickEvent);
-            return () => {
-                element.removeEventListener('click', checkClickEvent);
-            };
-        }
-    }, [sectionRef.current]);
+    // useEffect(() => {
+    //     if (sectionRef.current) {
+    //         let element = sectionRef.current
+    //         element.addEventListener('click', checkClickEvent);
+    //         return () => {
+    //             element.removeEventListener('click', checkClickEvent);
+    //         };
+    //     }
+    // }, [sectionRef.current]);
 
     const handleImageChange = (e) => {
         var file = e.target.files[0];
@@ -175,8 +178,8 @@ const GeneralInfoAddForm = ({ data, onClose, setRefetchData }) => {
                     </form>
                     <form onSubmit={handleFormSubmit}>
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                            <input type="submit" name="submit" value="Change" />
-                            <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                            <input type="submit" name="submit" value="Update" />
+                            {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
                         </div>
                     </form>
                 </div>

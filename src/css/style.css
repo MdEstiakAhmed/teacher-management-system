@@ -292,6 +292,39 @@ input[type="submit"]:hover,
 
 
 
+.select__control {
+    border: 1px solid var(--borderColor);
+    border-radius: 5px;
+    padding: 0 0 0 10px;
+    height: 38px;
+    line-height: 38px;
+    font-size: var(--textFont);
+    font-weight: var(--fontRegular);
+    color: var(--textColor);
+    transition: all 0.3s;
+    width: 100%;
+}
+.select__value-container,
+.select__placeholder,
+.select__input-container {
+    height: 32px;
+    line-height: 32px;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+.select__control svg {
+    margin: 0;
+}
+.select__indicator-separator {
+    display: none;
+}
+.composeBody .select__control {
+    border: none !important;
+}
+
+
+
+
 
 /* ============= For Authentication Style ============= */
 .signInArea {
@@ -616,9 +649,9 @@ input[type="submit"]:hover,
     justify-content: space-between;
     align-items: center;
     gap: 20px;
-    border-bottom: 1px solid var(--borderColorLight);
+    /* border-bottom: 1px solid var(--borderColorLight); */
     padding-bottom: 15px;
-    margin-bottom: 10px;
+    /* margin-bottom: 10px; */
 }
 .todoArea .rightSide .header .menuButton {
     display: none;
@@ -674,7 +707,9 @@ input[type="submit"]:hover,
     align-items: center;
     gap: 15px;
 }
-.todoArea .rightSide .taskDetails .taskTag {
+.todoArea .rightSide .taskDetails .taskTag,
+.todoArea .userListBody .priority,
+.todoArea .userListBody .status {
     position: relative;
     padding: 3px 8px;
     font-size: var(--textFontSm);
@@ -682,7 +717,8 @@ input[type="submit"]:hover,
     font-weight: var(--fontMedium);
     color: var(--primaryColor);
 }
-.todoArea .rightSide .taskDetails .taskTag::before {
+.todoArea .rightSide .taskDetails .taskTag::before,
+.todoArea .userListBody .priority::before {
     content: '';
     background: var(--primaryColor);
     position: absolute;
@@ -693,25 +729,33 @@ input[type="submit"]:hover,
     border-radius: 3px;
     opacity: 0.1;
 }
-.todoArea .rightSide .taskDetails .taskTag.low {
+.todoArea .rightSide .taskDetails .taskTag.low,
+.todoArea .userListBody .priority.low,
+.todoArea .userListBody .status.completed {
     color: var(--successColor);
 }
-.todoArea .rightSide .taskDetails .taskTag.low::before {
+.todoArea .rightSide .taskDetails .taskTag.low::before,
+.todoArea .userListBody .priority.low::before {
     background: var(--successColor);
 }
-.todoArea .rightSide .taskDetails .taskTag.medium {
+.todoArea .rightSide .taskDetails .taskTag.medium,
+.todoArea .userListBody .priority .medium {
     color: var(--warningColor);
 }
-.todoArea .rightSide .taskDetails .taskTag.medium::before {
+.todoArea .rightSide .taskDetails .taskTag.medium::before,
+.todoArea .userListBody .priority .medium::before {
     background: var(--warningColor);
 }
-.todoArea .rightSide .taskDetails .taskTag.high {
+.todoArea .rightSide .taskDetails .taskTag.high,
+.todoArea .userListBody .priority .high {
     color: var(--dangerColor);
 }
-.todoArea .rightSide .taskDetails .taskTag.high::before {
+.todoArea .rightSide .taskDetails .taskTag.high::before,
+.todoArea .userListBody .priority .high::before {
     background: var(--dangerColor);
 }
-.todoArea .rightSide .taskDetails .taskDate {
+.todoArea .rightSide .taskDetails .taskDate,
+.todoArea .userListBody .date {
     font-size: var(--textFontSm);
     line-height: var(--lineHeightSm);
     font-weight: var(--fontRegular);
@@ -723,6 +767,60 @@ input[type="submit"]:hover,
     border-radius: 50%;
 }
 
+
+
+
+/* New style for todo page */
+.todoArea .bookmark .button svg {
+    fill: none;
+    stroke: var(--textColor);
+}
+.todoArea .bookmark .button.active svg {
+    fill: var(--warningColor);
+    stroke: var(--warningColor);
+}
+.todoArea .userListBody .status {
+    font-weight: var(--fontRegular);
+}
+.todoArea .userListBody .status.incomplete {
+    color: var(--textColorLight);
+}
+.todoArea .userListBody .priority {
+    min-width: 60px;
+    text-align: center;
+}
+.todoArea .userListBody .date {
+    min-width: 90px;
+}
+.todoArea .userListBody .Actions {
+    min-width: 60px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+.todoArea .userListBody svg {
+    margin: 0;
+}
+
+
+
+
+
+.addFormArea p {
+    font-size: var(--textFontSm);
+    line-height: var(--lineHeightSm);
+    font-weight: var(--fontRegular);
+    color: var(--textColor);
+    margin-bottom: 10px;
+}
+.addFormArea p span {
+    color: var(--textColorLight);
+}
+.addFormArea hr {
+    margin: 0 0 20px 0;
+    border: 0;
+    border-top: 1px solid var(--borderColorLight);
+}
 
 
 

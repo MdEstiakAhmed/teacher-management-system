@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { addOtherInfo, updateOtherInfo } from "../../../api/user";
+import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
 const form = {
     academic: [
@@ -51,6 +52,8 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
     const sectionRef = useRef(null);
     const formRef = useRef(null);
 
+    usePseudoElementClick(sectionRef, () => closeForm());
+
     useEffect(() => {
         if (action === "add") {
             formRef.current.reset();
@@ -70,15 +73,15 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
         }
     }
 
-    useEffect(() => {
-        if (sectionRef.current) {
-            let element = sectionRef.current
-            element.addEventListener('click', checkClickEvent);
-            return () => {
-                element.removeEventListener('click', checkClickEvent);
-            };
-        }
-    }, [sectionRef.current]);
+    // useEffect(() => {
+    //     if (sectionRef.current) {
+    //         let element = sectionRef.current
+    //         element.addEventListener('click', checkClickEvent);
+    //         return () => {
+    //             element.removeEventListener('click', checkClickEvent);
+    //         };
+    //     }
+    // }, [sectionRef.current]);
 
     const handleFormSubmit = async (e) => {
         e.preventDefault();
@@ -105,7 +108,7 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
     }
 
     const closeForm = (e) => {
-        e.preventDefault();
+        // e.preventDefault();
         if (action === "add") {
             onClose("addOtherInfo")
         }
@@ -133,12 +136,12 @@ const OtherInformationForm = ({ data, type, onClose, action, setRefetchData }) =
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             {
                                 action === "edit" ?
-                                    <button className="Button primaryButton" onClick={handleFormSubmit}>Change</button> :
+                                    <button className="Button primaryButton" onClick={handleFormSubmit}>Update</button> :
                                     action === "add" ?
                                         <button className="Button primaryButton" onClick={handleFormSubmit}>Add</button> :
                                         ""
                             }
-                            <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                            {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
                         </div>
                     </form>
                 </div>

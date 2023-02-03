@@ -1,8 +1,10 @@
 import { useEffect, useRef } from "react";
 import { signup } from "../../../api/auth";
 import { createUser } from "../../../api/users";
+import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 
 export const UserForm = ({ onClose, type }) => {
+    const sectionRef = useRef(null);
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -18,6 +20,8 @@ export const UserForm = ({ onClose, type }) => {
             // console.log(formRef.current.Phone.value);
         }
     }
+
+    usePseudoElementClick(sectionRef, () => onClose(true));
     
     const handleAddUser = async(e) => {
         e.preventDefault();
@@ -31,9 +35,9 @@ export const UserForm = ({ onClose, type }) => {
         response.status && onClose(true);
     }
     return (
-        <section className="addFormArea">
+        <section className="addFormArea" ref={sectionRef}>
             <div className="popUp contentArea">
-                <h3 className="title">Add User</h3>
+                <h3 className="title">Add teacher</h3>
                 <form onSubmit={handleAddUser} ref={formRef}>
                     <div className="inputBox">
                         <label>Username</label>
@@ -60,8 +64,8 @@ export const UserForm = ({ onClose, type }) => {
                         <input type="password" name="password2" placeholder="Confirm Password" />
                     </div>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                        <input type="submit" name="submit" value="Save" />
-                        <button className="Button primaryButton warning" onClick={onClose}>Cancel</button>
+                        <input type="submit" name="submit" value="Add teacher" />
+                        {/* <button className="Button primaryButton warning" onClick={onClose}>Cancel</button> */}
                     </div>
                 </form>
             </div>

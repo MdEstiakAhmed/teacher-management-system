@@ -190,7 +190,7 @@ const TodoEditForm = ({ taskData, onClose, taskSection }) => {
                             !taskData.TaskCompleted ? (
                                 <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                                     <input type="submit" name="submit" value="Update" />
-                                    <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                                    {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
                                 </div>
                             ) : ""
                         }

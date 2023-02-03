@@ -156,3 +156,18 @@ export const deleteOtherInfo = async (type, id) => {
         return { status: false, message: error.message };
     }
 }
+
+export const taskAndEmailCount = async (id) => {
+    try {
+        const taskUrl = `${baseUrl}/taskCount/${id}/`;
+        const emailUrl = `${baseUrl}/emailCount/${id}/`;
+
+        const taskResponse =  getData(taskUrl, {});
+        const emailResponse =  getData(emailUrl, {});
+        
+        const [taskCount, emailCount] = await Promise.all([taskResponse, emailResponse]);
+        return {taskCount, emailCount};
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}

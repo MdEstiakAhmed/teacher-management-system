@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import { Link } from "react-router-dom";
 import { fetchTodo, updateTodoWithObj } from "../api/todo";
-import { CheckboxIcon, EditIcon, ViewIcon } from "../assets/icons/icons";
+import { CheckboxIcon, EditIcon, SubmitIcon, ViewIcon } from "../assets/icons/icons";
 import ActionForm from "../components/pages/todo/ActionForm";
 import TodoAddForm from "../components/pages/todo/TodoAddForm";
 import TodoEditForm from "../components/pages/todo/TodoEditForm";
@@ -69,7 +69,7 @@ const Todo = () => {
     }
 
     const handleSectionFilter = (item) => {
-        if (taskSection.all) return item.Assignee === id;
+        if (taskSection.all) return (item.Assignee === id && !item.TaskCompleted);
         if (taskSection.supervisor) return (item.user === id && !item.TaskCompleted);
         if (taskSection.important) return ((item.Important) && !item.TaskCompleted);
         if (taskSection.completed) return item.TaskCompleted;
@@ -184,8 +184,8 @@ const Todo = () => {
                                     <th className="User">BK</th>
                                     <th className="Designation">Title</th>
                                     <th className="Status">Status</th>
-                                    <th className="Status">Priority</th>
                                     <th className="Status">Date</th>
+                                    <th className="Status">Priority</th>
                                     <th className="Actions">Actions</th>
                                 </tr>
                             </thead>
@@ -334,16 +334,18 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
                     TaskCompleted ? "Completed" : Completed ? "Submitted" : "Incomplete"
                 }
             </td>
-            <td className={`priority ${priorityClass}`}>
-                {Priority}
-            </td>
             <td className="date">
                 {formattedDate(DueDate)}
+            </td>
+            <td className={`priority`}>
+                <div className={`${priorityClass}`}>
+                    {Priority}
+                </div>
             </td>
             <td className="Actions">
                 {
                     <button className="Button secondaryButton" onClick={clickOnButton}>
-                        <EditIcon />
+                        <SubmitIcon />
                     </button>
                 }
             </td>

@@ -3,6 +3,7 @@ import { updateGeneralInfo, updatePersonalInfo } from "../../../api/user";
 import useGetContext from "../../../hooks/useGetContext";
 import placeholderImage from "../../../assets/images/placeholder.jpg";
 import { imageObjectToBase64 } from "../../../utils/fileConverter";
+import usePseudoElementClick from "../../../hooks/usePseudoElementClick";
 const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
     const sectionRef = useRef(null);
     const generalInfoForm = useRef(null);
@@ -11,6 +12,8 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
     const { userState } = useGetContext()
 
     const [profilePic, setProfilePic] = useState(placeholderImage);
+
+    usePseudoElementClick(sectionRef, () => onClose("generalInfo"));
 
     useEffect(() => {
         ;[...generalInfoForm.current].forEach((input) => {
@@ -174,8 +177,8 @@ const GeneralInfoForm = ({ data, onClose, setRefetchData }) => {
                     </form>
                     <form onSubmit={handleFormSubmit}>
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
-                            <input type="submit" name="submit" value="Change" />
-                            <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                            <input type="submit" name="submit" value="Update" />
+                            {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
                         </div>
                     </form>
                 </div>

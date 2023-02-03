@@ -51,7 +51,7 @@ const Users = () => {
                     {
                         (userState.data.is_superuser || userState.data.is_staff) && (
                             <div className="userListActions">
-                                <button className="Button primaryButton" onClick={handleModalOpen}>Add User</button>
+                                <button className="Button primaryButton" onClick={handleModalOpen}>Add teacher</button>
                             </div>
                         )
                     }

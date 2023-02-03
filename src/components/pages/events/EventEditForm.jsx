@@ -121,7 +121,7 @@ const EventEditForm = ({ data, onClose }) => {
                         </div>
                         <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "0 10px" }}>
                             <input type="submit" name="submit" value="Update" />
-                            <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button>
+                            {/* <button className="Button primaryButton warning" onClick={closeForm}>Cancel</button> */}
                         </div>
                     </form>
                 </div>

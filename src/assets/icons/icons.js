@@ -62,6 +62,12 @@ export const EditIcon = () => {
     )
 }
 
+export const SubmitIcon = () => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-paper-plane"><path d="M22 2L11 13"></path><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+    )
+}
+
 export const DeleteIcon = () => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" tag="i" className="v-icon notranslate v-theme--light iconify iconify--tabler" width="1em" height="1em" viewBox="0 0 24 24">

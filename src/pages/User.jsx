@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
 import InfoSection from "../components/pages/user/InfoSection";
 import { userGeneralInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
-import { fetchUserInfo, fetchUser } from "../api/user";
+import { fetchUserInfo, fetchUser, taskAndEmailCount } from "../api/user";
 import useGetContext from "../hooks/useGetContext";
 import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
 import OtherInformationForm from "../components/pages/user/OtherInformationForm";
@@ -18,6 +18,9 @@ import { CheckboxIcon } from "../assets/icons/icons";
 const User = () => {
     const { id } = useParams();
     const { userState } = useGetContext();
+
+    const { data: count } = useFetch(taskAndEmailCount);
+    const [countData, setCountData] = useState({task: 0, email: 0});
 
     const [refetchData, setRefetchData] = useState(false);
 
@@ -33,6 +36,13 @@ const User = () => {
     })
 
     const [otherInfoModalData, setOtherInfoModalData] = useState({})
+
+    useEffect(() => {
+        const {taskCount={}, emailCount={}} = count;
+        if(taskCount?.status && emailCount?.status){
+            setCountData({task: taskCount.data, email: emailCount.data})
+        }
+    }, [count])
 
     useEffect(() => {
         // setUserInfo({
@@ -150,7 +160,7 @@ const User = () => {
                                     <CheckboxIcon />
                                 </div>
                                 <div className="details">
-                                    <h4 className="count">10</h4>
+                                    <h4 className="count">{countData.task}</h4>
                                     <p className="title">Task</p>
                                 </div>
                             </div>
@@ -159,7 +169,7 @@ const User = () => {
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-mail"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
                                 </div>
                                 <div className="details">
-                                    <h4 className="count">10</h4>
+                                    <h4 className="count">{countData.email}</h4>
                                     <p className="title">Email</p>
                                 </div>
                             </div>
