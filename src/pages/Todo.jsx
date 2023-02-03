@@ -344,7 +344,13 @@ const TodoList = ({ item, setSelectedTodo, handleModalOpen, fetchData, taskSecti
             </td>
             <td className="Actions">
                 {
-                    <button className="Button secondaryButton" onClick={clickOnButton}>
+                    <button
+                        className="Button secondaryButton"
+                        disabled={
+                            (Completed && loggedInId == Assignee) ? true : false
+                        }
+                        onClick={clickOnButton}
+                    >
                         <SubmitIcon />
                     </button>
                 }
