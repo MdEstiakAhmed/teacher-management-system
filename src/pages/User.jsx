@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { ChangePasswordForm } from "../components/pages/user/ChangePasswordForm";
 import InfoSection from "../components/pages/user/InfoSection";
 import { userGeneralInfo, academicInfo, awardAndScholarshipInfo, experienceInfo, publicationInfo, teachingInfo, trainingInfo } from "../assets/test-data/userInfo";
-import { fetchUserInfo, fetchUser, taskAndEmailCount } from "../api/user";
+import { fetchUserInfo, fetchUser, taskAndEmailCount, updateStatus } from "../api/user";
 import useGetContext from "../hooks/useGetContext";
 import GeneralInfoForm from "../components/pages/user/GeneralInfoForm";
 import OtherInformationForm from "../components/pages/user/OtherInformationForm";
@@ -19,8 +19,8 @@ const User = () => {
     const { id } = useParams();
     const { userState } = useGetContext();
 
-    const { data: count } = useFetch(taskAndEmailCount, {id});
-    const [countData, setCountData] = useState({task: 0, email: 0});
+    const { data: count } = useFetch(taskAndEmailCount, { id });
+    const [countData, setCountData] = useState({ task: 0, email: 0 });
 
     const [refetchData, setRefetchData] = useState(false);
 
@@ -38,9 +38,9 @@ const User = () => {
     const [otherInfoModalData, setOtherInfoModalData] = useState({})
 
     useEffect(() => {
-        const {taskCount={}, emailCount={}} = count;
-        if(taskCount?.status && emailCount?.status){
-            setCountData({task: taskCount.data, email: emailCount.data})
+        const { taskCount = {}, emailCount = {} } = count;
+        if (taskCount?.status && emailCount?.status) {
+            setCountData({ task: taskCount.data, email: emailCount.data })
         }
     }, [count])
 
@@ -100,6 +100,13 @@ const User = () => {
     const handleModalClose = (type) => {
         setOtherInfoModalData({})
         setIsModalShow(prev => ({ ...prev, [type]: false }));
+    }
+
+    const handleActivation = async () => {
+        const response = await updateStatus(id, !userInfo.general?.is_active)
+        if(response.status) {
+            fetchParallelUserInfo();
+        }
     }
 
     return (
@@ -207,6 +214,15 @@ const User = () => {
                                         )
                                     }
                                     <button className="button primaryButton warning" onClick={() => handleModalOpen("changePassword")}>Change Password</button>
+                                    {
+                                        (userState.data.is_superuser && id !== userState.data.user) ? (
+                                            userInfo.general?.is_active ? (
+                                                <button className="button primaryButton danger" onClick={handleActivation}>Deactivate</button>
+                                            ) : (
+                                                <button className="button primaryButton" onClick={handleActivation}>Activate</button>
+                                            )
+                                        ) : ""
+                                    }
                                 </div>
                             )
                         }

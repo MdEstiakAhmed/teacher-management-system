@@ -171,3 +171,15 @@ export const taskAndEmailCount = async ({id}) => {
         return { status: false, message: error.message };
     }
 }
+
+export const updateStatus = async (id, status) => {
+    try {
+        let url;
+        url = `${baseUrl}/userDeactivate/${id}/`;
+        const response = await putData(url, {is_active: status ? 1 : 0}, {});
+        showAlertPopup(response.status, response.message);
+        return response;
+    } catch (error) {
+        return { status: false, message: error.message };
+    }
+}
